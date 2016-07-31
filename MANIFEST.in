@@ -1,0 +1,4 @@
+graft src/ploneorg
+graft docs
+include *.rst
+global-exclude *.pyc
