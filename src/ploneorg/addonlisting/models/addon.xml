@@ -62,8 +62,6 @@
           <title i18n:translate="">Supported Plone-Versions</title>
           <description i18n:translate="">A List of Supported Plone Versions</description>
           <required>False</required>
-          <default>False</default>
-          <unique>True</unique>
           <valuetype type="zope.schema.Choice" >
             <vocabulary>ploneorg.addonlisting.plone_series_versions_vocabulary</vocabulary>
           </valuetype>
@@ -77,9 +75,6 @@
           <title i18n:translate="">Supported Plone-Versions</title>
           <description i18n:translate="">A List of Supported Plone Versions</description>
           <required>False</required>
-          <default>False</default>
-          <unique>True</unique>
-          <select multiple="multiple" />
           <valuetype type="zope.schema.Choice" >
             <vocabulary>ploneorg.addonlisting.plone_series_versions_vocabulary</vocabulary>
           </valuetype>
