@@ -33,4 +33,9 @@
       factory=".setuphandlers.HiddenProfiles"
       name="ploneorg.addonlisting-hiddenprofiles" />
 
+  <utility
+      name="ploneorg.addonlisting.plone_series_versions_vocabulary"
+      provides="zope.schema.interfaces.IVocabularyFactory"
+      component="ploneorg.addonlisting.PloneVersionsVocabularyFactory" />
+
 </configure>

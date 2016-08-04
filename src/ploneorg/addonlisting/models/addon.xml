@@ -3,6 +3,8 @@
        xmlns:form="http://namespaces.plone.org/supermodel/form"
        xmlns:security="http://namespaces.plone.org/supermodel/security"
        xmlns:marshal="http://namespaces.plone.org/supermodel/marshal"
+       xmlns:users="http://namespaces.plone.org/supermodel/users"
+       xmlns:lingua="http://namespaces.plone.org/supermodel/lingua"
        xmlns:i18n="http://namespaces.zope.org/i18n"
        i18n_domain="ploneorg.addonlisting">
 
@@ -63,7 +65,7 @@
           <default>False</default>
           <unique>True</unique>
           <valuetype type="zope.schema.Choice" >
-            <source>ploneorg.addonlisting.plone_series_versions_vocabulary</source>
+            <vocabulary>ploneorg.addonlisting.plone_series_versions_vocabulary</vocabulary>
           </valuetype>
         </field>
 
@@ -77,8 +79,9 @@
           <required>False</required>
           <default>False</default>
           <unique>True</unique>
+          <select multiple="multiple" />
           <valuetype type="zope.schema.Choice" >
-            <source>ploneorg.addonlisting.plone_series_versions_vocabulary</source>
+            <vocabulary>ploneorg.addonlisting.plone_series_versions_vocabulary</vocabulary>
           </valuetype>
         </field>
 
