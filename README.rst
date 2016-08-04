@@ -54,8 +54,8 @@ and then running ``bin/buildout``
 Contribute
 ----------
 
-- Issue Tracker: https://github.com/collective/ploneorg.addonlisting/issues
-- Source Code: https://github.com/collective/ploneorg.addonlisting
+- Issue Tracker: https://github.com/plone/ploneorg.addonlisting/issues
+- Source Code: https://github.com/plone/ploneorg.addonlisting
 - Documentation: https://docs.plone.org/foo/bar
 
 

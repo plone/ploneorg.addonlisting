@@ -2,46 +2,43 @@
 <object
     i18n:domain="ploneorg.addonlisting"
     meta_type="Dexterity FTI"
-    name="AddOnFolder"
+    name="AddOn"
     xmlns:i18n="http://xml.zope.org/namespaces/i18n">
 
   <!-- Basic properties -->
   <property
       i18n:translate=""
-      name="title">AddOnFolder</property>
+      name="title">AddOn</property>
   <property
       i18n:translate=""
-      name="description">A Folder that lists Add'ons</property>
+      name="description">A Plone Add'on, listed on PyPI</property>
 
   <property name="allow_discussion">False</property>
-  <property name="factory">AddOnFolder</property>
+  <property name="factory">AddOn</property>
   <property name="icon_expr"></property>
   <property name="link_target"></property>
 
   <!-- Hierarchy control -->
   <property name="allowed_content_types">
     <!-- <element value="" />-->
-    <element value="AddOn" />
   </property>
   <property name="filter_content_types">True</property>
-  <property name="global_allow">True</property>
+  <property name="global_allow">False</property>
 
   <!-- Schema, class and security -->
   <property name="schema"></property>
   <property name="model_source"></property>
-  <property name="model_file">ploneorg.addonlisting.models:addonfolder.xml</property>
-  <property name="klass">ploneorg.addonlisting.contents.AddOnFolder</property>
+  <property name="model_file">ploneorg.addonlisting.models:addon.xml</property>
+  <property name="klass">ploneorg.addonlisting.contents.AddOn</property>
   <property name="add_permission">cmf.AddPortalContent</property>
 
   <!-- Enabled behaviors -->
   <property name="behaviors">
     <element value="plone.app.content.interfaces.INameFromTitle" />
-    <element value="plone.app.dexterity.behaviors.metadata.IBasic" />
-    <element value="plone.app.dexterity.behaviors.nextprevious.INextPreviousEnabled" />
   </property>
 
   <!-- View information -->
-  <property name="add_view_expr">string:${folder_url}/++add++AddOnFolder</property>
+  <property name="add_view_expr">string:${folder_url}/++add++AddOn</property>
   <property name="immediate_view">view</property>
   <property name="default_view">view</property>
   <property name="default_view_fallback">False</property>

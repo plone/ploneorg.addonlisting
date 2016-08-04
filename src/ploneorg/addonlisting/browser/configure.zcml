@@ -17,4 +17,11 @@
       directory="static"
       />
 
+  <browser:page
+      name="update_listing"
+      for="ploneorg.addonlisting.interfaces.IAddOnFolder"
+      permission="zope2.View"
+      class="ploneorg.addonlisting.browser.views.FolderUpdateView"
+      />
+
 </configure>

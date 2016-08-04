@@ -12,13 +12,14 @@ class IPloneorgAddonlistingLayer(IDefaultBrowserLayer):
 
 
 class IAddOnFolder(Interface):
+    """
+    Content Type for Add'ons-Folder.
+    """
+    #form.model("models/addonfolder.xml")
 
-    title = schema.TextLine(
-        title=_(u"Title"),
-        required=True,
-    )
 
-    description = schema.Text(
-        title=_(u"Description"),
-        required=False,
-    )
+class IAddOn(Interface):
+    """
+    Content Type for Add'ons.
+    """
+    #form.model("models/addon.xml")
