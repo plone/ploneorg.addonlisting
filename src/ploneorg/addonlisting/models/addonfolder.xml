@@ -12,32 +12,36 @@
 
       <!-- field definitions -->
       <field name="plone_version_mapping"
-             type="zope.schema.Set"
+             type="zope.schema.List"
+             form:widget="collective.z3cform.datagridfield.datagridfield.DataGridFieldFactory"
              security:write_permission="cmf.ManagePortal"
              security:read_permission="zope2.View" >
         <title i18n:translate="">Plone Version Mapping</title>
         <description i18n:translate="">Map PyPI Classifier to a supported Plone Version to show on Add'on</description>
         <required>False</required>
-        <value_type type="zope.schema.Object">
+        <value_type type="collective.z3cform.datagridfield.DictRow">
+          <title>Mapping</title>
           <schema>ploneorg.addonlisting.contents.IMapping</schema>
         </value_type>
       </field>
 
       <field name="python_version_mapping"
-             type="zope.schema.Set"
+             type="zope.schema.List"
+             form:widget="collective.z3cform.datagridfield.datagridfield.DataGridFieldFactory"
              security:write_permission="cmf.ManagePortal"
              security:read_permission="zope2.View" >
         <title i18n:translate="">Python Version Mapping</title>
         <description i18n:translate="">Map PyPI Classifier to a supported Python Version to show on Add'on</description>
         <required>False</required>
-        <value_type type="zope.schema.Object">
+        <value_type type="collective.z3cform.datagridfield.DictRow">
+          <title>Mapping</title>
           <schema>ploneorg.addonlisting.contents.IMapping</schema>
         </value_type>
       </field>
 
 
-      <field name="plone_version_mapping"
-             type="zope.schema.Set"
+      <field name="add_categories"
+             type="zope.schema.List"
              security:write_permission="cmf.ManagePortal"
              security:read_permission="zope2.View" >
         <title i18n:translate="">Add'on Categories</title>

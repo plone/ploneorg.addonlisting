@@ -59,7 +59,7 @@
                 form:mode="z3c.form.interfaces.IAddForm:hidden"
                 >
         <field name="supported_plone_versions"
-               type="zope.schema.Set"
+               type="zope.schema.List"
                form:mode="z3c.form.interfaces.IAddForm:input z3c.form.interfaces.IEditForm:display"
                security:write_permission="cmf.ManagePortal"
                security:read_permission="zope2.View" >
@@ -72,7 +72,7 @@
         </field>
 
         <field name="supported_python_versions"
-               type="zope.schema.Set"
+               type="zope.schema.List"
                form:mode="z3c.form.interfaces.IAddForm:hidden z3c.form.interfaces.IEditForm:display"
                security:write_permission="cmf.ManagePortal"
                security:read_permission="zope2.View" >
