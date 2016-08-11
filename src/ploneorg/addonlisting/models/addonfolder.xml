@@ -11,27 +11,41 @@
     <schema>
 
       <!-- field definitions -->
-      <!--
-      <field name="title" type="zope.schema.TextLine">
-        <title i18n:translate="">Name</title>
-        <description i18n:translate="">Name of AddOn</description>
-        <required>True</required>
-      </field>
-      <field name="description" type="zope.schema.TextLine">
-        <title i18n:translate="">Tagline</title>
-        <description i18n:translate="">A oneline description for the Add'on, that show up in Isotope.</description>
+      <field name="plone_version_mapping"
+             type="zope.schema.Set"
+             security:write_permission="cmf.ManagePortal"
+             security:read_permission="zope2.View" >
+        <title i18n:translate="">Plone Version Mapping</title>
+        <description i18n:translate="">Map PyPI Classifier to a supported Plone Version to show on Add'on</description>
         <required>False</required>
+        <value_type type="zope.schema.Object">
+          <schema>ploneorg.addonlisting.contents.IMapping</schema>
+        </value_type>
       </field>
--->
-    <field name="test" type="zope.schema.Set">
-      <description/>
-      <required>False</required>
-      <title>Test</title>
-      <value_type type="zope.schema.Choice">
-        <vocabulary>ploneorg.addonlisting.plone_series_versions_vocabulary</vocabulary>
-      </value_type>
-    </field>
 
+      <field name="python_version_mapping"
+             type="zope.schema.Set"
+             security:write_permission="cmf.ManagePortal"
+             security:read_permission="zope2.View" >
+        <title i18n:translate="">Python Version Mapping</title>
+        <description i18n:translate="">Map PyPI Classifier to a supported Python Version to show on Add'on</description>
+        <required>False</required>
+        <value_type type="zope.schema.Object">
+          <schema>ploneorg.addonlisting.contents.IMapping</schema>
+        </value_type>
+      </field>
+
+
+      <field name="plone_version_mapping"
+             type="zope.schema.Set"
+             security:write_permission="cmf.ManagePortal"
+             security:read_permission="zope2.View" >
+        <title i18n:translate="">Add'on Categories</title>
+        <description i18n:translate="">Base for Add'on Category Vocabulary</description>
+        <required>False</required>
+        <value_type type="zope.schema.TextLine">
+        </value_type>
+      </field>
 
     </schema>
 

@@ -2,6 +2,8 @@
     xmlns="http://namespaces.zope.org/zope"
     xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
     xmlns:i18n="http://namespaces.zope.org/i18n"
+    xmlns:zcml="http://namespaces.zope.org/zcml"
+    xmlns:browser="http://namespaces.zope.org/browser"
     i18n_domain="ploneorg.addonlisting">
 
   <i18n:registerTranslations directory="locales" />
@@ -9,7 +11,6 @@
   <includeDependencies package="." />
 
   <include package=".browser" />
-
 
   <genericsetup:registerProfile
       name="default"
@@ -37,5 +38,12 @@
       name="ploneorg.addonlisting.plone_series_versions_vocabulary"
       provides="zope.schema.interfaces.IVocabularyFactory"
       component="ploneorg.addonlisting.PloneVersionsVocabularyFactory" />
+
+  <subscriber
+      zcml:condition="installed zope.lifecycleevent"
+      for="Products.CMFCore.interfaces.IContentish
+           zope.lifecycleevent.interfaces.IObjectAddedEvent"
+      handler="ploneorg.addonlisting.browser.utils.update_addon"
+      />
 
 </configure>
