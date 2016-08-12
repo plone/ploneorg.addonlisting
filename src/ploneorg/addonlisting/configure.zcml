@@ -39,6 +39,21 @@
       provides="zope.schema.interfaces.IVocabularyFactory"
       component="ploneorg.addonlisting.PloneVersionsVocabularyFactory" />
 
+  <utility
+      name="ploneorg.addonlisting.framework_versions_vocabulary"
+      provides="zope.schema.interfaces.IVocabularyFactory"
+      component="ploneorg.addonlisting.FrameworkVersionsDynamicVocabularyFactory" />
+
+  <utility
+      name="ploneorg.addonlisting.python_versions_vocabulary"
+      provides="zope.schema.interfaces.IVocabularyFactory"
+      component="ploneorg.addonlisting.PythonVersionsDynamicVocabularyFactory" />
+
+  <utility
+      name="ploneorg.addonlisting.state_vocabulary"
+      provides="zope.schema.interfaces.IVocabularyFactory"
+      component="ploneorg.addonlisting.StateVocabularyFactory" />
+
   <subscriber
       zcml:condition="installed zope.lifecycleevent"
       for="Products.CMFCore.interfaces.IContentish

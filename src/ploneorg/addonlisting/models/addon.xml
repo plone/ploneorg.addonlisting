@@ -17,10 +17,19 @@
         <description i18n:translate="">Name of AddOn</description>
         <required>True</required>
       </field>
+
       <field name="description"
              type="zope.schema.Text">
         <title i18n:translate="">Tagline</title>
         <description i18n:translate="">A one-line description for the Add'on, that show up in Isotope. (Max 120 Chars)</description>
+        <required>False</required>
+        <max_length>120</max_length>
+      </field>
+
+      <field name="text"
+             type="plone.app.textfield.RichText">
+        <title i18n:translate="">Description</title>
+        <description i18n:translate="">A longer Marketing Description for Curated Add'ons</description>
         <required>False</required>
         <max_length>120</max_length>
       </field>
@@ -43,14 +52,15 @@
         <default>False</default>
       </field>
 
-      <field name="curated"
-             type="zope.schema.Bool"
+      <field name="curated_status"
+             type="zope.schema.Choice"
              security:write_permission="cmf.ManagePortal"
              security:read_permission="zope2.View" >
-        <title i18n:translate="">Curated</title>
-        <description i18n:translate="">Is this Add'on curated (highlighted by a jury)</description>
+        <title i18n:translate="">Curated Status</title>
+        <description i18n:translate="">Is this Add'on in an workable state (highlighted by a jury)</description>
         <required>False</required>
         <default>False</default>
+        <vocabulary>ploneorg.addonlisting.state_vocabulary</vocabulary>
       </field>
 
       <fieldset name="pypi_data"
@@ -60,14 +70,14 @@
                 >
         <field name="supported_plone_versions"
                type="zope.schema.List"
-               form:mode="z3c.form.interfaces.IAddForm:input z3c.form.interfaces.IEditForm:display"
+               form:mode="z3c.form.interfaces.IAddForm:hidden z3c.form.interfaces.IEditForm:display"
                security:write_permission="cmf.ManagePortal"
                security:read_permission="zope2.View" >
           <title i18n:translate="">Supported Plone-Versions</title>
           <description i18n:translate="">A List of Supported Plone Versions</description>
           <required>False</required>
           <value_type type="zope.schema.Choice">
-            <vocabulary>ploneorg.addonlisting.plone_series_versions_vocabulary</vocabulary>
+            <vocabulary>ploneorg.addonlisting.framework_versions_vocabulary</vocabulary>
           </value_type>
         </field>
 
@@ -80,7 +90,7 @@
           <description i18n:translate="">A List of Supported Plone Versions</description>
           <required>False</required>
           <value_type type="zope.schema.Choice">
-            <vocabulary>ploneorg.addonlisting.plone_series_versions_vocabulary</vocabulary>
+            <vocabulary>ploneorg.addonlisting.python_versions_vocabulary</vocabulary>
           </value_type>
         </field>
 
@@ -102,6 +112,20 @@
           <title i18n:translate="">Link to a Bugtracker for this Add'on</title>
           <description i18n:translate=""></description>
           <required>False</required>
+        </field>
+
+        <field name="versions"
+               type="zope.schema.List"
+               form:mode="z3c.form.interfaces.IAddForm:hidden z3c.form.interfaces.IEditForm:display"
+               security:write_permission="cmf.ManagePortal"
+               security:read_permission="zope2.View" >
+          <title i18n:translate="">Supported Plone-Versions</title>
+          <description i18n:translate="">A List of Supported Plone Versions</description>
+          <required>False</required>
+          <value_type type="collective.z3cform.datagridfield.DictRow">
+            <title>Mapping</title>
+            <schema>ploneorg.addonlisting.contents.IVersionInfo</schema>
+          </value_type>
         </field>
 
       </fieldset>

@@ -11,6 +11,18 @@
     <schema>
 
       <!-- field definitions -->
+
+      <field name="query_classifieres"
+             type="zope.schema.List"
+             security:write_permission="cmf.ManagePortal"
+             security:read_permission="zope2.View" >
+        <title i18n:translate="">PyPI Classifiers to query on</title>
+        <description i18n:translate="">Those Classifiers will be used as an AND Selector to query the PyPI API to list all Add'ons. Modifing an existing Add'on Folder ewill not remove any Add'on.</description>
+        <required>False</required>
+        <value_type type="zope.schema.TextLine">
+        </value_type>
+      </field>
+
       <field name="plone_version_mapping"
              type="zope.schema.List"
              form:widget="collective.z3cform.datagridfield.datagridfield.DataGridFieldFactory"
@@ -21,7 +33,7 @@
         <required>False</required>
         <value_type type="collective.z3cform.datagridfield.DictRow">
           <title>Mapping</title>
-          <schema>ploneorg.addonlisting.contents.IMapping</schema>
+          <schema>ploneorg.addonlisting.interfaces.IPyPIClassifierMapping</schema>
         </value_type>
       </field>
 
@@ -35,7 +47,7 @@
         <required>False</required>
         <value_type type="collective.z3cform.datagridfield.DictRow">
           <title>Mapping</title>
-          <schema>ploneorg.addonlisting.contents.IMapping</schema>
+          <schema>ploneorg.addonlisting.interfaces.IPyPIClassifierMapping</schema>
         </value_type>
       </field>
 

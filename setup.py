@@ -28,8 +28,10 @@ setup(
         "License :: OSI Approved :: GNU General Public License v2 (GPLv2)",
     ],
     keywords='Python Plone',
-    author='Alexander Loechel',
+    author='Alexander Loechel - Plone Foundation',
     author_email='Alexander.Loechel@lmu.de',
+    maintainer='Plone Foundation',
+    maintainer_email='plone-developers@lists.sourceforge.net',
     url='https://pypi.python.org/pypi/ploneorg.addonlisting',
     license='GPL version 2',
     packages=find_packages('src', exclude=['ez_setup']),
@@ -38,11 +40,12 @@ setup(
     include_package_data=True,
     zip_safe=False,
     install_requires=[
+        'setuptools',
         'plone.api',
         'Products.GenericSetup>=1.8.2',
-        'setuptools',
-        'z3c.jbot',
         'plone.app.dexterity',
+        'plone.supermodel',
+        'z3c.jbot',
     ],
     extras_require={
         'test': [

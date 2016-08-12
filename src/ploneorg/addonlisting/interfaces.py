@@ -2,6 +2,7 @@
 """Module where all interfaces, events and exceptions live."""
 
 from ploneorg.addonlisting import _
+from plone.supermodel import model
 from zope import schema
 from zope.interface import Interface
 from zope.publisher.interfaces.browser import IDefaultBrowserLayer
@@ -23,3 +24,27 @@ class IAddOn(Interface):
     Content Type for Add'ons.
     """
     #form.model("models/addon.xml")
+
+
+class IMapping(model.Schema):
+    """
+    Schema for Mappings.
+    """
+    model.load("models/mapping.xml")
+
+
+class IPyPIClassifierMapping(model.Schema):
+    """
+    Schema for Mappings.
+    """
+    model.load("models/pypi_classifier_mapping.xml")
+
+
+class IVersionInfo(model.Schema):
+    """
+    Schema for Version Information.
+    """
+    model.load("models/versioninfo.xml")
+
+#IMapping = xmlSchema("models/mapping.xml")
+#IVersionInfo = xmlSchema("models/versioninfo.xml")
