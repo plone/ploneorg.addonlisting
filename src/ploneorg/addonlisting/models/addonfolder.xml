@@ -23,16 +23,26 @@
         </value_type>
       </field>
 
-      <field name="plone_version_mapping"
+      <field name="framework_name"
+             type="zope.schema.TextLine"
+             security:write_permission="cmf.ManagePortal"
+             security:read_permission="zope2.View" >
+        <title i18n:translate="">Framework Name</title>
+        <description i18n:translate="">Name of the Framework that should show up</description>
+        <required>True</required>
+      </field>
+
+      <field name="framework_version_mapping"
              type="zope.schema.List"
              form:widget="collective.z3cform.datagridfield.datagridfield.DataGridFieldFactory"
              security:write_permission="cmf.ManagePortal"
              security:read_permission="zope2.View" >
-        <title i18n:translate="">Plone Version Mapping</title>
-        <description i18n:translate="">Map PyPI Classifier to a supported Plone Version to show on Add'on</description>
+      <!-- form:widget="collective.z3cform.datagridfield.datagridfield.DataGridFieldFactory" -->
+        <title i18n:translate="">Framework Version Mapping</title>
+        <description i18n:translate="">Map PyPI Classifier to a supported Framework Version to show on Add'on</description>
         <required>False</required>
-        <value_type type="collective.z3cform.datagridfield.DictRow">
-          <title>Mapping</title>
+        <value_type type="zope.schema.Object" old_type="collective.z3cform.datagridfield.DictRow">
+          <title i18n:translation="" >Mapping</title>
           <schema>ploneorg.addonlisting.interfaces.IPyPIClassifierMapping</schema>
         </value_type>
       </field>
@@ -42,15 +52,15 @@
              form:widget="collective.z3cform.datagridfield.datagridfield.DataGridFieldFactory"
              security:write_permission="cmf.ManagePortal"
              security:read_permission="zope2.View" >
+      <!-- form:widget="collective.z3cform.datagridfield.datagridfield.DataGridFieldFactory" -->
         <title i18n:translate="">Python Version Mapping</title>
         <description i18n:translate="">Map PyPI Classifier to a supported Python Version to show on Add'on</description>
         <required>False</required>
-        <value_type type="collective.z3cform.datagridfield.DictRow">
-          <title>Mapping</title>
+        <value_type type="zope.schema.Object" old_type="collective.z3cform.datagridfield.DictRow">
+          <title i18n:translation="" >Mapping</title>
           <schema>ploneorg.addonlisting.interfaces.IPyPIClassifierMapping</schema>
         </value_type>
       </field>
-
 
       <field name="add_categories"
              type="zope.schema.List"

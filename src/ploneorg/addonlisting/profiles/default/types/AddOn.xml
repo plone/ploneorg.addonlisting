@@ -36,7 +36,6 @@
   <property name="behaviors">
     <element value="plone.app.content.interfaces.INameFromTitle" />
     <element value="plone.app.contenttypes.behaviors.leadimage.ILeadImage" />
-    <element value="plone.app.contenttypes.behaviors.richtext.IRichText" />
   </property>
 
   <!-- View information -->

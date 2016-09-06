@@ -1,0 +1,41 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      i18n:domain="ploneorg.addonlisting"
+      metal:use-macro="context/main_template/macros/master">
+
+  <metal:block fill-slot="content-core">
+          XXX - this text comes below title and description
+  </metal:block>
+
+  <metal:block fill-slot="main">
+
+    <h1 tal:content="context/title">Add'on Title</h1>
+    <div>
+      <p class="description" tal:content="context/description">Description</p>
+      <div tal:replace="structure context/text/output" >Text</div>
+    </div>
+    <table>
+      <tr>
+        <th>Current Version</th>
+        <td tal:content="context/current_version">1.0.0</td>
+      </tr>
+      <tr>
+        <th>Downloads</th>
+        <td tal:content="context/downloads">Number</td>
+      </tr>
+      <tr>
+        <th i18n:translate="" >Author</th>
+        <td><a tal:content="context/author_name" tal:attributes="href string:mailto:${context/author_email}">Author</a></td>
+      </tr>
+      <tr>
+        <th i18n:translate="" >Maintainer</th>
+        <td><a tal:content="context/maintainer_name" tal:attributes="href string:mailto:${context/maintainer_email}">Author</a></td>
+      </tr>
+    </table>
+    <p tal:content="context/versions">Versions</p>
+    <p tal:content="context/dict">Dict</p>
+  </metal:block>
+
+</html>

@@ -25,8 +25,36 @@
         <required>False</required>
       </field>
 
+      <field name="egg_files"
+             type="zope.schema.List"
+             form:widget="collective.z3cform.datagridfield.datagridfield.DataGridFieldFactory" >
+        <title i18n:translate="">Egg File Infos</title>
+        <description i18n:translate=""></description>
+        <required>False</required>
+        <value_type type="zope.schema.Object" old_type="collective.z3cform.datagridfield.DictRow">
+          <schema>ploneorg.addonlisting.interfaces.IVersionEggInfo</schema>
+        </value_type>
+      </field>
+
+      <field name="downloads"
+             type="zope.schema.Int" >
+        <title i18n:translate="">Sum of Downloads for Version</title>
+        <description i18n:translate=""></description>
+        <required>False</required>
+      </field>
+    </schema>
+
+    <schema name="egg_info" >
+
+      <field name="filename"
+             type="zope.schema.TextLine" >
+        <title i18n:translate="">Filename</title>
+        <description i18n:translate=""></description>
+        <required>False</required>
+      </field>
+
       <field name="upload_time"
-             type="zope.schema.Datetime" >
+             type="zope.schema.Date" >
         <title i18n:translate="">PyPI Upload time</title>
         <description i18n:translate=""></description>
         <required>False</required>
@@ -34,11 +62,10 @@
 
       <field name="downloads"
              type="zope.schema.Int" >
-        <title i18n:translate="">Version ID (PEP460)</title>
+        <title i18n:translate="">Downloads</title>
         <description i18n:translate=""></description>
         <required>False</required>
       </field>
-
     </schema>
 
 </model>

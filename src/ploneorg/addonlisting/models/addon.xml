@@ -31,7 +31,6 @@
         <title i18n:translate="">Description</title>
         <description i18n:translate="">A longer Marketing Description for Curated Add'ons</description>
         <required>False</required>
-        <max_length>120</max_length>
       </field>
 
       <field name="curated"
@@ -68,13 +67,24 @@
                 description="Data in this tab will be automatically updated from PyPI."
                 form:mode="z3c.form.interfaces.IAddForm:hidden"
                 >
-        <field name="supported_plone_versions"
-               type="zope.schema.List"
+
+        <field name="current_version"
+               type="zope.schema.TextLine"
                form:mode="z3c.form.interfaces.IAddForm:hidden z3c.form.interfaces.IEditForm:display"
                security:write_permission="cmf.ManagePortal"
                security:read_permission="zope2.View" >
-          <title i18n:translate="">Supported Plone-Versions</title>
-          <description i18n:translate="">A List of Supported Plone Versions</description>
+          <title i18n:translate="">Current Version</title>
+          <description i18n:translate=""></description>
+          <required>False</required>
+        </field>
+
+        <field name="supported_framework_versions"
+               type="zope.schema.List"
+               form:mode="z3c.form.interfaces.IAddForm:input z3c.form.interfaces.IEditForm:display"
+               security:write_permission="cmf.ManagePortal"
+               security:read_permission="zope2.View" >
+          <title i18n:translate="">Supported Framework-Versions</title>
+          <description i18n:translate="">A List of Supported Framework Versions</description>
           <required>False</required>
           <value_type type="zope.schema.Choice">
             <vocabulary>ploneorg.addonlisting.framework_versions_vocabulary</vocabulary>
@@ -83,7 +93,7 @@
 
         <field name="supported_python_versions"
                type="zope.schema.List"
-               form:mode="z3c.form.interfaces.IAddForm:hidden z3c.form.interfaces.IEditForm:display"
+               form:mode="z3c.form.interfaces.IAddForm:input z3c.form.interfaces.IEditForm:display"
                security:write_permission="cmf.ManagePortal"
                security:read_permission="zope2.View" >
           <title i18n:translate="">Supported Plone-Versions</title>
@@ -92,6 +102,59 @@
           <value_type type="zope.schema.Choice">
             <vocabulary>ploneorg.addonlisting.python_versions_vocabulary</vocabulary>
           </value_type>
+        </field>
+
+        <field name="keywords"
+               type="zope.schema.List"
+               form:mode="z3c.form.interfaces.IAddForm:hidden z3c.form.interfaces.IEditForm:display"
+               security:write_permission="cmf.ManagePortal"
+               security:read_permission="zope2.View" >
+          <title i18n:translate="">PyPI Keywords</title>
+          <description i18n:translate="">A List of Keywords</description>
+          <required>False</required>
+          <value_type type="zope.schema.TextLine">
+            <title>Keyword</title>
+          </value_type>
+        </field>
+
+        <field name="author_name"
+               type="zope.schema.TextLine"
+               form:mode="z3c.form.interfaces.IAddForm:hidden z3c.form.interfaces.IEditForm:display"
+               security:write_permission="cmf.ManagePortal"
+               security:read_permission="zope2.View" >
+          <title i18n:translate="">Author Name</title>
+          <description i18n:translate=""></description>
+          <required>False</required>
+        </field>
+
+        <field name="author_email"
+               type="zope.schema.TextLine"
+               form:mode="z3c.form.interfaces.IAddForm:hidden z3c.form.interfaces.IEditForm:display"
+               security:write_permission="cmf.ManagePortal"
+               security:read_permission="zope2.View" >
+          <title i18n:translate="">Author E-Mail</title>
+          <description i18n:translate=""></description>
+          <required>False</required>
+        </field>
+
+        <field name="maintainer_name"
+               type="zope.schema.TextLine"
+               form:mode="z3c.form.interfaces.IAddForm:hidden z3c.form.interfaces.IEditForm:display"
+               security:write_permission="cmf.ManagePortal"
+               security:read_permission="zope2.View" >
+          <title i18n:translate="">Maintainer Name</title>
+          <description i18n:translate=""></description>
+          <required>False</required>
+        </field>
+
+        <field name="maintainer_email"
+               type="zope.schema.TextLine"
+               form:mode="z3c.form.interfaces.IAddForm:hidden z3c.form.interfaces.IEditForm:display"
+               security:write_permission="cmf.ManagePortal"
+               security:read_permission="zope2.View" >
+          <title i18n:translate="">Maintainer E-Mail</title>
+          <description i18n:translate=""></description>
+          <required>False</required>
         </field>
 
         <field name="docs_link"
@@ -116,15 +179,15 @@
 
         <field name="versions"
                type="zope.schema.List"
-               form:mode="z3c.form.interfaces.IAddForm:hidden z3c.form.interfaces.IEditForm:display"
+               form:mode="z3c.form.interfaces.IAddForm:input z3c.form.interfaces.IEditForm:display"
                security:write_permission="cmf.ManagePortal"
                security:read_permission="zope2.View" >
           <title i18n:translate="">Supported Plone-Versions</title>
           <description i18n:translate="">A List of Supported Plone Versions</description>
           <required>False</required>
-          <value_type type="collective.z3cform.datagridfield.DictRow">
+          <value_type type="zope.schema.Object" old_type="collective.z3cform.datagridfield.DictRow">
             <title>Mapping</title>
-            <schema>ploneorg.addonlisting.contents.IVersionInfo</schema>
+            <schema>ploneorg.addonlisting.interfaces.IVersionInfo</schema>
           </value_type>
         </field>
 

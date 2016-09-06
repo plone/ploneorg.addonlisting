@@ -1,11 +1,16 @@
 # -*- coding: utf-8 -*-
 """Module where all interfaces, events and exceptions live."""
 
+from datetime import date
+from datetime import datetime
 from distutils.version import LooseVersion
 from pkg_resources import parse_version
 from plone import api
 from plone.app.textfield.value import RichTextValue
 from ploneorg.addonlisting import _
+from ploneorg.addonlisting import PYPI_URL
+from ploneorg.addonlisting.contents import VersionInfo
+from ploneorg.addonlisting.contents import VersionEggInfo
 
 import logging
 import requests
@@ -14,7 +19,6 @@ import urllib
 import xmlrpclib
 
 
-PYPI_URL = 'https://pypi.python.org/pypi'
 log = logging.getLogger("ploneorg.addonlisting")
 
 
@@ -64,10 +68,8 @@ def update_addon_list(context, request=None):
 def update_addon(context, request=None):
     addon = context
     with api.env.adopt_roles(['Manager']):
-
+        log.info(u'Start updating: %s', addon.title)
         url = PYPI_URL + '/' + addon.title + '/json'
-
-        import ipdb; ipdb.set_trace()
 
         pypi_response = requests.get(url)
 
@@ -76,16 +78,45 @@ def update_addon(context, request=None):
                 pypi_response.headers['Content-Type'].startswith('application/json'):
             data = pypi_response.json()
 
+            import ipdb; ipdb.set_trace()
+            if not addon.curated:
+                addon.description = data['info'].get('summary')
+                addon.text = RichTextValue(data['info'].get('description'), 'text/restructured', 'text/restructured')
+
+            addon.current_version = data['info'].get('version')
             addon.docs_link = data['info'].get('docs_link')
             addon.bugtracker_link = data['info'].get('bugtrack_link')
+            addon.author_name = data['info'].get('author')
+            addon.author_email = data['info'].get('author_email')
+            addon.maintainer_name = data['info'].get('maintainer')
+            addon.maintainer_email = data['info'].get('maintainer_email')
 
-            if addon.description is None or addon.description == "":
-                addon.description = data['info'].get('summary')
+            versions = []
+            tsum = 0
+            for version, version_data in data['releases'].iteritems():
+                psum = 0
+                version_info = VersionInfo()
+                version_info.version_id = version
+                version_info.version_name = version
+                egg_infos = []
+                for info in version_data:
+                    egg_info = VersionEggInfo()
+                    egg_info.filename = info['filename']
+                    egg_info.downloads = int(info['downloads'])
+                    psum += egg_info.downloads
+                    egg_info.upload_time = datetime.strptime(info['upload_time'], '%Y-%m-%dT%H:%M:%S').date()
+                    egg_infos.append(egg_info)
+                version_info.egg_files = egg_infos
+                version_info.downloads = psum
+                tsum += psum
+                versions.append(version_info)
+            addon.downloads = tsum
+            addon.versions = versions
 
-            if addon.text is None or addon.text == "":
-                addon.text = RichTextValue(data['info'].get('description'), 'text/restructured', 'text/restructured')
+            api.portal.show_message("Add'on %s has been updated" % (addon.title), request=request, type='info')
+            log.info(u'Finished to update: %s', addon.title)
         else:
-            log.info(u'somthing went wrong on update %s', addon.title)
+            log.info(u'something went wrong on update %s', addon.title)
 
         if request is not None:
             request.response.redirect(context.absolute_url())
@@ -93,6 +124,7 @@ def update_addon(context, request=None):
 
 def update_addons(context, request=None):
     addon_folder = context
+    import ipdb; ipdb.set_trace()
 
     # get Add'on List
     addons = api.content.find(context=addon_folder, portal_type="AddOn")

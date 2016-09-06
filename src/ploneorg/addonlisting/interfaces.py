@@ -46,5 +46,9 @@ class IVersionInfo(model.Schema):
     """
     model.load("models/versioninfo.xml")
 
-#IMapping = xmlSchema("models/mapping.xml")
-#IVersionInfo = xmlSchema("models/versioninfo.xml")
+
+class IVersionEggInfo(model.Schema):
+    """
+    Schema for Version Information.
+    """
+    model.load("models/versioninfo.xml", schema=u"egg_info")
