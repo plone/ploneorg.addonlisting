@@ -11,10 +11,6 @@ from zope.interface import alsoProvides
 
 class FolderUpdateView(BrowserView):
 
-    def __init__(self, context, request):
-        self.context = context
-        self.request = request
-
     def __call__(self):
         alsoProvides(self.request, IDisableCSRFProtection)
         update_addon_list(self.context, self.request)
@@ -22,20 +18,12 @@ class FolderUpdateView(BrowserView):
 
 class FolderUpdateAllView(BrowserView):
 
-    def __init__(self, context, request):
-        self.context = context
-        self.request = request
-
     def __call__(self):
         alsoProvides(self.request, IDisableCSRFProtection)
         update_addon_list(self.context, self.request)
 
 
 class AddOnUpdateView(BrowserView):
-
-    def __init__(self, context, request):
-        self.context = context
-        self.request = request
 
     def __call__(self):
         alsoProvides(self.request, IDisableCSRFProtection)
@@ -45,22 +33,6 @@ class AddOnUpdateView(BrowserView):
 class AddOnView(BrowserView):
 
     template = ViewPageTemplateFile('templates/addon_view.pt')
-
-    def __init__(self, context, request):
-        self.context = context
-        self.request = request
-
-    def __call__(self):
-        return self.template()
-
-
-class AddOnBaseView(BrowserView):
-
-    template = ViewPageTemplateFile('templates/addon_base_view.pt')
-
-    def __init__(self, context, request):
-        self.context = context
-        self.request = request
 
     def __call__(self):
         return self.template()

@@ -53,16 +53,10 @@ class PyPIClassifierMapping(object):
         return self.value
 
     def __getitem__(self, key):
-        if key == 'key':
-            return self.key
-        elif key == 'value':
-            return self.value
+        return getattr(self, key, None)
 
     def __setitem__(self, key, value):
-        if key == 'key':
-            self.key = value
-        elif key == 'value':
-            self.value = value
+        setattr(self, key, value)
 
 registerFactoryAdapter(IPyPIClassifierMapping, PyPIClassifierMapping)
 
@@ -79,6 +73,9 @@ class VersionEggInfo(object):
     implements(IVersionEggInfo)
 
     def __getitem__(self, key):
-        return getattr(self, key)
+        return getattr(self, key, None)
+
+    def __setitem__(self, key, value):
+        setattr(self, key, value)
 
 registerFactoryAdapter(IVersionEggInfo, VersionEggInfo)

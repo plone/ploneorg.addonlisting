@@ -12,7 +12,8 @@
 
       <!-- field definitions -->
       <field name="title"
-             type="zope.schema.TextLine">
+             type="zope.schema.TextLine"
+             form:mode="z3c.form.interfaces.IAddForm:input z3c.form.interfaces.IEditForm:display">
         <title i18n:translate="">Name</title>
         <description i18n:translate="">Name of AddOn</description>
         <required>True</required>
@@ -59,7 +60,19 @@
         <description i18n:translate="">Is this Add'on in an workable state (highlighted by a jury)</description>
         <required>False</required>
         <default>False</default>
-        <vocabulary>ploneorg.addonlisting.state_vocabulary</vocabulary>
+        <vocabulary>ploneorg.addonlisting.pypi_state_vocabulary</vocabulary>
+      </field>
+
+
+      <field name="addon_type"
+             type="zope.schema.Choice"
+             security:write_permission="cmf.ManagePortal"
+             security:read_permission="zope2.View" >
+        <title i18n:translate="">Addon Type</title>
+        <description i18n:translate="">Please choose a Category this Add on matches best</description>
+        <required>False</required>
+        <default>False</default>
+        <vocabulary>ploneorg.addonlisting.addon_type_vocabulary</vocabulary>
       </field>
 
       <fieldset name="pypi_data"
@@ -77,6 +90,19 @@
           <description i18n:translate=""></description>
           <required>False</required>
         </field>
+
+
+        <field name="pypi_status"
+               type="zope.schema.Choice"
+               security:write_permission="cmf.ManagePortal"
+               security:read_permission="zope2.View" >
+          <title i18n:translate="">Curated Status</title>
+          <description i18n:translate="">Is this Add'on in an workable state (highlighted by a jury)</description>
+          <required>False</required>
+          <default>False</default>
+          <vocabulary>ploneorg.addonlisting.pypi_state_vocabulary</vocabulary>
+        </field>
+
 
         <field name="supported_framework_versions"
                type="zope.schema.List"

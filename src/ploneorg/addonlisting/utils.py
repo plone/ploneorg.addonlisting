@@ -78,7 +78,7 @@ def update_addon(context, request=None):
                 pypi_response.headers['Content-Type'].startswith('application/json'):
             data = pypi_response.json()
 
-            import ipdb; ipdb.set_trace()
+            #import ipdb; ipdb.set_trace()
             if not addon.curated:
                 addon.description = data['info'].get('summary')
                 addon.text = RichTextValue(data['info'].get('description'), 'text/restructured', 'text/restructured')
@@ -124,7 +124,7 @@ def update_addon(context, request=None):
 
 def update_addons(context, request=None):
     addon_folder = context
-    import ipdb; ipdb.set_trace()
+    #import ipdb; ipdb.set_trace()
 
     # get Add'on List
     addons = api.content.find(context=addon_folder, portal_type="AddOn")

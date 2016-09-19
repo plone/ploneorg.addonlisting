@@ -35,31 +35,36 @@
       name="ploneorg.addonlisting-hiddenprofiles" />
 
   <utility
-      name="ploneorg.addonlisting.plone_series_versions_vocabulary"
-      provides="zope.schema.interfaces.IVocabularyFactory"
-      component="ploneorg.addonlisting.PloneVersionsVocabularyFactory" />
-
-  <utility
       name="ploneorg.addonlisting.framework_versions_vocabulary"
       provides="zope.schema.interfaces.IVocabularyFactory"
-      component="ploneorg.addonlisting.FrameworkVersionsDynamicVocabularyFactory" />
+      component="ploneorg.addonlisting.vocabularies.framework_versions_dynamic_vocabulary" />
 
   <utility
       name="ploneorg.addonlisting.python_versions_vocabulary"
       provides="zope.schema.interfaces.IVocabularyFactory"
-      component="ploneorg.addonlisting.PythonVersionsDynamicVocabularyFactory" />
+      component="ploneorg.addonlisting.vocabularies.python_versions_dynamic_vocabulary" />
 
   <utility
       name="ploneorg.addonlisting.state_vocabulary"
       provides="zope.schema.interfaces.IVocabularyFactory"
-      component="ploneorg.addonlisting.StateVocabularyFactory" />
+      component="ploneorg.addonlisting.vocabularies.addon_state_vocabulary" />
+
+  <utility
+      name="ploneorg.addonlisting.pypi_state_vocabulary"
+      provides="zope.schema.interfaces.IVocabularyFactory"
+      component="ploneorg.addonlisting.vocabularies.addon_pypi_state_vocabulary" />
+
+  <utility
+      name="ploneorg.addonlisting.addon_type_vocabulary"
+      provides="zope.schema.interfaces.IVocabularyFactory"
+      component="ploneorg.addonlisting.vocabularies.addon_type_vocabulary" />
 
   <subscriber
       zcml:condition="installed zope.lifecycleevent"
       for="Products.CMFCore.interfaces.IContentish
            ploneorg.addonlisting.interfaces.IAddOn
            zope.lifecycleevent.interfaces.IObjectAddedEvent"
-      handler="ploneorg.addonlisting.browser.utils.update_addon"
+      handler="ploneorg.addonlisting.utils.update_addon"
       />
 
 </configure>
