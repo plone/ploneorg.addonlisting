@@ -38,12 +38,16 @@ def update_addon_list(context, request=None):
 
     new_addons = set(queried_addon_list) - set(present_addon_list)
 
+    if request is not None:
+        request.response.write("Start Update Add'on Listing\n")
 
     for elem in new_addons:
         with api.env.adopt_roles(['Manager']):
             info = u'For Add\'on-Folder: "%s" add Plone-Package "%s"' % (addon_folder.title, elem)
             log.info(info)
 
+            if request is not None:
+                request.response.write(str(info) + "\n")
             try:
                 addon = api.content.create(
                     container=addon_folder,
@@ -53,6 +57,9 @@ def update_addon_list(context, request=None):
                 )
             except:
                 log.error(u'Could not create %s', elem)
+
+    if request is not None:
+        request.response.write("Finished Update Add'on Listing\n")
 
 
 def update_addon(context, request=None):
@@ -114,18 +121,18 @@ def update_addon(context, request=None):
 
 def update_addons(context, request=None):
     addon_folder = context
-    #import ipdb; ipdb.set_trace()
+    import ipdb; ipdb.set_trace()
 
     # get Add'on List
     addons = api.content.find(context=addon_folder, portal_type="AddOn")
 
     if request is not None:
         request.response.write("Start Update all Add'ons\n")
-        request.response.flush()
+        #request.response.flush()
 
     for addon in addons:
         update_addon(addon, request=request)
 
     if request is not None:
         request.response.write("Finished Update all Add'ons\n")
-        request.response.flush()
+        #request.response.flush()
