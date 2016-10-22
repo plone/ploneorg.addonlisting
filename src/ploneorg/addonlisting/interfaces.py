@@ -40,6 +40,13 @@ class IPyPIClassifierMapping(model.Schema):
     model.load("models/pypi_classifier_mapping.xml")
 
 
+class ICategory(model.Schema):
+    """
+    Schema for version information.
+    """
+    model.load("models/category.xml", schema=u"egg_info")
+
+
 class IVersionInfo(model.Schema):
     """
     Schema for version information.

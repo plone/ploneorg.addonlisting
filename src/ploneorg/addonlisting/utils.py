@@ -125,18 +125,15 @@ def update_addon(context, request=None):
 
 def update_addons(context, request=None):
     addon_folder = context
-    import ipdb; ipdb.set_trace()
 
     # get Add'on List
     addons = api.content.find(context=addon_folder, portal_type="AddOn")
 
     if request is not None:
-        request.response.write("Start Update all Add'ons\n")
-        #request.response.flush()
+        request.response.write("Start Update all Add-ons\n")
 
     for addon in addons:
         update_addon(addon, request=request)
 
     if request is not None:
-        request.response.write("Finished Update all Add'ons\n")
-        #request.response.flush()
+        request.response.write("Finished Update all Add-ons\n")

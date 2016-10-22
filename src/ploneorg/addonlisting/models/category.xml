@@ -1,0 +1,36 @@
+<?xml version="1.0" ?>
+<model xmlns="http://namespaces.plone.org/supermodel/schema"
+       xmlns:form="http://namespaces.plone.org/supermodel/form"
+       xmlns:security="http://namespaces.plone.org/supermodel/security"
+       xmlns:marshal="http://namespaces.plone.org/supermodel/marshal"
+       xmlns:users="http://namespaces.plone.org/supermodel/users"
+       xmlns:lingua="http://namespaces.plone.org/supermodel/lingua"
+       xmlns:i18n="http://namespaces.zope.org/i18n"
+       i18n_domain="ploneorg.addonlisting">
+
+    <schema>
+
+      <!-- field definitions -->
+      <field name="title"
+             type="zope.schema.TextLine" >
+        <title i18n:translate="">Category Title</title>
+        <description i18n:translate=""></description>
+        <required>False</required>
+      </field>
+
+      <field name="icon"
+             type="zope.schema.TextLine" >
+        <title i18n:translate="">Icon</title>
+        <description i18n:translate=""></description>
+        <required>False</required>
+      </field>
+
+      <field name="color"
+             type="zope.schema.TextLine" >
+        <title i18n:translate="">Color</title>
+        <description i18n:translate="">A Color for Highlight a Category</description>
+        <required>False</required>
+      </field>
+    </schema>
+
+</model>

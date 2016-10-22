@@ -64,12 +64,15 @@
 
       <field name="add_categories"
              type="zope.schema.List"
+             form:widget="collective.z3cform.datagridfield.datagridfield.DataGridFieldFactory"
              security:write_permission="cmf.ManagePortal"
              security:read_permission="zope2.View" >
         <title i18n:translate="">Add-on Categories</title>
         <description i18n:translate="">Used to assign a category to a particular add-on</description>
         <required>False</required>
-        <value_type type="zope.schema.TextLine">
+        <value_type type="zope.schema.Object" old_type="collective.z3cform.datagridfield.DictRow">
+          <title i18n:translation="" >Category</title>
+          <schema>ploneorg.addonlisting.interfaces.ICategory</schema>
         </value_type>
       </field>
 
