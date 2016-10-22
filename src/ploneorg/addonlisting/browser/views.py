@@ -14,7 +14,7 @@ class FolderUpdateView(BrowserView):
     def __call__(self):
         alsoProvides(self.request, IDisableCSRFProtection)
         update_addon_list(self.context, self.request)
-        return self.request.response.redirect(self.context.absolut_url)
+        #return self.request.response.redirect(self.context.absolut_url)
 
 
 class FolderUpdateAllView(BrowserView):

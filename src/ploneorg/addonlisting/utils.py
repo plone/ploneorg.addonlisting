@@ -15,6 +15,7 @@ from ploneorg.addonlisting.contents import VersionEggInfo
 import logging
 import requests
 import simplejson as json
+import transaction
 import urllib
 import xmlrpclib
 
@@ -49,14 +50,17 @@ def update_addon_list(context, request=None):
             if request is not None:
                 request.response.write(str(info) + "\n")
             try:
+                transaction.begin()
                 addon = api.content.create(
                     container=addon_folder,
                     type="AddOn",
                     id=elem,
                     title=elem
                 )
-            except:
+                transaction.get().commit()
+            except Exception as e:
                 log.error(u'Could not create %s', elem)
+                log.error(e)
 
     if request is not None:
         request.response.write("Finished Update Add'on Listing\n")
