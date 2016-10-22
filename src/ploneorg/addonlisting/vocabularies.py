@@ -55,8 +55,8 @@ def addon_pypi_state_vocabulary(context):
 @provider(IVocabularyFactory)
 def addon_state_vocabulary(context):
     return SimpleVocabulary([
-        SimpleTerm(value=u'alpha', title=_(u'Alpha Status (Prototype State, never use in Production)')),
-        SimpleTerm(value=u'beta', title=_(u'Beta Status (Development State / Release preperations)')),
+        SimpleTerm(value=u'alpha', title=_(u'Alpha status (prototype state: never use in production)')),
+        SimpleTerm(value=u'beta', title=_(u'Beta status (development state: release being prepared)')),
         SimpleTerm(value=u'stable', title=_(u'Production/Stable')),
         SimpleTerm(value=u'unmaintained', title=_(u'Unmaintained/Inactive ()')),
     ])

@@ -15,7 +15,7 @@ long_description = '\n\n'.join([
 setup(
     name='ploneorg.addonlisting',
     version='1.0a1',
-    description="Add On Listings for plone.org",
+    description="Add-on listings for Plone.org",
     long_description=long_description,
     # Get more from https://pypi.python.org/pypi?%3Aaction=list_classifiers
     classifiers=[

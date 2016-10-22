@@ -2,16 +2,16 @@
 <object
     i18n:domain="ploneorg.addonlisting"
     meta_type="Dexterity FTI"
-    name="AddOn"
+    name="Add-on"
     xmlns:i18n="http://xml.zope.org/namespaces/i18n">
 
   <!-- Basic properties -->
   <property
       i18n:translate=""
-      name="title">AddOn</property>
+      name="title">Add-on</property>
   <property
       i18n:translate=""
-      name="description">A Plone Add'on, listed on PyPI</property>
+      name="description">A Plone add-on, listed on PyPI</property>
 
   <property name="allow_discussion">False</property>
   <property name="factory">AddOn</property>

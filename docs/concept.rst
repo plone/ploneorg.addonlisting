@@ -1,24 +1,23 @@
 Concept of ploneorg.addonlisting (SW-Design and Implementation)
 ===============================================================
 
-ploneorg.addonlisting is a separate package from ploneorg.core, where some other content types and functionality for the plone.org Webpage are developed.
-This is done with the intention to reuse this functionality.
+ploneorg.addonlisting is a separate package from ploneorg.core, which includes content types and functionality for the Plone.org site.
 
-Plone Add'ons that could an should be presented to users should be released and life on PyPI (Python Package Index).
-Therefore we could use PyPI package lookup to get all Plone Add'ons via a filter on relevant PyPI classifiers.
+Plone add-ons should continue to be released to PyPI (pypi.python.org, the Python Package Index).
+ploneorg.addonlisting reads PyPI to get information on all Plone add-ons, applying a filter on relevant PyPI classifiers, but also lets us manually indicate which add-ons to hide, which to highlight ("curate"), and, for curated add-ons, override the summary and description of the add-on.
 
 PyPI-Classifiers
 ----------------
 
-All Plone related Package should be tagged with the PyPI-Classifier
+All Plone related add-ons should be tagged with the PyPI classifier
 
 * Framework :: Plone
 
-All Add'ons should have been tagged additionally with the PyPI-Classifier:
+All add-ons should have been tagged additionally with the PyPI classifier:
 
 * Environment :: Plugins   *(Proposal)*
 
-additional classifiers that reflects the compatible Plone Version:
+Additional classifiers that reflect the compatible Plone version:
 
 * Framework :: Plone :: 3.2
 * Framework :: Plone :: 3.3
@@ -28,7 +27,7 @@ additional classifiers that reflects the compatible Plone Version:
 * Framework :: Plone :: 4.3
 * Framework :: Plone :: 5.0
 
-Also if possible following classifiers which reflects Python compatibility should read
+Also, if possible, the following classifiers should be included to reflect the add-ons' Python version compatibility:
 
 * Programming Language :: Python
 * Programming Language :: Python :: 2
@@ -48,7 +47,7 @@ Also if possible following classifiers which reflects Python compatibility shoul
 * Programming Language :: Python :: 3.6
 * Programming Language :: Python :: 3 :: Only
 
-Plone Packages should also indicate which status the current package has:
+Plone add-ons should also indicate their status:
 
 * Development Status :: 1 - Planning
 * Development Status :: 2 - Pre-Alpha
@@ -61,41 +60,42 @@ Plone Packages should also indicate which status the current package has:
 Storage
 -------
 
-External lookups on runtime should be considered harmful, so we should frequently update (CRON) the Listing and store the data in Plone itself.
-Plone has a fantastic Content Type story, so we use a Plone Dexterity Content Type for storing the data.
+Real-time queries to PyPi could be problematic, so we use a scheduled task (or "cron" job) to retrieve the add-on listing data from PyPi and we store the data locally in Plone.
 
-AddOn
-^^^^^
+We use a Plone Dexterity content type to store the add-on data locally.
 
-We will decide between two types of Add'ons we want to show on plone.org:
+Add-on
+^^^^^^
 
-* Curated Add'ons
-* Add'ons
+There are two types of add-ons we want to show on Plone.org:
 
-Additionally we do have PyPI Packages that are tagged with the classifiers but should not show up (core packages, unmaintained, harmful, ...).
+* Curated ("highlighted") add-ons
+* add-ons
+
+There are many Plone packages on PyPi that are tagged with the Plone classifiers but should not show up in the Plone.org add-on listing (e.g., core packages, unmaintained or harmful add-ons).
 
 Fields
 ``````
 
-* Name (PyPI Name)
+* Name (PyPI package name)
 * Tag-Line (Text / TextLine for a one sentence description used in isotope)
-* Description (RichText, Marketing Text for curated add'ons)
-* Lead Image (Used in Listings and Isotope)
-* Tags (Keywords)
-* Curated (Bool)
-* Blacklist (Bool, for Core and harmful packages)
-* Unmaintained (For highlighting Old Packages that may still be known but shoud not be used anymore) - maybe replaced_by should be added.
-* Download Numbers
-* Links (PyPI, Bugfix/Issue-Tracker, Docs)
-* Plone Version Support
+* Description (RichText, marketing text for curated add-ons)
+* Lead Image (used in listings and isotope)
+* Tags (keywords)
+* Curated (boolean yes/no)
+* Blacklist (boolean yes/no, for core and harmful add-ons)
+* Unmaintained (for highlighting old add-ons that should no longer be used) [maybe we should add a replaced_by boolean?]
+* Download count
+* Links (e.g., to PyPI, issue tracker, documentation, project site)
+* Plone version support
 
 AddOnFolder
 ^^^^^^^^^^^
 
 
-Storage-Details
+Storage Details
 ---------------
 
-As we would like to store the data in Plone for easier access and view, we should prevent that users edit fields that are auto-updated.
-For implementation we use Plone Dexterity XML Schemas, there you could use form:mode (http://docs.plone.org/external/plone.app.dexterity/docs/reference/dexterity-xml.html#mode) for hide or view mode.
-Additionally we might should consider showing those data in edit mode, but as mode view not input and group them in a different tab-group (Fieldset).
+Since we store data locally in Plone for easier and faster access, we prevent users from editing field values that are auto-updated from PyPi.
+ We use Plone Dexterity XML schemas, and the form:mode (http://docs.plone.org/external/plone.app.dexterity/docs/reference/dexterity-xml.html#mode) feature to hide or show fields.
+Additionally we could show those data in edit mode but view only (not editable) and group them in a different tab group or fieldset.

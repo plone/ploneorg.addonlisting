@@ -15,14 +15,14 @@
              type="zope.schema.TextLine"
              form:mode="z3c.form.interfaces.IAddForm:input z3c.form.interfaces.IEditForm:display">
         <title i18n:translate="">Name</title>
-        <description i18n:translate="">Name of AddOn</description>
+        <description i18n:translate="">Name of add-on</description>
         <required>True</required>
       </field>
 
       <field name="description"
              type="zope.schema.Text">
         <title i18n:translate="">Tagline</title>
-        <description i18n:translate="">A one-line description for the Add'on, that show up in Isotope. (Max 120 Chars)</description>
+        <description i18n:translate="">A one-line description for the add-on (up to 120 characters); if not specified, the PyPi short description will be used</description>
         <required>False</required>
         <max_length>120</max_length>
       </field>
@@ -30,14 +30,14 @@
       <field name="text"
              type="plone.app.textfield.RichText">
         <title i18n:translate="">Description</title>
-        <description i18n:translate="">A longer Marketing Description for Curated Add'ons</description>
+        <description i18n:translate="">A longer, friendly description of the add-on; if not specified, the PyPi description will be used</description>
         <required>False</required>
       </field>
 
       <field name="curated"
              type="zope.schema.Bool">
         <title i18n:translate="">Curated</title>
-        <description i18n:translate="">Is this Add'on curated (highlighted by a jury)</description>
+        <description i18n:translate="">Is this add-on curated (highlighted)?</description>
         <required>False</required>
         <default>False</default>
       </field>
@@ -47,7 +47,7 @@
              security:write_permission="cmf.ManagePortal"
              security:read_permission="zope2.View" >
         <title i18n:translate="">Blacklisted</title>
-        <description i18n:translate="">Is this Add'on blacklisted (should not show up on Listing, because it is a wrong taged core modul, a harmful add on, ...)</description>
+        <description i18n:translate="">Do not show this add-on? (e.g., because it is a core package, or it is harmful)</description>
         <required>False</required>
         <default>False</default>
       </field>
@@ -56,8 +56,8 @@
              type="zope.schema.Choice"
              security:write_permission="cmf.ManagePortal"
              security:read_permission="zope2.View" >
-        <title i18n:translate="">Curated Status</title>
-        <description i18n:translate="">Is this Add'on in an workable state (highlighted by a jury)</description>
+        <title i18n:translate="">Add-on Status</title>
+        <description i18n:translate="">Is this add-on in a workable state?</description>
         <required>False</required>
         <default>False</default>
         <vocabulary>ploneorg.addonlisting.pypi_state_vocabulary</vocabulary>
@@ -68,8 +68,8 @@
              type="zope.schema.Choice"
              security:write_permission="cmf.ManagePortal"
              security:read_permission="zope2.View" >
-        <title i18n:translate="">Addon Type</title>
-        <description i18n:translate="">Please choose a Category this Add on matches best</description>
+        <title i18n:translate="">Add-on Category</title>
+        <description i18n:translate="">Please choose a category for this add-on</description>
         <required>False</required>
         <default>False</default>
         <vocabulary>ploneorg.addonlisting.addon_type_vocabulary</vocabulary>
@@ -96,8 +96,8 @@
                type="zope.schema.Choice"
                security:write_permission="cmf.ManagePortal"
                security:read_permission="zope2.View" >
-          <title i18n:translate="">Curated Status</title>
-          <description i18n:translate="">Is this Add'on in an workable state (highlighted by a jury)</description>
+          <title i18n:translate="">PyPi Status</title>
+          <description i18n:translate="">The PyPi status of this add-on</description>
           <required>False</required>
           <default>False</default>
           <vocabulary>ploneorg.addonlisting.pypi_state_vocabulary</vocabulary>
@@ -109,8 +109,8 @@
                form:mode="z3c.form.interfaces.IAddForm:input z3c.form.interfaces.IEditForm:display"
                security:write_permission="cmf.ManagePortal"
                security:read_permission="zope2.View" >
-          <title i18n:translate="">Supported Framework-Versions</title>
-          <description i18n:translate="">A List of Supported Framework Versions</description>
+          <title i18n:translate="">Supported Framework Versions</title>
+          <description i18n:translate="">A list of supported framework versions</description>
           <required>False</required>
           <value_type type="zope.schema.Choice">
             <vocabulary>ploneorg.addonlisting.framework_versions_vocabulary</vocabulary>
@@ -122,8 +122,8 @@
                form:mode="z3c.form.interfaces.IAddForm:input z3c.form.interfaces.IEditForm:display"
                security:write_permission="cmf.ManagePortal"
                security:read_permission="zope2.View" >
-          <title i18n:translate="">Supported Plone-Versions</title>
-          <description i18n:translate="">A List of Supported Plone Versions</description>
+          <title i18n:translate="">Supported Python Versions</title>
+          <description i18n:translate="">A list of supported Python versions</description>
           <required>False</required>
           <value_type type="zope.schema.Choice">
             <vocabulary>ploneorg.addonlisting.python_versions_vocabulary</vocabulary>
@@ -136,7 +136,7 @@
                security:write_permission="cmf.ManagePortal"
                security:read_permission="zope2.View" >
           <title i18n:translate="">PyPI Keywords</title>
-          <description i18n:translate="">A List of Keywords</description>
+          <description i18n:translate="">A list of keywords</description>
           <required>False</required>
           <value_type type="zope.schema.TextLine">
             <title>Keyword</title>
@@ -188,7 +188,7 @@
                form:mode="z3c.form.interfaces.IAddForm:hidden z3c.form.interfaces.IEditForm:display"
                security:write_permission="cmf.ManagePortal"
                security:read_permission="zope2.View" >
-          <title i18n:translate="">Link to Docs for this Add'on</title>
+          <title i18n:translate="">Link to this add-on's documentation</title>
           <description i18n:translate=""></description>
           <required>False</required>
         </field>
@@ -198,7 +198,7 @@
                form:mode="z3c.form.interfaces.IAddForm:hidden z3c.form.interfaces.IEditForm:display"
                security:write_permission="cmf.ManagePortal"
                security:read_permission="zope2.View" >
-          <title i18n:translate="">Link to a Bugtracker for this Add'on</title>
+          <title i18n:translate="">Link to this add-on's issue tracker</title>
           <description i18n:translate=""></description>
           <required>False</required>
         </field>
@@ -208,8 +208,8 @@
                form:mode="z3c.form.interfaces.IAddForm:input z3c.form.interfaces.IEditForm:display"
                security:write_permission="cmf.ManagePortal"
                security:read_permission="zope2.View" >
-          <title i18n:translate="">Supported Plone-Versions</title>
-          <description i18n:translate="">A List of Supported Plone Versions</description>
+          <title i18n:translate="">Supported Plone Versions</title>
+          <description i18n:translate="">A list of supported Plone versions</description>
           <required>False</required>
           <value_type type="zope.schema.Object" old_type="collective.z3cform.datagridfield.DictRow">
             <title>Mapping</title>

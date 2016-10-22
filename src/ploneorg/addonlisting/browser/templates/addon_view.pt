@@ -11,7 +11,7 @@
 
   <metal:block fill-slot="main">
 
-    <h1 tal:content="context/title">Add'on Title</h1>
+    <h1 tal:content="context/title">Add-on Title</h1>
 
   </metal:block>
 

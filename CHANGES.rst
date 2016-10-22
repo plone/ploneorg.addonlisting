@@ -7,3 +7,6 @@ Changelog
 
 - Initial release.
   [loechel]
+
+- updated README
+

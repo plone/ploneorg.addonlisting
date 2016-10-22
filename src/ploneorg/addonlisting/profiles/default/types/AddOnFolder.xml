@@ -8,10 +8,10 @@
   <!-- Basic properties -->
   <property
       i18n:translate=""
-      name="title">AddOnFolder</property>
+      name="title">Add-on Folder</property>
   <property
       i18n:translate=""
-      name="description">A Folder that lists Add'ons</property>
+      name="description">A folder that lists add-ons</property>
 
   <property name="allow_discussion">False</property>
   <property name="factory">AddOnFolder</property>

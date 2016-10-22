@@ -16,8 +16,8 @@
              type="zope.schema.List"
              security:write_permission="cmf.ManagePortal"
              security:read_permission="zope2.View" >
-        <title i18n:translate="">PyPI Classifiers to query on</title>
-        <description i18n:translate="">Those Classifiers will be used as an AND Selector to query the PyPI API to list all Add'ons. Modifing an existing Add'on Folder ewill not remove any Add'on.</description>
+        <title i18n:translate="">PyPI classifiers to query on</title>
+        <description i18n:translate="">Those classifiers will be used as a logical AND selector to query the PyPI API to list all add-ons. Modifing an existing add-on folder will not remove any add-ons.</description>
         <required>False</required>
         <value_type type="zope.schema.TextLine">
         </value_type>
@@ -28,7 +28,7 @@
              security:write_permission="cmf.ManagePortal"
              security:read_permission="zope2.View" >
         <title i18n:translate="">Framework Name</title>
-        <description i18n:translate="">Name of the Framework that should show up</description>
+        <description i18n:translate="">Display name for the framework</description>
         <required>True</required>
       </field>
 
@@ -39,7 +39,7 @@
              security:read_permission="zope2.View" >
       <!-- form:widget="collective.z3cform.datagridfield.datagridfield.DataGridFieldFactory" -->
         <title i18n:translate="">Framework Version Mapping</title>
-        <description i18n:translate="">Map PyPI Classifier to a supported Framework Version to show on Add'on</description>
+        <description i18n:translate="">PyPI framework version classifier to display</description>
         <required>False</required>
         <value_type type="zope.schema.Object" old_type="collective.z3cform.datagridfield.DictRow">
           <title i18n:translation="" >Mapping</title>
@@ -54,7 +54,7 @@
              security:read_permission="zope2.View" >
       <!-- form:widget="collective.z3cform.datagridfield.datagridfield.DataGridFieldFactory" -->
         <title i18n:translate="">Python Version Mapping</title>
-        <description i18n:translate="">Map PyPI Classifier to a supported Python Version to show on Add'on</description>
+        <description i18n:translate="">PyPI Python version classifier to display</description>
         <required>False</required>
         <value_type type="zope.schema.Object" old_type="collective.z3cform.datagridfield.DictRow">
           <title i18n:translation="" >Mapping</title>
@@ -66,8 +66,8 @@
              type="zope.schema.List"
              security:write_permission="cmf.ManagePortal"
              security:read_permission="zope2.View" >
-        <title i18n:translate="">Add'on Categories</title>
-        <description i18n:translate="">Base for Add'on Category Vocabulary</description>
+        <title i18n:translate="">Add-on Categories</title>
+        <description i18n:translate="">Used to assign a category to a particular add-on</description>
         <required>False</required>
         <value_type type="zope.schema.TextLine">
         </value_type>
