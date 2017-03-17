@@ -38,52 +38,50 @@ class AddOn(Item):
         return self.__dict__
 
 
+class Base(object):
+
+    def __getitem__(self, key):
+        return getattr(self, key, None)
+
+    def __setitem__(self, key, value):
+        setattr(self, key, value)
+
+
 @implementer(IMapping)
-class Mapping(object):
+class Mapping(Base):
     implements(IMapping)
+
 
 registerFactoryAdapter(IMapping, Mapping)
 
 
 @implementer(IPyPIClassifierMapping)
-class PyPIClassifierMapping(object):
+class PyPIClassifierMapping(Base):
     implements(IPyPIClassifierMapping)
 
     @property
     def version(self):
         return self.value
 
-    def __getitem__(self, key):
-        return getattr(self, key, None)
-
-    def __setitem__(self, key, value):
-        setattr(self, key, value)
-
 registerFactoryAdapter(IPyPIClassifierMapping, PyPIClassifierMapping)
 
 
 @implementer(ICategory)
-class Category(object):
+class Category(Base):
     implements(ICategory)
 
 registerFactoryAdapter(ICategory, Category)
 
 
 @implementer(IVersionInfo)
-class VersionInfo(object):
+class VersionInfo(Base):
     implements(IVersionInfo)
 
 registerFactoryAdapter(IVersionInfo, VersionInfo)
 
 
 @implementer(IVersionEggInfo)
-class VersionEggInfo(object):
+class VersionEggInfo(Base):
     implements(IVersionEggInfo)
-
-    def __getitem__(self, key):
-        return getattr(self, key, None)
-
-    def __setitem__(self, key, value):
-        setattr(self, key, value)
 
 registerFactoryAdapter(IVersionEggInfo, VersionEggInfo)

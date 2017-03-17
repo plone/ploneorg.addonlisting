@@ -22,6 +22,7 @@ class FolderUpdateAllView(BrowserView):
     def __call__(self):
         alsoProvides(self.request, IDisableCSRFProtection)
         update_addon_list(self.context, self.request)
+        update_addons(self.context, self.request)
 
 
 class AddOnUpdateView(BrowserView):

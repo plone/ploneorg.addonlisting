@@ -28,6 +28,7 @@ def update_addon_list(context, request=None):
 
     # get Add'on List
     present_addon_list = api.content.find(context=addon_folder, portal_type="AddOn")
+    present_addon_list = [obj[0] for obj in context.items()]
 
     client = xmlrpclib.ServerProxy(PYPI_URL)
 
@@ -44,11 +45,6 @@ def update_addon_list(context, request=None):
 
     for elem in new_addons:
         with api.env.adopt_roles(['Manager']):
-            info = u'For Add\'on-Folder: "%s" add Plone-Package "%s"' % (addon_folder.title, elem)
-            log.info(info)
-
-            if request is not None:
-                request.response.write(str(info) + "\n")
             try:
                 transaction.begin()
                 addon = api.content.create(
@@ -58,6 +54,12 @@ def update_addon_list(context, request=None):
                     title=elem
                 )
                 transaction.get().commit()
+
+                info = u'For Add\'on-Folder: "%s" add Plone-Package "%s"' % (addon_folder.title, elem)
+                log.info(info)
+
+                if request is not None:
+                    request.response.write(str(info) + "\n")
             except Exception as e:
                 log.error(u'Could not create %s', elem)
                 log.error(e)

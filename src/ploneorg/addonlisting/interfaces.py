@@ -44,7 +44,7 @@ class ICategory(model.Schema):
     """
     Schema for version information.
     """
-    model.load("models/category.xml", schema=u"egg_info")
+    model.load("models/category.xml")
 
 
 class IVersionInfo(model.Schema):
