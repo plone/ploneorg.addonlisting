@@ -46,6 +46,8 @@ setup(
         'plone.app.dexterity',
         'plone.supermodel',
         'z3c.jbot',
+        'collective.z3cform.datagridfield',
+        'requests',
     ],
     extras_require={
         'test': [

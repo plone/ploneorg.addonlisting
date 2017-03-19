@@ -14,7 +14,7 @@ from ploneorg.addonlisting.contents import VersionEggInfo
 
 import logging
 import requests
-import simplejson as json
+import json
 import transaction
 import urllib
 import xmlrpclib
