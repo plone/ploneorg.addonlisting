@@ -46,6 +46,8 @@ setup(
         'plone.app.dexterity',
         'plone.supermodel',
         'z3c.jbot',
+        'requests',
+        'simplejson'
     ],
     extras_require={
         'test': [
