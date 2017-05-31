@@ -4,8 +4,8 @@
 
 
 import argparse
-
 import logging
+
 
 logging.basicConfig()
 log = logging.getLogger('ploneorg.addonlisting-cli')

@@ -9,12 +9,12 @@ from plone import api
 from plone.app.textfield.value import RichTextValue
 from ploneorg.addonlisting import _
 from ploneorg.addonlisting import PYPI_URL
-from ploneorg.addonlisting.contents import VersionInfo
 from ploneorg.addonlisting.contents import VersionEggInfo
+from ploneorg.addonlisting.contents import VersionInfo
 
+import json
 import logging
 import requests
-import json
 import transaction
 import urllib
 import xmlrpclib

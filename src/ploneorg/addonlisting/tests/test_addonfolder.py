@@ -1,13 +1,12 @@
 # -*- coding: utf-8 -*-
-from plone.app.testing import TEST_USER_ID
-from zope.component import queryUtility
-from zope.component import createObject
-from plone.app.testing import setRoles
-from plone.dexterity.interfaces import IDexterityFTI
 from plone import api
-
-from ploneorg.addonlisting.testing import PLONEORG_ADDONLISTING_INTEGRATION_TESTING  # noqa
+from plone.app.testing import setRoles
+from plone.app.testing import TEST_USER_ID
+from plone.dexterity.interfaces import IDexterityFTI
 from ploneorg.addonlisting.interfaces import IAddOnFolder
+from ploneorg.addonlisting.testing import PLONEORG_ADDONLISTING_INTEGRATION_TESTING  # noqa
+from zope.component import createObject
+from zope.component import queryUtility
 
 import unittest
 

@@ -1,11 +1,10 @@
 # -*- coding: utf-8 -*-
 
-from Products.Five.browser import BrowserView
-from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
-
+from plone.protect.interfaces import IDisableCSRFProtection
 from ploneorg.addonlisting.utils import update_addon
 from ploneorg.addonlisting.utils import update_addon_list
-from plone.protect.interfaces import IDisableCSRFProtection
+from Products.Five.browser import BrowserView
+from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from zope.interface import alsoProvides
 
 
