@@ -37,4 +37,6 @@ htmlcov
 share/
 .tox/
 .coverage*
+coverage.xml
 !.coveragerc
+reports/
