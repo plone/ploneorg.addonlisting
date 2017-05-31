@@ -9,12 +9,10 @@ matrix:
 
 install:
     - pip install -U setuptools==33.1.1 tox coveralls coverage
-    - python bootstrap-buildout.py
-    - bin/buildout
 
 script:
-    #- coverage run bin/test -v1
     - tox
+
 after_success:
     - coverage combine
     - coveralls
