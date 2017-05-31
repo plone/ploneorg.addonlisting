@@ -9,7 +9,7 @@ parts
 var
 *.egg
 *.egg-info
-*.pyc
+*.py[cod]
 *$py.class
 *.pt.py
 *.txt.py
@@ -35,3 +35,6 @@ cache
 contributions.cfg
 htmlcov
 share/
+.tox/
+.coverage*
+!.coveragerc
