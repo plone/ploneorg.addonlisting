@@ -24,7 +24,7 @@ class AddOnFolderIntegrationTest(unittest.TestCase):
     def test_schema(self):
         fti = queryUtility(IDexterityFTI, name='AddOnFolder')
         schema = fti.lookupSchema()
-        #self.assertEqual(IAddOnFolder, schema)
+        # self.assertEqual(IAddOnFolder, schema)  # TODO: fix test
         self.assertEqual(schema, schema)
 
     def test_fti(self):

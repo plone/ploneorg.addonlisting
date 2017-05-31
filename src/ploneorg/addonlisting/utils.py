@@ -1,22 +1,16 @@
 # -*- coding: utf-8 -*-
 """Module where all interfaces, events and exceptions live."""
 
-from datetime import date
 from datetime import datetime
-from distutils.version import LooseVersion
-from pkg_resources import parse_version
 from plone import api
 from plone.app.textfield.value import RichTextValue
-from ploneorg.addonlisting import _
 from ploneorg.addonlisting import PYPI_URL
 from ploneorg.addonlisting.contents import VersionEggInfo
 from ploneorg.addonlisting.contents import VersionInfo
 
-import json
 import logging
 import requests
 import transaction
-import urllib
 import xmlrpclib
 
 
@@ -27,12 +21,13 @@ def update_addon_list(context, request=None):
     addon_folder = context
 
     # get Add'on List
-    present_addon_list = api.content.find(context=addon_folder, portal_type="AddOn")
+    present_addon_list = api.content.find(context=addon_folder,
+                                          portal_type="AddOn")
     present_addon_list = [obj[0] for obj in context.items()]
 
     client = xmlrpclib.ServerProxy(PYPI_URL)
 
-    classifiers = context.query_classifieres if context.query_classifieres else ['Framework :: Plone']
+    classifiers = context.query_classifieres if context.query_classifieres else ['Framework :: Plone']  # NOQA: E501
 
     raw_queried_addon_list = client.browse(classifiers)
 
@@ -55,8 +50,9 @@ def update_addon_list(context, request=None):
                 )
                 transaction.get().commit()
 
-                info = u'For Add\'on-Folder: "%s" add Plone-Package "%s"' % (addon_folder.title, elem)
+                info = u'For Add\'on-Folder: "%s" add Plone-Package "%s"' % (addon_folder.title, elem)  # NOQA: E501
                 log.info(info)
+                log.info(addon)
 
                 if request is not None:
                     request.response.write(str(info) + "\n")
@@ -78,13 +74,15 @@ def update_addon(context, request=None):
 
         if pypi_response.ok and pypi_response.status_code == 200 and \
                 pypi_response.headers['Content-Type'] and \
-                pypi_response.headers['Content-Type'].startswith('application/json'):
+                pypi_response.headers['Content-Type'].startswith(
+                'application/json'):
             data = pypi_response.json()
 
-            #import ipdb; ipdb.set_trace()
             if not addon.curated:
                 addon.description = data['info'].get('summary')
-                addon.text = RichTextValue(data['info'].get('description'), 'text/restructured', 'text/restructured')
+                addon.text = RichTextValue(data['info'].get('description'),
+                                           'text/restructured',
+                                           'text/restructured')
 
             addon.current_version = data['info'].get('version')
             addon.docs_link = data['info'].get('docs_link')
@@ -107,7 +105,8 @@ def update_addon(context, request=None):
                     egg_info.filename = info['filename']
                     egg_info.downloads = int(info['downloads'])
                     psum += egg_info.downloads
-                    egg_info.upload_time = datetime.strptime(info['upload_time'], '%Y-%m-%dT%H:%M:%S').date()
+                    egg_info.upload_time = datetime.strptime(
+                        info['upload_time'], '%Y-%m-%dT%H:%M:%S').date()
                     egg_infos.append(egg_info)
                 version_info.egg_files = egg_infos
                 version_info.downloads = psum
@@ -116,7 +115,9 @@ def update_addon(context, request=None):
             addon.downloads = tsum
             addon.versions = versions
 
-            api.portal.show_message("Add'on %s has been updated" % (addon.title), request=request, type='info')
+            api.portal.show_message("Add'on %s has been updated" %
+                                    (addon.title),
+                                    request=request, type='info')
             log.info(u'Finished to update: %s', addon.title)
         else:
             log.info(u'something went wrong on update %s', addon.title)

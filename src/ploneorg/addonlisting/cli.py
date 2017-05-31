@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
 
-#http://pastebin.com/3u1gNCD3
+# http://pastebin.com/3u1gNCD3
 
-
-import argparse
+# import argparse
 import logging
 
 
@@ -13,18 +12,17 @@ log = logging.getLogger('ploneorg.addonlisting-cli')
 
 def update_addon_listing():
     # Parse the command line arguments
-    argparser = argparse.ArgumentParser()
+    # argparser = argparse.ArgumentParser()
     pass
 
 
 def update_addons():
     # Parse the command line arguments
-    argparser = argparse.ArgumentParser()
+    # argparser = argparse.ArgumentParser()
     pass
 
 
 def update_addon():
     # Parse the command line arguments
-    argparser = argparse.ArgumentParser()
-    import ipdb; ipdb.set_trace()
+    # argparser = argparse.ArgumentParser()
     pass

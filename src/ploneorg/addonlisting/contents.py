@@ -3,7 +3,6 @@
 
 from plone.dexterity.content import Container
 from plone.dexterity.content import Item
-from ploneorg.addonlisting import _
 from ploneorg.addonlisting import PYPI_URL
 from ploneorg.addonlisting.interfaces import IAddOn
 from ploneorg.addonlisting.interfaces import IAddOnFolder
@@ -15,9 +14,6 @@ from ploneorg.addonlisting.interfaces import IVersionInfo
 from z3c.form.object import registerFactoryAdapter
 from zope.interface import implementer
 from zope.interface import implements
-from zope.interface import Interface
-from zope.schema import Date
-from zope.schema import TextLine
 
 
 @implementer(IAddOnFolder)
@@ -63,12 +59,14 @@ class PyPIClassifierMapping(Base):
     def version(self):
         return self.value
 
+
 registerFactoryAdapter(IPyPIClassifierMapping, PyPIClassifierMapping)
 
 
 @implementer(ICategory)
 class Category(Base):
     implements(ICategory)
+
 
 registerFactoryAdapter(ICategory, Category)
 
@@ -77,11 +75,13 @@ registerFactoryAdapter(ICategory, Category)
 class VersionInfo(Base):
     implements(IVersionInfo)
 
+
 registerFactoryAdapter(IVersionInfo, VersionInfo)
 
 
 @implementer(IVersionEggInfo)
 class VersionEggInfo(Base):
     implements(IVersionEggInfo)
+
 
 registerFactoryAdapter(IVersionEggInfo, VersionEggInfo)
