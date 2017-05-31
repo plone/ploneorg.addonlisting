@@ -8,10 +8,10 @@ matrix:
           env: TOXENV=py27,isort,flake8
 
 install:
-    - pip install -U setuptools==33.1.1 tox coveralls coverage
+    - travis_retry pip install -U setuptools==33.1.1 tox coveralls coverage
 
 script:
-    - tox
+    - travis_retry tox
 
 after_success:
     - coverage combine
