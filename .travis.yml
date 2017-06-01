@@ -1,0 +1,26 @@
+# custom
+language: python
+sudo: false
+
+matrix:
+    include:
+        - python: "2.7"
+          env: TOXENV=py27,isort,flake8
+
+install:
+    - travis_retry pip install -U setuptools==33.1.1 tox coveralls coverage
+
+script:
+    - travis_retry tox
+
+after_success:
+    - coverage combine
+    - coveralls
+
+notifications:
+    email: false
+
+cache:
+    pip: true
+    directories:
+      - eggs/

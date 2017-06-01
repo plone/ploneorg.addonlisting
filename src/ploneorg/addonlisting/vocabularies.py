@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 """static and dynamic vocabularies."""
 
+# flake8: NOQA: E501
 
+from ploneorg.addonlisting import _
+from zope.interface import provider
 from zope.schema.interfaces import IVocabularyFactory
 from zope.schema.vocabulary import SimpleTerm
 from zope.schema.vocabulary import SimpleVocabulary
-from zope.interface import implementer
-from zope.interface import provider
 
 
 @provider(IVocabularyFactory)

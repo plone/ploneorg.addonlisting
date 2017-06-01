@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 
-from Products.Five.browser import BrowserView
-from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
-
+from plone.protect.interfaces import IDisableCSRFProtection
 from ploneorg.addonlisting.utils import update_addon
 from ploneorg.addonlisting.utils import update_addon_list
-from plone.protect.interfaces import IDisableCSRFProtection
+from ploneorg.addonlisting.utils import update_addons
+from Products.Five.browser import BrowserView
+from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from zope.interface import alsoProvides
 
 
@@ -14,7 +14,7 @@ class FolderUpdateView(BrowserView):
     def __call__(self):
         alsoProvides(self.request, IDisableCSRFProtection)
         update_addon_list(self.context, self.request)
-        #return self.request.response.redirect(self.context.absolut_url)
+        # return self.request.response.redirect(self.context.absolut_url)
 
 
 class FolderUpdateAllView(BrowserView):
