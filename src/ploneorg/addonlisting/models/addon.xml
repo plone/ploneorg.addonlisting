@@ -217,6 +217,119 @@
           </value_type>
         </field>
 
+        <field name="docs_link"
+               type="zope.schema.TextLine"
+               form:mode="z3c.form.interfaces.IAddForm:hidden z3c.form.interfaces.IEditForm:display"
+               security:write_permission="cmf.ManagePortal"
+               security:read_permission="zope2.View" >
+          <title i18n:translate="">Link to this add-on's documentation</title>
+          <description i18n:translate=""></description>
+          <required>False</required>
+        </field>
+
+        <field name="package_url" 
+               type="zope.schema.URI" 
+               form:mode="z3c.form.interfaces.IEditForm:display"
+               security:write_permission="cmf.ManagePortal"
+               security:read_permission="zope2.View" >
+          <description>Link to this addon's pypi page</description>
+          <required>False</required>
+          <title>Package Url</title>
+        </field>
+
+        <field name="release_url" 
+               type="zope.schema.URI" 
+               form:mode="z3c.form.interfaces.IEditForm:display"
+               security:write_permission="cmf.ManagePortal"
+               security:read_permission="zope2.View" >
+          <description>Link to this addon's release page</description>
+          <required>False</required>
+          <title>Release Url</title>
+        </field>
+
+    
+        <field name="home_page" 
+               type="zope.schema.URI" 
+               form:mode="z3c.form.interfaces.IEditForm:display"
+               security:write_permission="cmf.ManagePortal"
+               security:read_permission="zope2.View" >
+          <description>Link to this addon's home page</description>
+          <required>False</required>
+          <title>Home Page</title>
+        </field>
+
+        <field name="platform" 
+               type="zope.schema.TextLine" 
+               form:mode="z3c.form.interfaces.IEditForm:display"
+               security:write_permission="cmf.ManagePortal"
+               security:read_permission="zope2.View" >
+          <description>List of compatible platforms</description>
+          <required>False</required>
+          <title>Platforms</title>
+        </field>
+
+        <field name="license" 
+               type="zope.schema.TextLine" 
+               form:mode="z3c.form.interfaces.IEditForm:display"
+               security:write_permission="cmf.ManagePortal"
+               security:read_permission="zope2.View" >
+          <description>License assosciated with the addon</description>
+          <required>False</required>
+          <title>License</title>
+        </field>
+
+        <field name="downloads" 
+               type="zope.schema.Int" 
+               form:mode="z3c.form.interfaces.IEditForm:display"
+               security:write_permission="cmf.ManagePortal"
+               security:read_permission="zope2.View" >
+          <description>Number of downloads of this addon</description>
+          <required>False</required>
+          <title>Downloads</title>
+        </field>
+    
+        <field name="upload_time" 
+               type="zope.schema.Datetime" 
+               form:mode="z3c.form.interfaces.IEditForm:display"
+               security:write_permission="cmf.ManagePortal"
+               security:read_permission="zope2.View" >
+           <description>upload time of the first version of this addon to find whether it is a new addon</description>
+           <required>False</required>
+           <title>Upload Time</title>
+        </field>
+    
+        <field name="cheesecake_code_kwalitee_id" 
+               type="zope.schema.Int" 
+               form:mode="z3c.form.interfaces.IEditForm:display"
+               security:write_permission="cmf.ManagePortal"
+               security:read_permission="zope2.View" >
+           <description></description>
+           <required>False</required>
+           <title>Cheesecake Code Kwalitee Id</title>
+        </field>
+    
+        <field name="cheesecake_installability_id" 
+               type="zope.schema.Int" 
+               form:mode="z3c.form.interfaces.IEditForm:display"
+               security:write_permission="cmf.ManagePortal"
+               security:read_permission="zope2.View" >
+           <description></description>
+           <required>False</required>
+           <title>Cheesecake Installability Id</title>
+        </field>
+   
+        <field name="cheesecake_documentation_id" 
+               type="zope.schema.Int" 
+               form:mode="z3c.form.interfaces.IEditForm:display"
+               security:write_permission="cmf.ManagePortal"
+               security:read_permission="zope2.View" >
+           <description></description>
+           <required>False</required>
+           <title>Cheesecake Documentation Id</title>
+        </field>
+    
+    
+
       </fieldset>
 
     </schema>
