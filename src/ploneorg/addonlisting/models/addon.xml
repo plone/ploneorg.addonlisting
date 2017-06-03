@@ -232,9 +232,9 @@
                form:mode="z3c.form.interfaces.IEditForm:display"
                security:write_permission="cmf.ManagePortal"
                security:read_permission="zope2.View" >
-          <description>Link to this addon's pypi page</description>
+          <description i18n:translate="">Link to this addon's pypi page</description>
           <required>False</required>
-          <title>Package Url</title>
+          <title i18n:translate="">Package Url</title>
         </field>
 
         <field name="release_url" 
@@ -242,9 +242,9 @@
                form:mode="z3c.form.interfaces.IEditForm:display"
                security:write_permission="cmf.ManagePortal"
                security:read_permission="zope2.View" >
-          <description>Link to this addon's release page</description>
+          <description i18n:translate="">Link to this addon's release page</description>
           <required>False</required>
-          <title>Release Url</title>
+          <title i18n:translate="">Release Url</title>
         </field>
 
     
@@ -253,9 +253,9 @@
                form:mode="z3c.form.interfaces.IEditForm:display"
                security:write_permission="cmf.ManagePortal"
                security:read_permission="zope2.View" >
-          <description>Link to this addon's home page</description>
+          <description i18n:translate="">Link to this addon's home page</description>
           <required>False</required>
-          <title>Home Page</title>
+          <title i18n:translate="">Home Page</title>
         </field>
 
         <field name="platform" 
@@ -263,9 +263,9 @@
                form:mode="z3c.form.interfaces.IEditForm:display"
                security:write_permission="cmf.ManagePortal"
                security:read_permission="zope2.View" >
-          <description>List of compatible platforms</description>
+          <description i18n:translate="">List of compatible platforms</description>
           <required>False</required>
-          <title>Platforms</title>
+          <title i18n:translate="">Platforms</title>
         </field>
 
         <field name="license" 
@@ -273,9 +273,9 @@
                form:mode="z3c.form.interfaces.IEditForm:display"
                security:write_permission="cmf.ManagePortal"
                security:read_permission="zope2.View" >
-          <description>License assosciated with the addon</description>
+          <description i18n:translate="">License assosciated with the addon</description>
           <required>False</required>
-          <title>License</title>
+          <title i18n:translate="">License</title>
         </field>
 
         <field name="downloads" 
@@ -283,9 +283,9 @@
                form:mode="z3c.form.interfaces.IEditForm:display"
                security:write_permission="cmf.ManagePortal"
                security:read_permission="zope2.View" >
-          <description>Number of downloads of this addon</description>
+          <description i18n:translate="">Number of downloads of this addon</description>
           <required>False</required>
-          <title>Downloads</title>
+          <title i18n:translate="">Downloads</title>
         </field>
     
         <field name="upload_time" 
@@ -293,9 +293,9 @@
                form:mode="z3c.form.interfaces.IEditForm:display"
                security:write_permission="cmf.ManagePortal"
                security:read_permission="zope2.View" >
-           <description>upload time of the first version of this addon to find whether it is a new addon</description>
+           <description i18n:translate="">upload time of the first version of this addon to find whether it is a new addon</description>
            <required>False</required>
-           <title>Upload Time</title>
+           <title i18n:translate="">Upload Time</title>
         </field>
     
         <field name="cheesecake_code_kwalitee_id" 
@@ -303,9 +303,9 @@
                form:mode="z3c.form.interfaces.IEditForm:display"
                security:write_permission="cmf.ManagePortal"
                security:read_permission="zope2.View" >
-           <description></description>
+           <description i18n:translate="">refers to the code kwalitee index of the package computed by the cheeescake script</description>
            <required>False</required>
-           <title>Cheesecake Code Kwalitee Id</title>
+           <title i18n:translate="">Cheesecake Code Kwalitee Id</title>
         </field>
     
         <field name="cheesecake_installability_id" 
@@ -313,9 +313,9 @@
                form:mode="z3c.form.interfaces.IEditForm:display"
                security:write_permission="cmf.ManagePortal"
                security:read_permission="zope2.View" >
-           <description></description>
+           <description i18n:translate="">refers to the installability index of the package computed by the cheesecake script</description>
            <required>False</required>
-           <title>Cheesecake Installability Id</title>
+           <title i18n:translate="">Cheesecake Installability Id</title>
         </field>
    
         <field name="cheesecake_documentation_id" 
@@ -323,9 +323,9 @@
                form:mode="z3c.form.interfaces.IEditForm:display"
                security:write_permission="cmf.ManagePortal"
                security:read_permission="zope2.View" >
-           <description></description>
+           <description i18n:translate="">refers to the documentation index of the package computed by the cheesecake script</description>
            <required>False</required>
-           <title>Cheesecake Documentation Id</title>
+           <title i18n:translate="">Cheesecake Documentation Id</title>
         </field>
     
     
