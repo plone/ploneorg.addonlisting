@@ -278,16 +278,26 @@
           <title i18n:translate="">License</title>
         </field>
 
-        <field name="downloads" 
+        <field name="download_sum_total" 
                type="zope.schema.Int" 
                form:mode="z3c.form.interfaces.IEditForm:display"
                security:write_permission="cmf.ManagePortal"
                security:read_permission="zope2.View" >
-          <description i18n:translate="">Number of downloads of this addon</description>
-          <required>False</required>
-          <title i18n:translate="">Downloads</title>
+          <description i18n:translate="">Sum of download counts of all versions of this add-on</description>
+          <required>False</required> 
+          <title i18n:translate="">All versions download count</title>
         </field>
-    
+
+        <field name="download_sum_latest" 
+               type="zope.schema.Int" 
+               form:mode="z3c.form.interfaces.IEditForm:display"
+               security:write_permission="cmf.ManagePortal"
+               security:read_permission="zope2.View" >
+          <description i18n:translate="">Download count of the latest version of this add-on</description>
+          <required>False</required>
+          <title i18n:translate="">Latest version download count</title>
+        </field>
+
         <field name="upload_time" 
                type="zope.schema.Datetime" 
                form:mode="z3c.form.interfaces.IEditForm:display"
