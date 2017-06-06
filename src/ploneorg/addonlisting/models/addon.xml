@@ -217,6 +217,129 @@
           </value_type>
         </field>
 
+        <field name="docs_link"
+               type="zope.schema.TextLine"
+               form:mode="z3c.form.interfaces.IAddForm:hidden z3c.form.interfaces.IEditForm:display"
+               security:write_permission="cmf.ManagePortal"
+               security:read_permission="zope2.View" >
+          <title i18n:translate="">Docs Link</title>
+          <description i18n:translate="">Link to this add-on's documentation</description>
+          <required>False</required>
+        </field>
+
+        <field name="package_url" 
+               type="zope.schema.URI" 
+               form:mode="z3c.form.interfaces.IEditForm:display"
+               security:write_permission="cmf.ManagePortal"
+               security:read_permission="zope2.View" >
+          <description i18n:translate="">Link to this addon's pypi page</description>
+          <required>False</required>
+          <title i18n:translate="">Package Url</title>
+        </field>
+
+        <field name="release_url" 
+               type="zope.schema.URI" 
+               form:mode="z3c.form.interfaces.IEditForm:display"
+               security:write_permission="cmf.ManagePortal"
+               security:read_permission="zope2.View" >
+          <description i18n:translate="">Link to this addon's release page</description>
+          <required>False</required>
+          <title i18n:translate="">Release Url</title>
+        </field>
+
+    
+        <field name="home_page" 
+               type="zope.schema.URI" 
+               form:mode="z3c.form.interfaces.IEditForm:display"
+               security:write_permission="cmf.ManagePortal"
+               security:read_permission="zope2.View" >
+          <description i18n:translate="">Link to this addon's home page</description>
+          <required>False</required>
+          <title i18n:translate="">Home Page</title>
+        </field>
+
+        <field name="platform" 
+               type="zope.schema.TextLine" 
+               form:mode="z3c.form.interfaces.IEditForm:display"
+               security:write_permission="cmf.ManagePortal"
+               security:read_permission="zope2.View" >
+          <description i18n:translate="">List of compatible platforms</description>
+          <required>False</required>
+          <title i18n:translate="">Platforms</title>
+        </field>
+
+        <field name="license" 
+               type="zope.schema.TextLine" 
+               form:mode="z3c.form.interfaces.IEditForm:display"
+               security:write_permission="cmf.ManagePortal"
+               security:read_permission="zope2.View" >
+          <description i18n:translate="">License assosciated with the addon</description>
+          <required>False</required>
+          <title i18n:translate="">License</title>
+        </field>
+
+        <field name="download_sum_total" 
+               type="zope.schema.Int" 
+               form:mode="z3c.form.interfaces.IEditForm:display"
+               security:write_permission="cmf.ManagePortal"
+               security:read_permission="zope2.View" >
+          <description i18n:translate="">Sum of download counts of all versions of this add-on</description>
+          <required>False</required> 
+          <title i18n:translate="">All versions download count</title>
+        </field>
+
+        <field name="download_sum_latest" 
+               type="zope.schema.Int" 
+               form:mode="z3c.form.interfaces.IEditForm:display"
+               security:write_permission="cmf.ManagePortal"
+               security:read_permission="zope2.View" >
+          <description i18n:translate="">Download count of the latest version of this add-on</description>
+          <required>False</required>
+          <title i18n:translate="">Latest version download count</title>
+        </field>
+
+        <field name="upload_time" 
+               type="zope.schema.Datetime" 
+               form:mode="z3c.form.interfaces.IEditForm:display"
+               security:write_permission="cmf.ManagePortal"
+               security:read_permission="zope2.View" >
+           <description i18n:translate="">upload time of the first version of this addon to find whether it is a new addon</description>
+           <required>False</required>
+           <title i18n:translate="">Upload Time</title>
+        </field>
+    
+        <field name="cheesecake_code_kwalitee_id" 
+               type="zope.schema.Int" 
+               form:mode="z3c.form.interfaces.IEditForm:display"
+               security:write_permission="cmf.ManagePortal"
+               security:read_permission="zope2.View" >
+           <description i18n:translate="">refers to the code kwalitee index of the package computed by the cheeescake script</description>
+           <required>False</required>
+           <title i18n:translate="">Cheesecake Code Kwalitee Id</title>
+        </field>
+    
+        <field name="cheesecake_installability_id" 
+               type="zope.schema.Int" 
+               form:mode="z3c.form.interfaces.IEditForm:display"
+               security:write_permission="cmf.ManagePortal"
+               security:read_permission="zope2.View" >
+           <description i18n:translate="">refers to the installability index of the package computed by the cheesecake script</description>
+           <required>False</required>
+           <title i18n:translate="">Cheesecake Installability Id</title>
+        </field>
+   
+        <field name="cheesecake_documentation_id" 
+               type="zope.schema.Int" 
+               form:mode="z3c.form.interfaces.IEditForm:display"
+               security:write_permission="cmf.ManagePortal"
+               security:read_permission="zope2.View" >
+           <description i18n:translate="">refers to the documentation index of the package computed by the cheesecake script</description>
+           <required>False</required>
+           <title i18n:translate="">Cheesecake Documentation Id</title>
+        </field>
+    
+    
+
       </fieldset>
 
     </schema>
