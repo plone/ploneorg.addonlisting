@@ -19,13 +19,12 @@ class AddOnIntegrationTest(unittest.TestCase):
     def test_fti(self):
         fti = queryUtility(IDexterityFTI, name='AddOn')
         self.assertTrue(fti)
-
+    
     def test_schema(self):
         fti = queryUtility(IDexterityFTI, name='AddOn')
         schema = fti.lookupSchema()
         self.assertTrue(schema)
         
-
     def test_factory(self):
         fti = queryUtility(IDexterityFTI, name='AddOn')
         factory = fti.factory
