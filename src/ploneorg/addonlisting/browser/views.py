@@ -5,6 +5,7 @@ from ploneorg.addonlisting.utils import update_addon
 from ploneorg.addonlisting.utils import update_addon_list
 from ploneorg.addonlisting.utils import update_addons
 from Products.Five.browser import BrowserView
+from plone.dexterity.browser.view import DefaultView
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from zope.interface import alsoProvides
 
@@ -38,3 +39,17 @@ class AddOnView(BrowserView):
 
     def __call__(self):
         return self.template()
+
+class AddOnFolderView(BrowserView):
+    """ A list of addons
+    """
+
+    def addons(self):
+        results = []
+        brains = api.content.find(context=self.context, portal_type='AddOn')
+        for brain in brains:
+            results.append({
+                'title': brain.title,
+                'description': brain.description,
+                })
+        return results

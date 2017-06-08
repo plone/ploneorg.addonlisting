@@ -1,0 +1,63 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      i18n:domain="ploneorg.addonlisting"
+      metal:use-macro="context/main_template/macros/master">
+<body>
+  <metal:content-core fill-slot="content-core">
+
+  <metal:addonlist define-macro="addonlist">
+  <table class="listing"
+         id="AddOns"
+         tal:define="addons python:view.addons()">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Speaker</th>
+        <th>Audience</th>
+        <th>Time</th>
+        <th>Room</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr tal:repeat="talk talks">
+        <td>
+          <a href=""
+             class="pat-contentloader"
+             data-pat-contentloader="url:${python:talk['url']}?ajax_load=1;content:#content;target:.talkinfo > *"
+             tal:attributes="href python:talk['url'];
+                             title python:talk['description']"
+             tal:content="python:talk['title']">
+             The 7 sins of plone-development
+          </a>
+        </td>
+        <td tal:content="python:talk['speaker']">
+            Philip Bauer
+        </td>
+        <td tal:content="python:talk['audience']">
+            Advanced
+        </td>
+        <td class="pat-moment"
+            data-pat-moment="format:calendar"
+            tal:content="python:talk['start']">
+            Time
+        </td>
+        <td tal:content="python:talk['room']">
+            101
+        </td>
+      </tr>
+      <tr tal:condition="not:talks">
+        <td colspan=5>
+            No talks so far :-(
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="talkinfo"><span /></div>
+  </metal:talklist>
+
+  </metal:content-core>
+</body>
+</html>
+
