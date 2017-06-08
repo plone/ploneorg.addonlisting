@@ -14,48 +14,30 @@
     <thead>
       <tr>
         <th>Title</th>
-        <th>Speaker</th>
-        <th>Audience</th>
-        <th>Time</th>
-        <th>Room</th>
+        <th>Description</th>
       </tr>
     </thead>
     <tbody>
-      <tr tal:repeat="talk talks">
-        <td>
-          <a href=""
-             class="pat-contentloader"
-             data-pat-contentloader="url:${python:talk['url']}?ajax_load=1;content:#content;target:.talkinfo > *"
-             tal:attributes="href python:talk['url'];
-                             title python:talk['description']"
-             tal:content="python:talk['title']">
-             The 7 sins of plone-development
-          </a>
+      <tr tal:repeat="addon addons">
+        
+        <td tal:content="python:addon['title']">
+            Title
         </td>
-        <td tal:content="python:talk['speaker']">
-            Philip Bauer
+        <td tal:content="python:addon['description']">
+            Description
         </td>
-        <td tal:content="python:talk['audience']">
-            Advanced
-        </td>
-        <td class="pat-moment"
-            data-pat-moment="format:calendar"
-            tal:content="python:talk['start']">
-            Time
-        </td>
-        <td tal:content="python:talk['room']">
-            101
-        </td>
+        
+        
       </tr>
-      <tr tal:condition="not:talks">
+      <tr tal:condition="not:addons">
         <td colspan=5>
-            No talks so far :-(
+            No addons so far :-(
         </td>
       </tr>
     </tbody>
   </table>
-  <div class="talkinfo"><span /></div>
-  </metal:talklist>
+  <div class="addoninfo"><span /></div>
+  </metal:addonlist>
 
   </metal:content-core>
 </body>
