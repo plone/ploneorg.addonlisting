@@ -60,5 +60,5 @@ The final score depends on how well the package scores for all indexes listed ab
 points obtained compared to maximum possible points) can help the curator in determining  the goodness of the add-on.
 More details about the cheesecake package at (https://pypi.python.org/pypi/Cheesecake)
 
-References:  A sample package like (https://pypi.python.org/pypi/wincertstore/json) was referred for the field names,
-and the following blog-post (https://martin-thoma.com/analyzing-pypi-metadata/) for learning more about the pypi metadata.
+References:  A sample package like `wincertstore <https://pypi.python.org/pypi/wincertstore/json>`_ was referred for the field names,
+and this `blog post <https://martin-thoma.com/analyzing-pypi-metadata/>`_ for learning more about the pypi metadata.
