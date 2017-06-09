@@ -18,12 +18,12 @@
       </tr>
     </thead>
     <tbody>
-      <tr tal:repeat="addon addons">
+      <tr tal:repeat="addon simple_view/addons">
         
-        <td tal:content="python:addon['title']">
+        <td tal:content="addon/title">
             Title
         </td>
-        <td tal:content="python:addon['description']">
+        <td tal:content="addon/description">
             Description
         </td>
         

@@ -5,7 +5,6 @@ from ploneorg.addonlisting.utils import update_addon
 from ploneorg.addonlisting.utils import update_addon_list
 from ploneorg.addonlisting.utils import update_addons
 from Products.Five.browser import BrowserView
-from plone.dexterity.browser.view import DefaultView
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from zope.interface import alsoProvides
 
@@ -41,15 +40,38 @@ class AddOnView(BrowserView):
         return self.template()
 
 class AddOnFolderView(BrowserView):
-    """ A list of addons
+    """Return a catalog search result of addons to show 
     """
 
-    def addons(self):
-        results = []
-        brains = api.content.find(context=self.context, portal_type='AddOn')
-        for brain in brains:
-            results.append({
-                'title': brain.title,
-                'description': brain.description,
-                })
-        return results
+    def all_addons(self):
+        
+        context = aq_inner(self.context)
+        catalog = api.portal.get_tool(name='portal_catalog')
+
+        return catalog(
+            object_provides=IAddOn.__identifier__,
+            path='/'.join(context.getPhysicalPath()),
+            sort_on='title')
+
+    def downloaded_addons(self):
+        
+        context = aq_inner(self.context)
+        catalog = api.portal.get_tool(name='portal_catalog')
+
+        return catalog(
+            object_provides=IAddOn.__identifier__,
+            path='/'.join(context.getPhysicalPath()),
+            sort_on='download_sum_total',
+            sort_order='reverse')
+
+
+    def recent_addons(self):
+        
+        context = aq_inner(self.context)
+        catalog = api.portal.get_tool(name='portal_catalog')
+
+        return catalog(
+            object_provides=IAddOn.__identifier__,
+            path='/'.join(context.getPhysicalPath()),
+            sort_on='upload_time',
+            sort_order='reverse')
