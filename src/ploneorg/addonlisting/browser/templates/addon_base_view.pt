@@ -14,7 +14,7 @@
     <h1 tal:content="context/title">Add-on Title</h1>
     <div>
       <p class="description" tal:content="context/description">Description</p>
-      <div tal:replace="structure context/text/output" >Text</div>
+      <div tal:replace="structure context/text/output">Text</div>
     </div>
     <table>
       <tr>
@@ -22,8 +22,12 @@
         <td tal:content="context/current_version">1.0.0</td>
       </tr>
       <tr>
-        <th>Downloads</th>
-        <td tal:content="context/downloads">Number</td>
+        <th>All versions download count</th>
+        <td tal:content="context/download_sum_total">Number</td>
+      </tr>
+      <tr>
+        <th>Latest version download count</th>
+        <td tal:content="context/download_sum_latest">Number</td>
       </tr>
       <tr>
         <th i18n:translate="" >Author</th>
@@ -35,6 +39,8 @@
       </tr>
     </table>
     <p tal:content="context/versions">Versions</p>
+    <p tal:content="context/platform">Compatible Platforms</p>
+    <p tal:content="context/license">license</p>
     <p tal:content="context/dict">Dict</p>
   </metal:block>
 

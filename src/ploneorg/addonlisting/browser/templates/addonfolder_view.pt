@@ -1,0 +1,41 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      i18n:domain="ploneorg.addonlisting"
+      metal:use-macro="context/main_template/macros/master">
+<body>
+  <metal:content-core fill-slot="content-core">
+
+  <metal:addonlist define-macro="addonlist">
+  <table class="listing"
+         id="AddOns">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr tal:repeat="addon simple_view/all_addons">
+        <td tal:content="addon/title">
+            Title
+        </td>
+        <td tal:content="addon/description">
+            Description
+        </td>
+      </tr>
+      <tr tal:condition="not:addons">
+        <td colspan=5>
+            No addons so far :-(
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="addoninfo"><span /></div>
+  </metal:addonlist>
+
+  </metal:content-core>
+</body>
+</html>
+

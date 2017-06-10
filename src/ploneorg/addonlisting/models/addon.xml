@@ -183,16 +183,6 @@
           <required>False</required>
         </field>
 
-        <field name="docs_link"
-               type="zope.schema.TextLine"
-               form:mode="z3c.form.interfaces.IAddForm:hidden z3c.form.interfaces.IEditForm:display"
-               security:write_permission="cmf.ManagePortal"
-               security:read_permission="zope2.View" >
-          <title i18n:translate="">Link to this add-on's documentation</title>
-          <description i18n:translate=""></description>
-          <required>False</required>
-        </field>
-
         <field name="bugtracker_link"
                type="zope.schema.TextLine"
                form:mode="z3c.form.interfaces.IAddForm:hidden z3c.form.interfaces.IEditForm:display"
