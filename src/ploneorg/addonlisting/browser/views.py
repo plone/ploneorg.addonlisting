@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
-
+from Acquisition import aq_inner
+from plone import api
+from ploneorg.addonlisting.interfaces import IAddOn
 from plone.protect.interfaces import IDisableCSRFProtection
 from ploneorg.addonlisting.utils import update_addon
 from ploneorg.addonlisting.utils import update_addon_list
@@ -7,6 +9,7 @@ from ploneorg.addonlisting.utils import update_addons
 from Products.Five.browser import BrowserView
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from zope.interface import alsoProvides
+
 
 
 class FolderUpdateView(BrowserView):
@@ -40,14 +43,11 @@ class AddOnView(BrowserView):
         return self.template()
 
 class AddOnFolderView(BrowserView):
-    """Return a catalog search result of addons to show 
-    """
 
     def all_addons(self):
         
         context = aq_inner(self.context)
         catalog = api.portal.get_tool(name='portal_catalog')
-
         return catalog(
             object_provides=IAddOn.__identifier__,
             path='/'.join(context.getPhysicalPath()),
@@ -57,7 +57,6 @@ class AddOnFolderView(BrowserView):
         
         context = aq_inner(self.context)
         catalog = api.portal.get_tool(name='portal_catalog')
-
         return catalog(
             object_provides=IAddOn.__identifier__,
             path='/'.join(context.getPhysicalPath()),
@@ -69,7 +68,6 @@ class AddOnFolderView(BrowserView):
         
         context = aq_inner(self.context)
         catalog = api.portal.get_tool(name='portal_catalog')
-
         return catalog(
             object_provides=IAddOn.__identifier__,
             path='/'.join(context.getPhysicalPath()),
