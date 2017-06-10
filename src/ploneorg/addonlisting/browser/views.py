@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 from Acquisition import aq_inner
 from plone import api
-from ploneorg.addonlisting.interfaces import IAddOn
 from plone.protect.interfaces import IDisableCSRFProtection
+from ploneorg.addonlisting.interfaces import IAddOn
 from ploneorg.addonlisting.utils import update_addon
 from ploneorg.addonlisting.utils import update_addon_list
 from ploneorg.addonlisting.utils import update_addons
@@ -11,9 +11,7 @@ from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from zope.interface import alsoProvides
 
 
-
 class FolderUpdateView(BrowserView):
-
     def __call__(self):
         alsoProvides(self.request, IDisableCSRFProtection)
         update_addon_list(self.context, self.request)
@@ -21,7 +19,6 @@ class FolderUpdateView(BrowserView):
 
 
 class FolderUpdateAllView(BrowserView):
-
     def __call__(self):
         alsoProvides(self.request, IDisableCSRFProtection)
         update_addon_list(self.context, self.request)
@@ -29,23 +26,21 @@ class FolderUpdateAllView(BrowserView):
 
 
 class AddOnUpdateView(BrowserView):
-
     def __call__(self):
         alsoProvides(self.request, IDisableCSRFProtection)
         update_addon(self.context, self.request)
 
 
 class AddOnView(BrowserView):
-
     template = ViewPageTemplateFile('templates/addon_view.pt')
 
     def __call__(self):
         return self.template()
 
+
 class AddOnFolderView(BrowserView):
 
     def all_addons(self):
-        
         context = aq_inner(self.context)
         catalog = api.portal.get_tool(name='portal_catalog')
         return catalog(
@@ -54,7 +49,6 @@ class AddOnFolderView(BrowserView):
             sort_on='title')
 
     def downloaded_addons(self):
-        
         context = aq_inner(self.context)
         catalog = api.portal.get_tool(name='portal_catalog')
         return catalog(
@@ -63,9 +57,7 @@ class AddOnFolderView(BrowserView):
             sort_on='download_sum_total',
             sort_order='reverse')
 
-
     def recent_addons(self):
-        
         context = aq_inner(self.context)
         catalog = api.portal.get_tool(name='portal_catalog')
         return catalog(

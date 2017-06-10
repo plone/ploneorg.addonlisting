@@ -10,7 +10,6 @@
   <metal:addonlist define-macro="addonlist">
   <table class="listing"
          id="AddOns">
-         
     <thead>
       <tr>
         <th>Title</th>
@@ -19,15 +18,12 @@
     </thead>
     <tbody>
       <tr tal:repeat="addon simple_view/all_addons">
-        
         <td tal:content="addon/title">
             Title
         </td>
         <td tal:content="addon/description">
             Description
         </td>
-        
-        
       </tr>
       <tr tal:condition="not:addons">
         <td colspan=5>
