@@ -37,6 +37,7 @@
       permission="zope2.View"
       class="ploneorg.addonlisting.browser.views.AddOnUpdateView"
       />
+  
   <browser:page
       name="base_view"
       for="ploneorg.addonlisting.interfaces.IAddOn"
@@ -45,9 +46,8 @@
       />
 
   <browser:page
-      name="AddOnFolderView"
-      for="*"
-      layer="zope.interface.Interface"
+      name="simple_view"
+      for="ploneorg.addonlisting.interfaces.IAddOnFolder"
       class="ploneorg.addonlisting.browser.views.AddOnFolderView"
       template="templates/addonfolder_view.pt"
       permission="zope2.View"
