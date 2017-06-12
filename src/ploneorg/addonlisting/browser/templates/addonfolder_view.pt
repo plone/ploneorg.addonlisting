@@ -9,30 +9,35 @@
   <metal:content-core fill-slot="content-core">
 
   <metal:addonlist define-macro="addonlist">
-  <table class="listing"
-         id="AddOns">
-    <thead>
-      <tr>
-        <th>Title</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr tal:repeat="addon view/all_addons" tal:condition="view/all_addons">
-        <td tal:content="addon/title">
-            Title
-        </td>
-        <td tal:content="addon/description">
-            Description
-        </td>
-      </tr>
-      <tr tal:condition="not:view/all_addons">
-        <td colspan="2">
+
+      <div tal:repeat="addon_brain view/all_addons" tal:condition="view/all_addons">
+      <div tal:define="addon python:addon_brain.getObject()">
+
+      
+      <!--
+      To display each card with addon image, minimum details and button to view more
+      -->
+      
+     
+     <div class="w3-card-4 w3-dark-grey">
+        <div class="w3-container w3-center">
+          <h3>${addon/title}</h3>
+          <img tal:attributes="src string:${addon/absolute_url}/@@images/image" alt="addon image" height="100" width="100" />
+          <h5>${addon/description}</h5>
+          <button class="w3-button w3-green">More</button>
+        </div>
+     </div>
+
+      </div>
+
+      </div>
+  
+      <div tal:condition="not:view/all_addons">
+        <div colspan="2">
             No addons so far :-(
-        </td>
-      </tr>
-    </tbody>
-  </table>
+        </div>
+      </div>
+    
   <div class="addoninfo"><span /></div>
   </metal:addonlist>
 
