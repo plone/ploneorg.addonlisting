@@ -4,6 +4,7 @@
       xmlns:i18n="http://xml.zope.org/namespaces/i18n"
       i18n:domain="ploneorg.addonlisting"
       metal:use-macro="context/main_template/macros/master">
+<link rel="stylesheet" href="../static/w3.css">
 <body>
   <metal:content-core fill-slot="content-core">
 
