@@ -50,19 +50,21 @@ class AddOnFolderView(BrowserView):
         )
 
     def downloaded_addons(self):
-        context = aq_inner(self.context)
-        catalog = api.portal.get_tool(name='portal_catalog')
-        return catalog(
-            object_provides=IAddOn.__identifier__,
-            path='/'.join(context.getPhysicalPath()),
+        return api.content.find(
+            context=self.context,
+            depth=1,
+            portal_type='AddOn',
             sort_on='download_sum_total',
-            sort_order='reverse')
+            sort_order='reverse'
+        )
 
     def recent_addons(self):
-        context = aq_inner(self.context)
-        catalog = api.portal.get_tool(name='portal_catalog')
-        return catalog(
-            object_provides=IAddOn.__identifier__,
-            path='/'.join(context.getPhysicalPath()),
+        return api.content.find(
+            context=self.context,
+            depth=1,
+            portal_type='AddOn',
             sort_on='upload_time',
-            sort_order='reverse')
+            sort_order='reverse'
+        )
+        
+
