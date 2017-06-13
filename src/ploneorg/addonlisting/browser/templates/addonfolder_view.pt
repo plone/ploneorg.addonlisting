@@ -4,7 +4,14 @@
       xmlns:i18n="http://xml.zope.org/namespaces/i18n"
       i18n:domain="ploneorg.addonlisting"
       metal:use-macro="context/main_template/macros/master">
-<link rel="stylesheet" href="../static/w3.css">
+<head>
+    <metal:block fill-slot="style_slot">
+        <link rel="stylesheet" type="text/css"
+            tal:define="navroot context/@@plone_portal_state/navigation_root_url"
+            tal:attributes="href string:${navroot}/++resource++ploneorg.addonlisting/conference.css"
+            />
+    </metal:block>
+</head>
 <body>
   <metal:content-core fill-slot="content-core">
 
