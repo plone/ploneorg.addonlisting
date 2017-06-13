@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
-from Acquisition import aq_inner
 from plone import api
 from plone.protect.interfaces import IDisableCSRFProtection
-from ploneorg.addonlisting.interfaces import IAddOn
 from ploneorg.addonlisting.utils import update_addon
 from ploneorg.addonlisting.utils import update_addon_list
 from ploneorg.addonlisting.utils import update_addons
@@ -66,5 +64,3 @@ class AddOnFolderView(BrowserView):
             sort_on='upload_time',
             sort_order='reverse'
         )
-        
-
