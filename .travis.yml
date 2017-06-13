@@ -42,7 +42,5 @@ notifications:
 cache:
     pip: true
     directories:
-      - eggs/
-      - downloads
-      - $HOME/eggs/
+      - eggs
       - $HOME/buildout-cache
