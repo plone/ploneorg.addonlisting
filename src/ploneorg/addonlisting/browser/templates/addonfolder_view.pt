@@ -1,53 +1,55 @@
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:metal="http://xml.zope.org/namespaces/metal"
-      xmlns:tal="http://xml.zope.org/namespaces/tal"
-      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
-      i18n:domain="ploneorg.addonlisting"
-      metal:use-macro="context/main_template/macros/master">
-<head>
+<html
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:metal="http://xml.zope.org/namespaces/metal"
+  xmlns:tal="http://xml.zope.org/namespaces/tal"
+  xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+  i18n:domain="ploneorg.addonlisting"
+  metal:use-macro="context/main_template/macros/master">
+  <head>
     <metal:block fill-slot="style_slot">
-        <link rel="stylesheet" type="text/css"
-            tal:define="navroot context/@@plone_portal_state/navigation_root_url"
-            tal:attributes="href string:${navroot}/++resource++ploneorg.addonlisting/w3.css"
-            />
+      <link rel="stylesheet" type="text/css" tal:define="navroot context/@@plone_portal_state/navigation_root_url" tal:attributes="href string:${navroot}/++resource++ploneorg.addonlisting/w3.css"/>
     </metal:block>
-</head>
-<body>
-  <metal:content-core fill-slot="content-core">
+  </head>
 
-  <metal:addonlist define-macro="addonlist">
+  <body>
+    <metal:content-core fill-slot="content-core">
 
-      <div tal:repeat="addon_brain view/all_addons" tal:condition="view/all_addons">
-      <div tal:define="addon python:addon_brain.getObject()">
+      <metal:addonlist define-macro="addonlist">
 
-      
-      <!--
-      To display each card with addon image, minimum details and button to view more
-      -->
-      
-     
-     <div class="w3-card-4 w3-dark-grey">
-        <div class="w3-container w3-center">
-          <h3>${addon/title}</h3>
-          <img tal:attributes="src string:${addon/absolute_url}/@@images/image" alt="addon image" height="100" width="100" />
-          <h5>${addon/description}</h5>
-          <button class="w3-button w3-green">More</button>
+        <div tal:repeat="addon_brain view/all_addons" tal:condition="view/all_addons">
+          <div tal:define="addon python:addon_brain.getObject()">
+
+            <!--
+              To display each card with addon image, minimum details and button to view more
+            -->
+
+            <div class="w3-card-4 w3-dark-grey">
+              <div class="w3-container w3-center">
+                <a href="#">
+                  <h3><span class="counter" >${repeat/addon_brain/number}</span> ${addon/title}</h3>
+                  <figure tal:define="scales addon/@@images;
+                                      image python: scales.scale('image', scale='thumb');"
+                          tal:condition="image">
+                    <img tal:replace="structure python:image.tag() if image else None"/>
+                    <figcaption tal:content="addon/image_caption">Caption</figcaption>
+                  </figure>
+                  <p class="description">${addon/description}</p>
+                </a>
+              </div>
+            </div>
+
+          </div>
         </div>
-     </div>
 
-      </div>
-
-      </div>
-  
-      <div tal:condition="not:view/all_addons">
-        <div colspan="2">
+        <div tal:condition="not:view/all_addons">
+          <div colspan="2">
             No addons so far :-(
+          </div>
         </div>
-      </div>
-    
-  <div class="addoninfo"><span /></div>
-  </metal:addonlist>
 
-  </metal:content-core>
-</body>
+        <div class="addoninfo"></div>
+      </metal:addonlist>
+
+    </metal:content-core>
+  </body>
 </html>
