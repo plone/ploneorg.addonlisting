@@ -4,6 +4,7 @@
       xmlns:i18n="http://xml.zope.org/namespaces/i18n"
       i18n:domain="ploneorg.addonlisting"
       metal:use-macro="context/main_template/macros/master">
+
 <head>
     <metal:block fill-slot="style_slot">
         <link rel="stylesheet" type="text/css"
@@ -12,41 +13,59 @@
             />
     </metal:block>
 </head>
+
 <body>
   <metal:content-core fill-slot="content-core">
+   
+  
 
   <metal:addonlist define-macro="addonlist">
 
+   <ul class="w3-ul" style="overflow: scroll">  
       <div tal:repeat="addon_brain view/all_addons" tal:condition="view/all_addons">
       <div tal:define="addon python:addon_brain.getObject()">
 
       
+
+
+
+    
       <!--
       To display each card with addon image, minimum details and button to view more
-      -->
+    -->
       
-     
-     <div class="w3-card-4 w3-dark-grey">
+     <li style="float: left">
+     <div class="w3-card-4 w3-dark-white" >
         <div class="w3-container w3-center">
           <h3>${addon/title}</h3>
           <img tal:attributes="src string:${addon/absolute_url}/@@images/image" alt="addon image" height="100" width="100" />
           <h5>${addon/description}</h5>
-          <button class="w3-button w3-green">More</button>
+          <div class="w3-section">
+            <button class="w3-button w3-blue">Details</button>
+          </div>
         </div>
      </div>
+  </li>
 
+   
+ 
       </div>
 
       </div>
+     </ul>  
   
       <div tal:condition="not:view/all_addons">
-        <div colspan="2">
+        
             No addons so far :-(
-        </div>
+        
       </div>
     
   <div class="addoninfo"><span /></div>
   </metal:addonlist>
+
+
+
+
 
   </metal:content-core>
 </body>
