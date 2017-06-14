@@ -35,8 +35,8 @@ def addon_type_vocabulary(context):
     terms = []
     if context:
         types = context.add_categories
-        for cat in types:
-            terms.append(SimpleVocabulary.createTerm(cat, cat))
+        for category in types:
+            terms.append(SimpleVocabulary.createTerm(category['title'], category['title']))
     return SimpleVocabulary(terms)
 
 

@@ -64,4 +64,3 @@ class AddOnFolderView(BrowserView):
             sort_on='upload_time',
             sort_order='reverse'
         )
-        

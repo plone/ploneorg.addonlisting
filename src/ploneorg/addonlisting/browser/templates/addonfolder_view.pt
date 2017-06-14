@@ -1,18 +1,18 @@
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:metal="http://xml.zope.org/namespaces/metal"
-      xmlns:tal="http://xml.zope.org/namespaces/tal"
-      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
-      i18n:domain="ploneorg.addonlisting"
-      metal:use-macro="context/main_template/macros/master">
 
-<head>
+<html
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:metal="http://xml.zope.org/namespaces/metal"
+  xmlns:tal="http://xml.zope.org/namespaces/tal"
+  xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+  i18n:domain="ploneorg.addonlisting"
+  metal:use-macro="context/main_template/macros/master">
+  <head>
+
     <metal:block fill-slot="style_slot">
-        <link rel="stylesheet" type="text/css"
-            tal:define="navroot context/@@plone_portal_state/navigation_root_url"
-            tal:attributes="href string:${navroot}/++resource++ploneorg.addonlisting/w3.css"
-            />
+      <link rel="stylesheet" type="text/css" tal:define="navroot context/@@plone_portal_state/navigation_root_url" tal:attributes="href string:${navroot}/++resource++ploneorg.addonlisting/w3.css"/>
     </metal:block>
-</head>
+
+  </head>
 
 <body>
   <metal:content-core fill-slot="content-core">
@@ -69,4 +69,7 @@
 
   </metal:content-core>
 </body>
+
+  
+
 </html>
