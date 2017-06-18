@@ -6,13 +6,9 @@
   xmlns:i18n="http://xml.zope.org/namespaces/i18n"
   i18n:domain="ploneorg.addonlisting"
   metal:use-macro="context/main_template/macros/master">
-  <head>
+<head>
 
-    <metal:block fill-slot="style_slot">
-      <link rel="stylesheet" type="text/css" tal:define="navroot context/@@plone_portal_state/navigation_root_url" tal:attributes="href string:${navroot}/++resource++ploneorg.addonlisting/w3.css"/>
-    </metal:block>
-
-  </head>
+</head>
 
 <body>
   <metal:content-core fill-slot="content-core">
@@ -21,7 +17,12 @@
 
   <metal:addonlist define-macro="addonlist">
 
-   <ul class="w3-ul" style="overflow: scroll">  
+   <div class="wrapper" style="
+    overflow-x:scroll;
+    overflow-y:hidden;
+   
+    white-space:nowrap;
+    ">  
       <div tal:repeat="addon_brain view/all_addons" tal:condition="view/all_addons">
       <div tal:define="addon python:addon_brain.getObject()">
 
@@ -34,25 +35,28 @@
       To display each card with addon image, minimum details and button to view more
     -->
       
-     <li style="float: left">
-     <div class="w3-card-4 w3-dark-white" >
-        <div class="w3-container w3-center">
-          <h3>${addon/title}</h3>
-          <img tal:attributes="src string:${addon/absolute_url}/@@images/image" alt="addon image" height="100" width="100" />
-          <h5>${addon/description}</h5>
-          <div class="w3-section">
-            <button class="w3-button w3-blue">Details</button>
-          </div>
-        </div>
-     </div>
-  </li>
+    <div class="element" 
+    style="float: left;
+    margin-right:3px;
+    ">
+
+     <div id="card" style="box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);">
+  
+  <div id="container" style="padding: 2px 16px;">
+    <h3><b>${addon/title}</b></h3> 
+    <p>${addon/description}</p> 
+    <button type="button" onclick="alert('Hello world!')">Details</button>
+  </div>
+
+</div>
+    </div>
 
    
  
       </div>
 
       </div>
-     </ul>  
+     </div>  
   
       <div tal:condition="not:view/all_addons">
         
