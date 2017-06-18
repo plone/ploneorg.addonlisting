@@ -38,11 +38,12 @@ class AddOnView(BrowserView):
 
 class AddOnFolderView(BrowserView):
 
-    def all_addons(self):
+    def curated_addons(self):
         return api.content.find(
             context=self.context,
             depth=1,
             portal_type='AddOn',
+            curated='True',
             sort_on='sortable_title',
             sort_order='ascending'
         )
@@ -52,15 +53,17 @@ class AddOnFolderView(BrowserView):
             context=self.context,
             depth=1,
             portal_type='AddOn',
+            blacklisted='False',
             sort_on='download_sum_total',
             sort_order='reverse'
         )
 
-    def recent_addons(self):
+    def new_addons(self):
         return api.content.find(
             context=self.context,
             depth=1,
             portal_type='AddOn',
+            blacklisted='False',
             sort_on='upload_time',
             sort_order='reverse'
         )
