@@ -4,6 +4,7 @@ from plone.protect.interfaces import IDisableCSRFProtection
 from ploneorg.addonlisting.utils import update_addon
 from ploneorg.addonlisting.utils import update_addon_list
 from ploneorg.addonlisting.utils import update_addons
+from Products.CMFPlone.resources import add_resource_on_request
 from Products.Five.browser import BrowserView
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from zope.interface import alsoProvides
@@ -37,33 +38,37 @@ class AddOnView(BrowserView):
 
 
 class AddOnFolderView(BrowserView):
+    def __call__(self):
+        add_resource_on_request(self.request, 'myresources')
+        return super(AddOnFolderView, self).__call__()
 
     def curated_addons(self):
         return api.content.find(
             context=self.context,
             depth=1,
             portal_type='AddOn',
-            curated='True',
+            curated=True,
             sort_on='sortable_title',
             sort_order='ascending'
         )
-
+        
     def downloaded_addons(self):
         return api.content.find(
             context=self.context,
             depth=1,
             portal_type='AddOn',
-            blacklisted='False',
+            blacklisted=False,
             sort_on='download_sum_total',
             sort_order='reverse'
         )
+
 
     def new_addons(self):
         return api.content.find(
             context=self.context,
             depth=1,
             portal_type='AddOn',
-            blacklisted='False',
+            blacklisted=False,
             sort_on='upload_time',
             sort_order='reverse'
         )

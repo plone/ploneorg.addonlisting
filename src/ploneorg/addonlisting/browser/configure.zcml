@@ -52,6 +52,14 @@
       template="templates/addonfolder_view.pt"
       permission="zope2.View"
       />
+
+  <browser:page
+      name="folder_view"
+      for="ploneorg.addonlisting.interfaces.IAddOnFolder"
+      class="ploneorg.addonlisting.browser.views.AddOnFolderView"
+      template="templates/folder_view.pt"
+      permission="zope2.View"
+      />
 <!--
   <browser:page
       name="view"

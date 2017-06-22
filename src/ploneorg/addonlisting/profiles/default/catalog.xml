@@ -9,9 +9,6 @@
     <index name="upload_time" meta_type="DateIndex">
         <indexed_attr value="upload_time"/>
     </index>
-    <index name="title" meta_type="FieldIndex">
-        <indexed_attr value="title"/>
-    </index>
     <index name="curated" meta_type="FieldIndex">
         <indexed_attr value="curated"/>
     </index>
