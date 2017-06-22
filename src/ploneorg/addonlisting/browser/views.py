@@ -51,7 +51,7 @@ class AddOnFolderView(BrowserView):
             sort_on='sortable_title',
             sort_order='ascending'
         )
-        
+
     def downloaded_addons(self):
         return api.content.find(
             context=self.context,
@@ -61,7 +61,6 @@ class AddOnFolderView(BrowserView):
             sort_on='download_sum_total',
             sort_order='reverse'
         )
-
 
     def new_addons(self):
         return api.content.find(

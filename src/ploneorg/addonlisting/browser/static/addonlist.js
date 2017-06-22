@@ -4,7 +4,7 @@ window.addEventListener('load',
         var modal = document.getElementById('myModal');
 
 
-        var btn = document.getElementById("myBtn");
+        var btn = document.getElementById("details");
 
 
         var span = document.getElementsByClassName("close")[0];
