@@ -1,0 +1,77 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      i18n:domain="ploneorg.addonlisting"
+      metal:use-macro="context/main_template/macros/master">
+<head>
+  <metal:block fill-slot="style_slot">
+    <link rel="stylesheet" type="text/css" tal:define="navroot context/@@plone_portal_state/navigation_root_url" tal:attributes="href string:${navroot}/++resource++ploneorg.addonlisting/addonlist.css"/>
+  </metal:block>
+</head>
+<body>
+    <metal:content-core fill-slot="content-core">
+      <dl class="dropdown">
+        <dt>
+          <a href="#">
+            <span class="hida">Select</span>
+            <p class="multiSel"></p>
+          </a>
+        </dt>
+        <dd>
+          <div class="mutliSelect">
+            <ul>
+              Versions
+              <li>
+                <input type="checkbox" value="plone4"/>4.x only
+              </li>
+              <li>
+                <input type="checkbox" value="plone5"/>5.x
+              </li>
+              Categories
+              <li>
+                <input type="checkbox" value="Security"/>Security
+              </li>
+              <li>
+                <input type="checkbox" value="Database"/>Database
+              </li>
+              <li>
+                <input type="checkbox" value="Communications"/>Communications
+              </li>
+            </ul>
+          </div>
+        </dd>
+        <button id="filter">Filter</button>
+      </dl>
+      <div class="wrapper">
+        <h1>Curated Add-Ons</h1>
+        <div class="scroll-container">
+          <ul class="list-container" id="listing">
+            <tal:addons tal:repeat="addon_brain view/curated_addons"
+                        tal:condition="view/curated_addons">
+              <tal:block tal:define="addon python:addon_brain.getObject()">
+                <li>
+                  <a href="${addon/absolute_url}"
+                     class="pat-plone-modal"
+                     data-pat-plone-modal="">
+                    <h3>${addon/title}</h3>
+                    <p>${addon/description}</p>
+                    <figure tal:define="scales addon/@@images;
+                                        image python: scales.scale('image', scale='thumb');"
+                            tal:condition="image">
+                      <img tal:replace="structure python:image.tag() if image else None"/>
+                      <figcaption tal:content="addon/image_caption">Caption</figcaption>
+                    </figure>
+                  </a>
+                </li>
+              </tal:block>
+            </tal:addons>
+          </ul>
+        </div>
+      </div>
+      <div tal:condition="not:view/curated_addons">
+        No addons so far :-(
+      </div>
+    </metal:content-core>
+  </body>
+</html>
