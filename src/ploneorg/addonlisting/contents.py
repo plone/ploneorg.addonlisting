@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 """Module where all interfaces, events and exceptions live."""
 
-from collective.z3cform.datagridfield import DictRow
 from plone.directives import form
 from plone.dexterity.content import Container
 from plone.dexterity.content import Item
