@@ -1,0 +1,51 @@
+<?xml version="1.0" ?>
+<model xmlns="http://namespaces.plone.org/supermodel/schema"
+       xmlns:form="http://namespaces.plone.org/supermodel/form"
+       xmlns:security="http://namespaces.plone.org/supermodel/security"
+       xmlns:marshal="http://namespaces.plone.org/supermodel/marshal"
+       xmlns:users="http://namespaces.plone.org/supermodel/users"
+       xmlns:lingua="http://namespaces.plone.org/supermodel/lingua"
+       xmlns:i18n="http://namespaces.zope.org/i18n"
+       i18n_domain="ploneorg.addonlisting">
+
+    <schema>
+
+      <!-- field definitions -->
+      <field name="curated"
+             type="zope.schema.Bool">
+        <title i18n:translate="">Curated</title>
+        <description i18n:translate="">Is this add-on curated (highlighted)?</description>
+        <required>False</required>
+        <default>False</default>
+      </field>
+
+      <field name="blacklisted"
+             type="zope.schema.Bool" >
+        <title i18n:translate="">Blacklisted</title>
+        <description i18n:translate="">Do not show this add-on? (e.g., because it is a core package, or it is harmful)</description>
+        <required>False</required>
+        <default>False</default>
+      </field>
+
+      <field name="curated_status"
+             type="zope.schema.Choice" >
+        <title i18n:translate="">Add-on Status</title>
+        <description i18n:translate="">Is this add-on in a workable state?</description>
+        <required>False</required>
+        <default>False</default>
+        <vocabulary>ploneorg.addonlisting.pypi_state_vocabulary</vocabulary>
+      </field>
+
+
+      <field name="addon_type"
+             type="zope.schema.Choice" >
+        <title i18n:translate="">Add-on Category</title>
+        <description i18n:translate="">Please choose a category for this add-on</description>
+        <required>False</required>
+        <default>False</default>
+        <vocabulary>ploneorg.addonlisting.addon_type_vocabulary</vocabulary>
+      </field>
+
+    </schema>
+
+</model>

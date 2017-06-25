@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from plone import api
 from plone.protect.interfaces import IDisableCSRFProtection
+from ploneorg.addonlisting.contents import FilterForm
 from ploneorg.addonlisting.utils import update_addon
 from ploneorg.addonlisting.utils import update_addon_list
 from ploneorg.addonlisting.utils import update_addons
@@ -90,3 +91,6 @@ class AddOnFolderView(BrowserView):
             sort_on='sortable_title',
             sort_order='ascending'
         )
+
+    def filter_form(self):
+        return FilterForm(self.context, self.request).render()
