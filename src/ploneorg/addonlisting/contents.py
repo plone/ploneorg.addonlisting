@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 """Module where all interfaces, events and exceptions live."""
 
-from plone.directives import form
 from plone.dexterity.content import Container
 from plone.dexterity.content import Item
+from plone.directives import form
 from ploneorg.addonlisting import PYPI_URL
 from ploneorg.addonlisting.interfaces import IAddOn
 from ploneorg.addonlisting.interfaces import IAddOnFolder
