@@ -23,36 +23,31 @@
           </tal:with-form-as-view>
 
       </tal:form>
-      <div class="wrapper">
-        <h1>Curated Add-Ons</h1>
-        <div class="scroll-container">
-          <ul class="list-container" id="listing">
-            <tal:addons tal:repeat="addon_brain view/curated_addons"
-                        tal:condition="view/curated_addons">
-              <tal:block tal:define="addon python:addon_brain.getObject()">
-                <li>
-                  <a href="${addon/absolute_url}"
-                     class="pat-plone-modal"
-                     data-pat-plone-modal="">
-                    <span class="">${repeat/addon_brain/number}. </span>
-                    <h3>${addon/title}</h3>
-                    <p>${addon/description}</p>
-                    <figure tal:define="scales addon/@@images;
-                                        image python: scales.scale('image', scale='thumb');"
-                            tal:condition="image">
-                      <img tal:replace="structure python:image.tag() if image else None"/>
-                      <figcaption tal:content="addon/image_caption">Caption</figcaption>
-                    </figure>
-                  </a>
-                </li>
-              </tal:block>
-            </tal:addons>
-          </ul>
-        </div>
-      </div>
-      <div tal:condition="not:view/curated_addons">
+      <h1> Add-Ons</h1>
+      <ul class="list-container" id="listing" tal:condition="view/all_addons">
+        <tal:addons tal:repeat="addon_brain view/all_addons">
+          <tal:block tal:define="addon python:addon_brain.getObject()">
+            <li>
+              <a href="${addon/absolute_url}"
+                 class="pat-plone-modal"
+                 data-pat-plone-modal="">
+                <span class="">${repeat/addon_brain/number}. </span>
+                <h3>${addon/title}</h3>
+                <p>${addon/description}</p>
+                <figure tal:define="scales addon/@@images;
+                                    image python: scales.scale('image', scale='thumb');"
+                        tal:condition="image">
+                  <img tal:replace="structure python:image.tag() if image else None"/>
+                  <figcaption tal:content="addon/image_caption">Caption</figcaption>
+                </figure>
+              </a>
+            </li>
+          </tal:block>
+        </tal:addons>
+      </ul>
+      <p tal:condition="not:view/all_addons">
         No addons so far :-(
-      </div>
+      </p>
     </metal:content-core>
   </body>
 </html>
