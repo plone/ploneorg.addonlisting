@@ -84,7 +84,7 @@
   <browser:page
       name="simplified_view"
       for="ploneorg.addonlisting.interfaces.IAddOnFolder"
-      class="ploneorg.addonlisting.browser.views.AddOnFolderView"
+      class="ploneorg.addonlisting.browser.views.FilteredAddOnFolderView"
       template="templates/addonfolder_simplified_view.pt"
       permission="zope2.View"
       />
