@@ -37,7 +37,7 @@
           <vocabulary>ploneorg.addonlisting.pypi_state_vocabulary</vocabulary>
         </value_type>
       </field>
-<!--
+
       <field name="addon_type"
              type="zope.schema.List" >
         <title i18n:translate="">Add-on Category</title>
@@ -48,7 +48,7 @@
           <vocabulary>ploneorg.addonlisting.addon_type_vocabulary</vocabulary>
         </value_type>
       </field>
--->
+
     </schema>
 
 </model>
