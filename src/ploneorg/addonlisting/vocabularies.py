@@ -34,7 +34,7 @@ def python_versions_dynamic_vocabulary(context):
 def addon_type_vocabulary(context):
     terms = []
     if context:
-        types = context.add_categories
+        types = context.addon_categories
         for category in types:
             terms.append(SimpleVocabulary.createTerm(category['title'], category['title']))
     return SimpleVocabulary(terms)
