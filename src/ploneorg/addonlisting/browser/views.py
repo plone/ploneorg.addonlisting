@@ -93,4 +93,7 @@ class AddOnFolderView(BrowserView):
         )
 
     def filter_form(self):
-        return FilterForm(self.context, self.request).render()
+        form = FilterForm(self.context, self.request)
+        form.update()
+        #import pdb; pdb.set_trace()
+        return form

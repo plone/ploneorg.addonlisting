@@ -11,7 +11,18 @@
 </head>
 <body>
     <metal:content-core fill-slot="content-core">
-      <!--tal:form content="view/filter_form">Filter Form</tal:form-->
+      <tal:form define="form view/filter_form">
+          <!-- plone.app.z3cform package provides view ploneform-macros
+               which come with a helpers to render forms. This one
+               will render the form body only. It also makes an assumption
+               that form is presented in "view" TAL variable.
+            -->
+          <h2 tal:content="form/label">Form Title</h2>
+          <tal:with-form-as-view define="view nocall:form">
+              <metal:block use-macro="form/@@ploneform-macros/titlelessform" />
+          </tal:with-form-as-view>
+
+      </tal:form>
       <div class="wrapper">
         <h1>Curated Add-Ons</h1>
         <div class="scroll-container">
