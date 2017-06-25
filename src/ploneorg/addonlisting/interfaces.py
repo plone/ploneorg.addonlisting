@@ -57,3 +57,7 @@ class IVersionEggInfo(model.Schema):
     Schema for version information.
     """
     model.load("models/versioninfo.xml", schema=u"egg_info")
+
+
+class IFilterForm(model.Schema):
+    model.load('models/filter_form.xml')

@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from plone import api
 from plone.protect.interfaces import IDisableCSRFProtection
+from ploneorg.addonlisting.contents import FilterForm
 from ploneorg.addonlisting.utils import update_addon
 from ploneorg.addonlisting.utils import update_addon_list
 from ploneorg.addonlisting.utils import update_addons
@@ -42,6 +43,15 @@ class AddOnFolderView(BrowserView):
         add_resource_on_request(self.request, 'myresources')
         return super(AddOnFolderView, self).__call__()
 
+    def all_addons(self):
+        return api.content.find(
+            context=self.context,
+            depth=1,
+            portal_type='AddOn',
+            sort_on='sortable_title',
+            sort_order='ascending'
+        )
+
     def curated_addons(self):
         return api.content.find(
             context=self.context,
@@ -71,3 +81,16 @@ class AddOnFolderView(BrowserView):
             sort_on='upload_time',
             sort_order='reverse'
         )
+
+    def blacklisted_addons(self):
+        return api.content.find(
+            context=self.context,
+            depth=1,
+            portal_type='AddOn',
+            blacklisted=True,
+            sort_on='sortable_title',
+            sort_order='ascending'
+        )
+
+    def filter_form(self):
+        return FilterForm(self.context, self.request).render()

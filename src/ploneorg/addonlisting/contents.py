@@ -1,16 +1,19 @@
 # -*- coding: utf-8 -*-
 """Module where all interfaces, events and exceptions live."""
 
+from plone.directives import form
 from plone.dexterity.content import Container
 from plone.dexterity.content import Item
 from ploneorg.addonlisting import PYPI_URL
 from ploneorg.addonlisting.interfaces import IAddOn
 from ploneorg.addonlisting.interfaces import IAddOnFolder
 from ploneorg.addonlisting.interfaces import ICategory
+from ploneorg.addonlisting.interfaces import IFilterForm
 from ploneorg.addonlisting.interfaces import IMapping
 from ploneorg.addonlisting.interfaces import IPyPIClassifierMapping
 from ploneorg.addonlisting.interfaces import IVersionEggInfo
 from ploneorg.addonlisting.interfaces import IVersionInfo
+from z3c.form import button
 from z3c.form.object import registerFactoryAdapter
 from zope.interface import implementer
 from zope.interface import implements
@@ -85,3 +88,32 @@ class VersionEggInfo(Base):
 
 
 registerFactoryAdapter(IVersionEggInfo, VersionEggInfo)
+
+
+class FilterForm(form.SchemaForm):
+
+    schema = IFilterForm
+    ignoreContext = True
+
+    label = u"Filter"
+    description = u"Filter after certain criteria."
+
+    @button.buttonAndHandler(u'Ok')
+    def handleApply(self, action):
+        data, errors = self.extractData()
+        if errors:
+            self.status = self.formErrorsMessage
+            return
+
+        # Do something with valid data here
+
+        # Set status on this form page
+        # (this status message is not bind to the session
+        #  and does not go thru redirects)
+        self.status = "Thank you very much!"
+
+    @button.buttonAndHandler(u"Cancel")
+    def handleCancel(self, action):
+        """User cancelled. Redirect back to the front page.
+        """
+        self.status = "Canceled!"

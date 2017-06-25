@@ -11,38 +11,7 @@
 </head>
 <body>
     <metal:content-core fill-slot="content-core">
-      <dl class="dropdown">
-        <dt>
-          <a href="#">
-            <span class="hida">Select</span>
-            <p class="multiSel"></p>
-          </a>
-        </dt>
-        <dd>
-          <div class="mutliSelect">
-            <ul>
-              Versions
-              <li>
-                <input type="checkbox" value="plone4"/>4.x only
-              </li>
-              <li>
-                <input type="checkbox" value="plone5"/>5.x
-              </li>
-              Categories
-              <li>
-                <input type="checkbox" value="Security"/>Security
-              </li>
-              <li>
-                <input type="checkbox" value="Database"/>Database
-              </li>
-              <li>
-                <input type="checkbox" value="Communications"/>Communications
-              </li>
-            </ul>
-          </div>
-        </dd>
-        <button id="filter">Filter</button>
-      </dl>
+      <!--tal:form content="view/filter_form">Filter Form</tal:form-->
       <div class="wrapper">
         <h1>Curated Add-Ons</h1>
         <div class="scroll-container">
@@ -54,6 +23,7 @@
                   <a href="${addon/absolute_url}"
                      class="pat-plone-modal"
                      data-pat-plone-modal="">
+                    <span class="">${repeat/addon_brain/number}. </span>
                     <h3>${addon/title}</h3>
                     <p>${addon/description}</p>
                     <figure tal:define="scales addon/@@images;

@@ -82,4 +82,11 @@
       permission="zope2.View"
       />
 
+  <browser:page
+      name="filter_form"
+      for="ploneorg.addonlisting.interfaces.IAddOnFolder"
+      class="ploneorg.addonlisting.contents.FilterForm"
+      permission="zope2.View"
+      />
+
 </configure>
