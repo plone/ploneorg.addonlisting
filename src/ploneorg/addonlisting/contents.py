@@ -97,11 +97,6 @@ class FilterForm(form.SchemaForm):
 
     label = u"Filter"
     description = u"Filter after certain criteria."
-    #
-    # def __init__(self, context, request):
-    #     self.request = request
-    #     self.context = context
-    #     super(FilterForm, self).__init__(context, request)
 
     @button.buttonAndHandler(u'Ok')
     def handleApply(self, action):
@@ -113,7 +108,8 @@ class FilterForm(form.SchemaForm):
         # Do something with valid data here
 
         # Set status on this form page
-        # (this status message is not bind to the session and does not go thru redirects)
+        # (this status message is not bind to the session
+        #  and does not go thru redirects)
         self.status = "Thank you very much!"
 
     @button.buttonAndHandler(u"Cancel")
