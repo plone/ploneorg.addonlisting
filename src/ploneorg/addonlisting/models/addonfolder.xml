@@ -34,10 +34,9 @@
 
       <field name="framework_version_mapping"
              type="zope.schema.List"
-             form:widget="collective.z3cform.datagridfield.datagridfield.DataGridFieldFactory"
              security:write_permission="cmf.ManagePortal"
-             security:read_permission="zope2.View" >
-      <!-- form:widget="collective.z3cform.datagridfield.datagridfield.DataGridFieldFactory" -->
+             security:read_permission="zope2.View" ><!--
+             form:widget="collective.z3cform.datagridfield.datagridfield.DataGridFieldFactory" -->
         <title i18n:translate="">Framework Version Mapping</title>
         <description i18n:translate="">PyPI framework version classifier to display</description>
         <required>False</required>
@@ -49,10 +48,9 @@
 
       <field name="python_version_mapping"
              type="zope.schema.List"
-             form:widget="collective.z3cform.datagridfield.datagridfield.DataGridFieldFactory"
              security:write_permission="cmf.ManagePortal"
-             security:read_permission="zope2.View" >
-      <!-- form:widget="collective.z3cform.datagridfield.datagridfield.DataGridFieldFactory" -->
+             security:read_permission="zope2.View" ><!--
+             form:widget="collective.z3cform.datagridfield.datagridfield.DataGridFieldFactory" -->
         <title i18n:translate="">Python Version Mapping</title>
         <description i18n:translate="">PyPI Python version classifier to display</description>
         <required>False</required>
@@ -62,11 +60,11 @@
         </value_type>
       </field>
 
-      <field name="add_categories"
+      <field name="addon_categories"
              type="zope.schema.List"
-             form:widget="collective.z3cform.datagridfield.datagridfield.DataGridFieldFactory"
              security:write_permission="cmf.ManagePortal"
-             security:read_permission="zope2.View" >
+             security:read_permission="zope2.View" ><!--
+             form:widget="collective.z3cform.datagridfield.datagridfield.DataGridFieldFactory" -->
         <title i18n:translate="">Add-on Categories</title>
         <description i18n:translate="">Used to assign a category to a particular add-on</description>
         <required>False</required>

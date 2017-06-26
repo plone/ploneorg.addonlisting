@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+
 from plone import api
 from plone.protect.interfaces import IDisableCSRFProtection
 from ploneorg.addonlisting.contents import FilterForm
@@ -92,5 +93,40 @@ class AddOnFolderView(BrowserView):
             sort_order='ascending'
         )
 
+
+class FilteredAddOnFolderView(AddOnFolderView):
+
     def filter_form(self):
-        return FilterForm(self.context, self.request).render()
+        form = FilterForm(self.context, self.request)
+        form.update()
+        return form
+
+    def __call__(self):
+        if self.request.method == "POST":
+            self.filter = {
+                'curated': bool(self.request.form.get('form.widgets.curated')),
+                'blacklisted': bool(self.request.form.get(
+                    'form.widgets.blacklisted')),
+            }
+        else:
+            self.filter = dict()
+        return super(FilteredAddOnFolderView, self).__call__()
+
+    def addons(self):
+        if self.filter:
+            return api.content.find(
+                context=self.context,
+                depth=1,
+                portal_type='AddOn',
+                curated=self.filter.get('curated'),
+                blacklisted=self.filter.get('blacklisted'),
+                sort_on='sortable_title',
+                sort_order='ascending'
+            )
+        return api.content.find(
+            context=self.context,
+            depth=1,
+            portal_type='AddOn',
+            sort_on='sortable_title',
+            sort_order='ascending'
+        )
