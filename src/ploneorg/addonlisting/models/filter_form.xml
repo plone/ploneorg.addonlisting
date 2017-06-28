@@ -14,7 +14,7 @@
       <field name="curated"
              type="zope.schema.Bool">
         <title i18n:translate="">Curated</title>
-        <description i18n:translate="">Is this add-on curated (highlighted)?</description>
+        <description i18n:translate="">Show curated (highlighted) add-ons</description>
         <required>False</required>
         <default>False</default>
       </field>
@@ -28,25 +28,46 @@
       </field>
 
       <field name="curated_status"
-             type="zope.schema.List" >
+             type="zope.schema.Choice" >
         <title i18n:translate="">Add-on Status</title>
         <description i18n:translate="">Is this add-on in a workable state?</description>
         <required>False</required>
-        <default>[]</default>
-        <value_type type="zope.schema.Choice">
-          <vocabulary>ploneorg.addonlisting.pypi_state_vocabulary</vocabulary>
-        </value_type>
+        
+        <vocabulary>ploneorg.addonlisting.state_vocabulary</vocabulary>
       </field>
-
-      <field name="addon_type"
+<!--
+      <field name="supported_framework_versionss"
              type="zope.schema.List" >
-        <title i18n:translate="">Add-on Category</title>
-        <description i18n:translate="">Please choose a category for this add-on</description>
+        <title i18n:translate="">Supported Framework Versions</title>
+        <description i18n:translate="">Choose the list of supported framework versions</description>
         <required>False</required>
         <default>[]</default>
         <value_type type="zope.schema.Choice">
-          <vocabulary>ploneorg.addonlisting.addon_type_vocabulary</vocabulary>
+          <vocabulary>plonorg.addonlisting.framework_versions_vocabulary</vocabulary>
         </value_type>
+      </field>
+-->
+      <field name="supported_python_versions"
+             type="zope.schema.Choice" >
+        <title i18n:translate="">Supported Python Versions</title>
+        <description i18n:translate="">Choose the list of supported Python versions</description>
+        <required>False</required>
+        
+        
+          <vocabulary>ploneorg.addonlisting.python_versions_vocabulary</vocabulary>
+        
+      </field>
+
+      
+
+      <field name="addon_type"
+             type="zope.schema.Choice" >
+        <title i18n:translate="">Add-on Category</title>
+        <description i18n:translate="">Choose categories for the add-ons</description>
+        <required>False</required>
+        
+          <vocabulary>ploneorg.addonlisting.addon_type_vocabulary</vocabulary>
+       
       </field>
 
     </schema>

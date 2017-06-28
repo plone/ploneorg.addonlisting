@@ -6,83 +6,45 @@
    i18n:domain="ploneorg.addonlisting"
    metal:use-macro="context/main_template/macros/master">
    <head>
-      <metal:block fill-slot="style_slot">
-         <link rel="stylesheet" type="text/css"
-            tal:define="navroot context/@@plone_portal_state/navigation_root_url"
-            tal:attributes="href string:${navroot}/++resource++ploneorg.addonlisting/addonlist.css"
-            />
-      </metal:block>
+      
    </head>
-   <body>
-      <metal:content-core fill-slot="content-core">
-         <dl class="dropdown">
-            <dt>
-               <a href="#">
-                  <span class="hida">Select</span>    
-                  <p class="multiSel"></p>
-               </a>
-            </dt>
-            <dd>
-               <div class="mutliSelect">
-                  <ul>
-                     Versions
-                     <li>
-                        <input type="checkbox" value="plone4"/>4.x only 
-                     </li>
-                     <li>
-                        <input type="checkbox" value="plone5" />5.x 
-                     </li>
-                     Categories
-                     <li>
-                        <input type="checkbox" value="Security" />Security
-                     </li>
-                     <li>
-                        <input type="checkbox" value="Database" />Database
-                     </li>
-                     <li>
-                        <input type="checkbox" value="Communications" />Communications
-                     </li>
-                  </ul>
-               </div>
-            </dd>
-            <button id="filter">Filter</button>
-         </dl>
+   <body>  
+   <metal:content-core fill-slot="content-core">
+   <div id="filter">
+        <tal:form define="form view/filter_form">
+            
+            
+            <h2 tal:content="form/label">Form Title</h2>
+
+            <tal:with-form-as-view define="view nocall:form">
+                <metal:block use-macro="form/@@ploneform-macros/titlelessform" />
+            </tal:with-form-as-view>
+
+        </tal:form>
+      </div>
+
+  
          <div class="wrapper">
-            <h1>Curated Add-Ons</h1>
+            <h1>All Add-Ons</h1>
             <div class="scroll-container">
-               <ul class="list-container" id="listing">
-                  <div tal:repeat="addon_brain view/curated_addons" tal:condition="view/curated_addons">
-                     <div tal:define="addon python:addon_brain.getObject()">
-                        <li>
-                           <h3>${addon/title}</h3>
-                           <p>${addon/description}</p>
-                           <!-- Trigger/Open The Modal -->
-                           <button id="details">Details</button>
-                           <!-- The Modal -->
-                           <div id="myModal" class="modal">
-                              <!-- Modal content -->
-                              <div class="modal-content">
-                                 <div class="modal-header">
-                                    <span class="close">&times;</span>
-                                    <h2>${addon/title}</h2>
-                                 </div>
-                                 <div class="modal-body">
-                                    <p tal:content="addon/description">description</p>
-                                    <p tal:content="addon/versions">Versions</p>
-                                    <p tal:content="addon/platform">Compatible Platforms</p>
-                                    <p tal:content="addon/license">license</p>
-                                    <p tal:content="addon/author_name">Author</p>
-                                    <p tal:content="addon/maintainer_name">Maintainer</p>
-                                 </div>
-                              </div>
-                           </div>
-                        </li>
-                     </div>
-                  </div>
-               </ul>
+               <ul class="list-container" id="listing" tal:condition="view/all_addons">
+        <tal:addons tal:repeat="addon_brain view/all_addons">
+          <tal:block tal:define="addon python:addon_brain.getObject()">
+            <li>
+              <a href="${addon/absolute_url}"
+                 class="pat-plone-modal"
+                 data-pat-plone-modal="">
+                <span class="">${repeat/addon_brain/number}. </span>
+                <h3>${addon/title}</h3>
+                <p>${addon/description}</p>
+                </a>
+            </li>
+          </tal:block>
+        </tal:addons>
+      </ul>
             </div>
          </div>
-         <div tal:condition="not:view/curated_addons">
+         <div tal:condition="not:view/all_addons">
             No addons so far :-(
          </div>
          <br>
@@ -90,35 +52,21 @@
          <div class="wrapper">
             <h1>New Add-Ons</h1>
             <div class="scroll-container">
-               <ul class="list-container" id="listing">
-                  <div tal:repeat="addon_brain view/new_addons" tal:condition="view/new_addons">
-                     <div tal:define="addon python:addon_brain.getObject()">
-                        <li>
-                           <h3>${addon/title}</h3>
-                           <p>${addon/description}</p>
-                           <button id="details">Details</button>
-                           <!-- The Modal -->
-                           <div id="myModal" class="modal">
-                              <!-- Modal content -->
-                              <div class="modal-content">
-                                 <div class="modal-header">
-                                    <span class="close">&times;</span>
-                                    <h2>${addon/title}</h2>
-                                 </div>
-                                 <div class="modal-body">
-                                    <p tal:content="addon/description">description</p>
-                                    <p tal:content="addon/versions">Versions</p>
-                                    <p tal:content="addon/platform">Compatible Platforms</p>
-                                    <p tal:content="addon/license">license</p>
-                                    <p tal:content="addon/author_name">Author</p>
-                                    <p tal:content="addon/maintainer_name">Maintainer</p>
-                                 </div>
-                              </div>
-                           </div>
-                        </li>
-                     </div>
-                  </div>
-               </ul>
+               <ul class="list-container" id="listing" tal:condition="view/new_addons">
+        <tal:addons tal:repeat="addon_brain view/new_addons">
+          <tal:block tal:define="addon python:addon_brain.getObject()">
+            <li>
+              <a href="${addon/absolute_url}"
+                 class="pat-plone-modal"
+                 data-pat-plone-modal="">
+                <span class="">${repeat/addon_brain/number}. </span>
+                <h3>${addon/title}</h3>
+                <p>${addon/description}</p>
+                </a>
+            </li>
+          </tal:block>
+        </tal:addons>
+      </ul>
             </div>
          </div>
          <div tal:condition="not:view/new_addons">
@@ -129,35 +77,21 @@
          <div class="wrapper">
             <h1 id="heading">Most Downloaded Add-Ons</h1>
             <div class="scroll-container">
-               <ul class="list-container" id="listing">
-                  <div tal:repeat="addon_brain view/downloaded_addons" tal:condition="view/downloaded_addons">
-                     <div tal:define="addon python:addon_brain.getObject()">
-                        <li>
-                           <h3>${addon/title}</h3>
-                           <p>${addon/description}</p>
-                           <button id="details">Details</button>
-                           <!-- The Modal -->
-                           <div id="myModal" class="modal">
-                              <!-- Modal content -->
-                              <div class="modal-content">
-                                 <div class="modal-header">
-                                    <span class="close">&times;</span>
-                                    <h2>${addon/title}</h2>
-                                 </div>
-                                 <div class="modal-body">
-                                    <p tal:content="addon/description">description</p>
-                                    <p tal:content="addon/versions">Versions</p>
-                                    <p tal:content="addon/platform">Compatible Platforms</p>
-                                    <p tal:content="addon/license">license</p>
-                                    <p tal:content="addon/author_name">Author</p>
-                                    <p tal:content="addon/maintainer_name">Maintainer</p>
-                                 </div>
-                              </div>
-                           </div>
-                        </li>
-                     </div>
-                  </div>
-               </ul>
+               <ul class="list-container" id="listing" tal:condition="view/downloaded_addons">
+        <tal:addons tal:repeat="addon_brain view/downloaded_addons">
+          <tal:block tal:define="addon python:addon_brain.getObject()">
+            <li>
+              <a href="${addon/absolute_url}"
+                 class="pat-plone-modal"
+                 data-pat-plone-modal="">
+                <span class="">${repeat/addon_brain/number}. </span>
+                <h3>${addon/title}</h3>
+                <p>${addon/description}</p>
+                </a>
+            </li>
+          </tal:block>
+        </tal:addons>
+      </ul>
             </div>
          </div>
          <div tal:condition="not:view/downloaded_addons">

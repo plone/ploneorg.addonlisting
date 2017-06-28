@@ -221,12 +221,11 @@ a {
 }
 
 #filter {
-  background-color: #006c9d;
-  width: 90px;
+  background-color: #d5e7f1;
   border: 0;
   padding: 10px 0;
   margin: 5px 0;
   text-align: center;
-  color: #fff;
+  color: #006c9d;;
   font-weight: bold;
 }

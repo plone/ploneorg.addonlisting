@@ -15,4 +15,13 @@
     <index name="blacklisted" meta_type="FieldIndex">
         <indexed_attr value="blacklisted"/>
     </index>
+    <index name="curated_status" meta_type="KeywordIndex">
+        <indexed_attr value="curated_status"/>
+    </index>
+    <index name="addon_type" meta_type="KeywordIndex">
+        <indexed_attr value="addon_type"/>
+    </index>
+
+
 </object>
+

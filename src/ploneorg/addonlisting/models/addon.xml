@@ -60,7 +60,7 @@
         <description i18n:translate="">Is this add-on in a workable state?</description>
         <required>False</required>
         <default>False</default>
-        <vocabulary>ploneorg.addonlisting.pypi_state_vocabulary</vocabulary>
+        <vocabulary>ploneorg.addonlisting.state_vocabulary</vocabulary>
       </field>
 
 
