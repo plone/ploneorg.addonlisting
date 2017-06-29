@@ -84,13 +84,13 @@ def update_addon(context, request=None):
                                            'text/restructured',
                                            'text/restructured')
 
-            addon.current_version = data['info'].get('version')
-            addon.docs_link = data['info'].get('docs_link')
-            addon.bugtracker_link = data['info'].get('bugtrack_link')
-            addon.author_name = data['info'].get('author')
-            addon.author_email = data['info'].get('author_email')
-            addon.maintainer_name = data['info'].get('maintainer')
-            addon.maintainer_email = data['info'].get('maintainer_email')
+                addon.current_version = data['info'].get('version')
+                addon.docs_link = data['info'].get('docs_link')
+                addon.bugtracker_link = data['info'].get('bugtrack_link')
+                addon.author_name = data['info'].get('author')
+                addon.author_email = data['info'].get('author_email')
+                addon.maintainer_name = data['info'].get('maintainer')
+                addon.maintainer_email = data['info'].get('maintainer_email')
 
             versions = []
             tsum = 0

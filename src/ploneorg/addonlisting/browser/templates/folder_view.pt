@@ -34,7 +34,10 @@
               <a href="${addon/absolute_url}"
                  class="pat-plone-modal"
                  data-pat-plone-modal="">
+                 <!--
                 <span class="">${repeat/addon_brain/number}. </span>
+                -->
+
                 <h3>${addon/title}</h3>
                 <p>${addon/description}</p>
                 </a>
@@ -59,7 +62,9 @@
               <a href="${addon/absolute_url}"
                  class="pat-plone-modal"
                  data-pat-plone-modal="">
+                 <!--
                 <span class="">${repeat/addon_brain/number}. </span>
+                -->
                 <h3>${addon/title}</h3>
                 <p>${addon/description}</p>
                 </a>
@@ -84,7 +89,9 @@
               <a href="${addon/absolute_url}"
                  class="pat-plone-modal"
                  data-pat-plone-modal="">
+                 <!--
                 <span class="">${repeat/addon_brain/number}. </span>
+                -->
                 <h3>${addon/title}</h3>
                 <p>${addon/description}</p>
                 </a>

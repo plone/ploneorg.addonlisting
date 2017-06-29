@@ -14,7 +14,6 @@ from ploneorg.addonlisting.interfaces import IPyPIClassifierMapping
 from ploneorg.addonlisting.interfaces import IVersionEggInfo
 from ploneorg.addonlisting.interfaces import IVersionInfo
 from z3c.form import button
-from z3c.form.browser.radio import RadioFieldWidget 
 from z3c.form.object import registerFactoryAdapter
 from zope.interface import implementer
 from zope.interface import implements
@@ -91,7 +90,6 @@ class VersionEggInfo(Base):
 registerFactoryAdapter(IVersionEggInfo, VersionEggInfo)
 
 
-
 class FilterForm(form.SchemaForm):
 
     schema = IFilterForm
@@ -100,8 +98,6 @@ class FilterForm(form.SchemaForm):
     label = u"Filter"
     description = u"Filter after certain criteria."
 
-    
-    
     @button.buttonAndHandler(u'Ok')
     def handleApply(self, action):
         data, errors = self.extractData()
