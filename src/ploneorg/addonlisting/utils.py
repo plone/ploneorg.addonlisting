@@ -50,7 +50,7 @@ def update_addon_list(context, request=None):
                 )
                 transaction.get().commit()
 
-                info = u'For Add\'on-Folder: "%s" add Plone-Package "%s"' % (addon_folder.title, elem)  # NOQA: E501
+                info = u'For Add\'on-Folder: "%s" add PyPI-Package "%s"' % (addon_folder.title, elem)  # NOQA: E501
                 log.info(info)
                 log.info(addon)
 

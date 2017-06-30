@@ -33,7 +33,7 @@
         <description i18n:translate="">Is this add-on in a workable state?</description>
         <required>False</required>
         <default>[]</default>
-        <vocabulary>ploneorg.addonlisting.state_vocabulary</vocabulary>
+        <vocabulary>ploneorg.addonlisting.pypi_state_vocabulary</vocabulary>
        </field>
 
       <field name="supported_framework_versions"
@@ -61,15 +61,8 @@
         <title i18n:translate="">Add-on Category</title>
         <description i18n:translate="">Choose categories for the add-ons</description>
         <required>False</required>
-        
-          <vocabulary>ploneorg.addonlisting.addon_type_vocabulary</vocabulary>
-       
+        <vocabulary>ploneorg.addonlisting.addon_type_vocabulary</vocabulary>
       </field>
-
-      
-
-
-
 
     </schema>
 
