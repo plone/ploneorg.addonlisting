@@ -14,8 +14,6 @@ from ploneorg.addonlisting.interfaces import IPyPIClassifierMapping
 from ploneorg.addonlisting.interfaces import IVersionEggInfo
 from ploneorg.addonlisting.interfaces import IVersionInfo
 from z3c.form import button
-from z3c.form import field
-from z3c.form.browser.checkbox import CheckBoxFieldWidget
 from z3c.form.object import registerFactoryAdapter
 from zope.interface import implementer
 from zope.interface import implements
