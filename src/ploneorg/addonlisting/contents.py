@@ -14,6 +14,8 @@ from ploneorg.addonlisting.interfaces import IPyPIClassifierMapping
 from ploneorg.addonlisting.interfaces import IVersionEggInfo
 from ploneorg.addonlisting.interfaces import IVersionInfo
 from z3c.form import button
+from z3c.form import field
+from z3c.form.browser.checkbox import CheckBoxFieldWidget
 from z3c.form.object import registerFactoryAdapter
 from zope.interface import implementer
 from zope.interface import implements
@@ -93,8 +95,11 @@ registerFactoryAdapter(IVersionEggInfo, VersionEggInfo)
 class FilterForm(form.SchemaForm):
 
     schema = IFilterForm
+    fields = field.Fields(IFilterForm)
+    print fields
+    fields["supported_framework_versions"].widgetFactory = CheckBoxFieldWidget
+    fields["supported_python_versions"].widgetFactory = CheckBoxFieldWidget
     ignoreContext = True
-
     label = u"Filter"
     description = u"Filter after certain criteria."
 
