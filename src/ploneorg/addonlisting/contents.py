@@ -95,10 +95,6 @@ registerFactoryAdapter(IVersionEggInfo, VersionEggInfo)
 class FilterForm(form.SchemaForm):
 
     schema = IFilterForm
-    fields = field.Fields(IFilterForm)
-    print fields
-    #fields["supported_framework_versions"].widgetFactory = CheckBoxFieldWidget
-    #fields["supported_python_versions"].widgetFactory = CheckBoxFieldWidget
     ignoreContext = True
     label = u"Filter"
     description = u"Filter after certain criteria."

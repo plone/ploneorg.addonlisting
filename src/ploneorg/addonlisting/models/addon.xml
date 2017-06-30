@@ -106,7 +106,6 @@
 
         <field name="supported_framework_versions"
                type="zope.schema.List"
-
                security:write_permission="cmf.ManagePortal"
                security:read_permission="zope2.View" >
           <title i18n:translate="">Supported Framework Versions</title>
@@ -119,7 +118,6 @@
 
         <field name="supported_python_versions"
                type="zope.schema.List"
-
                security:write_permission="cmf.ManagePortal"
                security:read_permission="zope2.View" >
           <title i18n:translate="">Supported Python Versions</title>
@@ -132,7 +130,6 @@
 
         <field name="keywords"
                type="zope.schema.List"
-
                security:write_permission="cmf.ManagePortal"
                security:read_permission="zope2.View" >
           <title i18n:translate="">PyPI Keywords</title>
@@ -155,7 +152,6 @@
 
         <field name="author_email"
                type="zope.schema.TextLine"
-
                security:write_permission="cmf.ManagePortal"
                security:read_permission="zope2.View" >
           <title i18n:translate="">Author E-Mail</title>
@@ -165,7 +161,6 @@
 
         <field name="maintainer_name"
                type="zope.schema.TextLine"
-
                security:write_permission="cmf.ManagePortal"
                security:read_permission="zope2.View" >
           <title i18n:translate="">Maintainer Name</title>
@@ -185,7 +180,6 @@
 
         <field name="bugtracker_link"
                type="zope.schema.TextLine"
-
                security:write_permission="cmf.ManagePortal"
                security:read_permission="zope2.View" >
           <title i18n:translate="">Link to this add-on's issue tracker</title>
@@ -195,7 +189,6 @@
 
         <field name="versions"
                type="zope.schema.List"
-
                security:write_permission="cmf.ManagePortal"
                security:read_permission="zope2.View" >
           <title i18n:translate="">Supported Plone Versions</title>
@@ -209,7 +202,6 @@
 
         <field name="docs_link"
                type="zope.schema.TextLine"
-
                security:write_permission="cmf.ManagePortal"
                security:read_permission="zope2.View" >
           <title i18n:translate="">Docs Link</title>
@@ -219,7 +211,6 @@
 
         <field name="package_url"
                type="zope.schema.URI"
-
                security:write_permission="cmf.ManagePortal"
                security:read_permission="zope2.View" >
           <description i18n:translate="">Link to this addon's pypi page</description>
@@ -229,7 +220,6 @@
 
         <field name="release_url"
                type="zope.schema.URI"
-
                security:write_permission="cmf.ManagePortal"
                security:read_permission="zope2.View" >
           <description i18n:translate="">Link to this addon's release page</description>
@@ -240,7 +230,6 @@
 
         <field name="home_page"
                type="zope.schema.URI"
-
                security:write_permission="cmf.ManagePortal"
                security:read_permission="zope2.View" >
           <description i18n:translate="">Link to this addon's home page</description>
@@ -250,7 +239,6 @@
 
         <field name="platform"
                type="zope.schema.TextLine"
-
                security:write_permission="cmf.ManagePortal"
                security:read_permission="zope2.View" >
           <description i18n:translate="">List of compatible platforms</description>
@@ -260,7 +248,6 @@
 
         <field name="license"
                type="zope.schema.TextLine"
-
                security:write_permission="cmf.ManagePortal"
                security:read_permission="zope2.View" >
           <description i18n:translate="">License assosciated with the addon</description>
@@ -270,7 +257,6 @@
 
         <field name="download_sum_total"
                type="zope.schema.Int"
-
                security:write_permission="cmf.ManagePortal"
                security:read_permission="zope2.View" >
           <description i18n:translate="">Sum of download counts of all versions of this add-on</description>
@@ -280,7 +266,6 @@
 
         <field name="download_sum_latest"
                type="zope.schema.Int"
-
                security:write_permission="cmf.ManagePortal"
                security:read_permission="zope2.View" >
           <description i18n:translate="">Download count of the latest version of this add-on</description>
@@ -290,7 +275,6 @@
 
         <field name="upload_time"
                type="zope.schema.Datetime"
-
                security:write_permission="cmf.ManagePortal"
                security:read_permission="zope2.View" >
            <description i18n:translate="">upload time of the first version of this addon to find whether it is a new addon</description>
@@ -300,7 +284,6 @@
 
         <field name="cheesecake_code_kwalitee_id"
                type="zope.schema.Int"
-
                security:write_permission="cmf.ManagePortal"
                security:read_permission="zope2.View" >
            <description i18n:translate="">refers to the code kwalitee index of the package computed by the cheeescake script</description>
@@ -310,7 +293,6 @@
 
         <field name="cheesecake_installability_id"
                type="zope.schema.Int"
-
                security:write_permission="cmf.ManagePortal"
                security:read_permission="zope2.View" >
            <description i18n:translate="">refers to the installability index of the package computed by the cheesecake script</description>
@@ -320,7 +302,6 @@
 
         <field name="cheesecake_documentation_id"
                type="zope.schema.Int"
-
                security:write_permission="cmf.ManagePortal"
                security:read_permission="zope2.View" >
            <description i18n:translate="">refers to the documentation index of the package computed by the cheesecake script</description>
