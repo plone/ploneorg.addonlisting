@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
-from Acquisition import aq_inner
+
 from plone import api
 from plone.protect.interfaces import IDisableCSRFProtection
-from ploneorg.addonlisting.interfaces import IAddOn
+from ploneorg.addonlisting.contents import FilterForm
 from ploneorg.addonlisting.utils import update_addon
 from ploneorg.addonlisting.utils import update_addon_list
 from ploneorg.addonlisting.utils import update_addons
+from Products.CMFPlone.resources import add_resource_on_request
 from Products.Five.browser import BrowserView
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from zope.interface import alsoProvides
@@ -39,6 +40,9 @@ class AddOnView(BrowserView):
 
 
 class AddOnFolderView(BrowserView):
+    def __call__(self):
+        add_resource_on_request(self.request, 'myresources')
+        return super(AddOnFolderView, self).__call__()
 
     def all_addons(self):
         return api.content.find(
@@ -49,20 +53,231 @@ class AddOnFolderView(BrowserView):
             sort_order='ascending'
         )
 
-    def downloaded_addons(self):
-        context = aq_inner(self.context)
-        catalog = api.portal.get_tool(name='portal_catalog')
-        return catalog(
-            object_provides=IAddOn.__identifier__,
-            path='/'.join(context.getPhysicalPath()),
-            sort_on='download_sum_total',
-            sort_order='reverse')
+    def curated_addons(self):
+        return api.content.find(
+            context=self.context,
+            depth=1,
+            portal_type='AddOn',
+            curated=True,
+            sort_on='sortable_title',
+            sort_order='ascending'
+        )
 
-    def recent_addons(self):
-        context = aq_inner(self.context)
-        catalog = api.portal.get_tool(name='portal_catalog')
-        return catalog(
-            object_provides=IAddOn.__identifier__,
-            path='/'.join(context.getPhysicalPath()),
+    def downloaded_addons(self):
+        return api.content.find(
+            context=self.context,
+            depth=1,
+            portal_type='AddOn',
+            blacklisted=False,
+            sort_on='download_sum_total',
+            sort_order='reverse'
+        )
+
+    def new_addons(self):
+        return api.content.find(
+            context=self.context,
+            depth=1,
+            portal_type='AddOn',
+            blacklisted=False,
             sort_on='upload_time',
-            sort_order='reverse')
+            sort_order='reverse'
+        )
+
+    def blacklisted_addons(self):
+        return api.content.find(
+            context=self.context,
+            depth=1,
+            portal_type='AddOn',
+            blacklisted=True,
+            sort_on='sortable_title',
+            sort_order='ascending'
+        )
+
+
+class FilteredAddOnFolderView(AddOnFolderView):
+
+    def filter_form(self):
+        form = FilterForm(self.context, self.request)
+        form.update()
+        return form
+
+    def __call__(self):
+        if self.request.method == "POST":
+            self.filter = {
+                'curated': bool(self.request.form.get('form.widgets.curated')),
+                'blacklisted': bool(self.request.form.get(
+                    'form.widgets.blacklisted')),
+                'addon_type': self.request.form.get(
+                    'form.widgets.addon_type'),
+                'addon_status': self.request.form.get(
+                    'form.widgets.addon_status'),
+                'supported_python_versions': self.request.form.get(
+                    'form.widgets.supported_python_versions'),
+                'supported_framework_versions': self.request.form.get(
+                    'form.widgets.supported_framework_versions')
+            }
+        else:
+            self.filter = dict()
+        return super(FilteredAddOnFolderView, self).__call__()
+
+    def all_addons(self):
+        if self.filter:
+            if self.filter.get('curated'):
+                return api.content.find(
+                    context=self.context,
+                    depth=1,
+                    portal_type='AddOn',
+                    curated=self.filter.get('curated'),
+                    blacklisted=self.filter.get('blacklisted'),
+                    addon_status=self.filter.get('curated_status'),
+                    addon_type=self.filter.get('addon_type'),
+                    supported_python_versions={
+                        "query": self.filter.get('supported_python_versions'),
+                        "operator": "and"
+                    },
+                    supported_framework_versions={
+                        "query": self.filter.get(
+                            'supported_framework_versions'
+                        ),
+                        "operator": "and"
+                    },
+                    sort_on='sortable_title',
+                    sort_order='ascending'
+                )
+            else:
+                return api.content.find(
+                    context=self.context,
+                    depth=1,
+                    portal_type='AddOn',
+                    curated=self.filter.get('curated'),
+                    blacklisted=self.filter.get('blacklisted'),
+                    addon_status=self.filter.get('pypi_status'),
+                    addon_type=self.filter.get('addon_type'),
+                    supported_python_versions={
+                        "query": self.filter.get('supported_python_versions'),
+                        "operator": "and"
+                    },
+                    supported_framework_versions={
+                        "query": self.filter.get(
+                            'supported_framework_versions'
+                        ),
+                        "operator": "and"
+                    },
+                    sort_on='sortable_title',
+                    sort_order='ascending'
+                )
+        return api.content.find(
+            context=self.context,
+            depth=1,
+            portal_type='AddOn',
+            sort_on='sortable_title',
+            sort_order='ascending'
+        )
+
+    def downloaded_addons(self):
+        if self.filter:
+            if self.filter.get('curated'):
+                return api.content.find(
+                    context=self.context,
+                    depth=1,
+                    portal_type='AddOn',
+                    curated=self.filter.get('curated'),
+                    blacklisted=self.filter.get('blacklisted'),
+                    addon_status=self.filter.get('curated_status'),
+                    addon_type=self.filter.get('addon_type'),
+                    supported_python_versions={
+                        "query": self.filter.get('supported_python_versions'),
+                        "operator": "and"
+                    },
+                    supported_framework_versions={
+                        "query": self.filter.get(
+                            'supported_framework_versions'
+                        ),
+                        "operator": "and"
+                    },
+                    sort_on='download_sum_total',
+                    sort_order='reverse'
+                )
+            else:
+                return api.content.find(
+                    context=self.context,
+                    depth=1,
+                    portal_type='AddOn',
+                    curated=self.filter.get('curated'),
+                    blacklisted=self.filter.get('blacklisted'),
+                    addon_status=self.filter.get('pypi_status'),
+                    addon_type=self.filter.get('addon_type'),
+                    supported_python_versions={
+                        "query": self.filter.get('supported_python_versions'),
+                        "operator": "and"
+                    },
+                    supported_framework_versions={
+                        "query": self.filter.get(
+                            'supported_framework_versions'
+                        ),
+                        "operator": "and"
+                    },
+                    sort_on='download_sum_total',
+                    sort_order='reverse'
+                )
+        return api.content.find(
+            context=self.context,
+            depth=1,
+            portal_type='AddOn',
+            sort_on='download_sum_total',
+            sort_order='reverse'
+        )
+
+    def new_addons(self):
+        if self.filter:
+            if self.filter.get('curated'):
+                return api.content.find(
+                    context=self.context,
+                    depth=1,
+                    portal_type='AddOn',
+                    curated=self.filter.get('curated'),
+                    blacklisted=self.filter.get('blacklisted'),
+                    curated_status=self.filter.get('curated_status'),
+                    supported_python_versions={
+                        "query": self.filter.get('supported_python_versions'),
+                        "operator": "and"
+                    },
+                    supported_framework_versions={
+                        "query": self.filter.get(
+                            'supported_framework_versions'
+                        ),
+                        "operator": "and"
+                    },
+                    addon_type=self.filter.get('addon_type'),
+                    sort_on='upload_time',
+                    sort_order='reverse'
+                )
+            else:
+                return api.content.find(
+                    context=self.context,
+                    depth=1,
+                    portal_type='AddOn',
+                    curated=self.filter.get('curated'),
+                    blacklisted=self.filter.get('blacklisted'),
+                    curated_status=self.filter.get('pypi_status'),
+                    supported_python_versions={
+                        "query": self.filter.get('supported_python_versions'),
+                        "operator": "and"
+                    },
+                    supported_framework_versions={
+                        "query": self.filter.get(
+                            'supported_framework_versions'
+                        ),
+                        "operator": "and"
+                    },
+                    addon_type=self.filter.get('addon_type'),
+                    sort_on='upload_time',
+                    sort_order='reverse'
+                )
+        return api.content.find(
+            context=self.context,
+            depth=1,
+            portal_type='AddOn',
+            sort_on='upload_time',
+            sort_order='reverse'
+        )

@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<object name="portal_catalog">
+    <index name="download_sum_total" meta_type="FieldIndex">
+        <indexed_attr value="download_sum_total"/>
+    </index>
+    <index name="download_sum_latest" meta_type="FieldIndex">
+        <indexed_attr value="download_sum_latest"/>
+    </index>
+    <index name="upload_time" meta_type="DateIndex">
+        <indexed_attr value="upload_time"/>
+    </index>
+    <index name="curated" meta_type="FieldIndex">
+        <indexed_attr value="curated"/>
+    </index>
+    <index name="blacklisted" meta_type="FieldIndex">
+        <indexed_attr value="blacklisted"/>
+    </index>
+    <index name="curated_status" meta_type="FieldIndex">
+        <indexed_attr value="curated_status"/>
+    </index>
+    <index name="addon_type" meta_type="FieldIndex">
+        <indexed_attr value="addon_type"/>
+    </index>
+    <index name="supported_framework_versions" meta_type="KeywordIndex">
+        <indexed_attr value="supported_framework_versions"/>
+    </index>
+    <index name="supported_python_versions" meta_type="KeywordIndex">
+        <indexed_attr value="supported_python_versions"/>
+    </index>
+    <index name="pypi_status" meta_type="FieldIndex">
+        <indexed_attr value="pypi_status"/>
+    </index>
+
+</object>
+

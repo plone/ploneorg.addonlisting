@@ -1,0 +1,109 @@
+<html
+   xmlns="http://www.w3.org/1999/xhtml"
+   xmlns:metal="http://xml.zope.org/namespaces/metal"
+   xmlns:tal="http://xml.zope.org/namespaces/tal"
+   xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+   i18n:domain="ploneorg.addonlisting"
+   metal:use-macro="context/main_template/macros/master">
+   <head>
+      
+   </head>
+   <body>  
+   <metal:content-core fill-slot="content-core">
+   <div id="filter">
+        <tal:form define="form view/filter_form">
+            
+            
+            <h2 tal:content="form/label">Form Title</h2>
+
+            <tal:with-form-as-view define="view nocall:form">
+                <metal:block use-macro="form/@@ploneform-macros/titlelessform" />
+            </tal:with-form-as-view>
+
+        </tal:form>
+      </div>
+
+  
+         <div class="wrapper">
+            <h1>All Add-Ons</h1>
+            <div class="scroll-container">
+               <ul class="list-container" id="listing" tal:condition="view/all_addons">
+        <tal:addons tal:repeat="addon_brain view/all_addons">
+          <tal:block tal:define="addon python:addon_brain.getObject()">
+            <li>
+              <a href="${addon/absolute_url}"
+                 class="pat-plone-modal"
+                 data-pat-plone-modal="">
+                 <!--
+                <span class="">${repeat/addon_brain/number}. </span>
+                -->
+
+                <h3>${addon/title}</h3>
+                <p>${addon/description}</p>
+                </a>
+            </li>
+          </tal:block>
+        </tal:addons>
+      </ul>
+            </div>
+         </div>
+         <div tal:condition="not:view/all_addons">
+            No addons so far :-(
+         </div>
+         <br>
+         <br>
+         <div class="wrapper">
+            <h1>New Add-Ons</h1>
+            <div class="scroll-container">
+               <ul class="list-container" id="listing" tal:condition="view/new_addons">
+        <tal:addons tal:repeat="addon_brain view/new_addons">
+          <tal:block tal:define="addon python:addon_brain.getObject()">
+            <li>
+              <a href="${addon/absolute_url}"
+                 class="pat-plone-modal"
+                 data-pat-plone-modal="">
+                 <!--
+                <span class="">${repeat/addon_brain/number}. </span>
+                -->
+                <h3>${addon/title}</h3>
+                <p>${addon/description}</p>
+                </a>
+            </li>
+          </tal:block>
+        </tal:addons>
+      </ul>
+            </div>
+         </div>
+         <div tal:condition="not:view/new_addons">
+            No addons so far :-(
+         </div>
+         <br>
+         <br>
+         <div class="wrapper">
+            <h1 id="heading">Most Downloaded Add-Ons</h1>
+            <div class="scroll-container">
+               <ul class="list-container" id="listing" tal:condition="view/downloaded_addons">
+        <tal:addons tal:repeat="addon_brain view/downloaded_addons">
+          <tal:block tal:define="addon python:addon_brain.getObject()">
+            <li>
+              <a href="${addon/absolute_url}"
+                 class="pat-plone-modal"
+                 data-pat-plone-modal="">
+                 <!--
+                <span class="">${repeat/addon_brain/number}. </span>
+                -->
+                <h3>${addon/title}</h3>
+                <p>${addon/description}</p>
+                </a>
+            </li>
+          </tal:block>
+        </tal:addons>
+      </ul>
+            </div>
+         </div>
+         <div tal:condition="not:view/downloaded_addons">
+            No addons so far :-(
+         </div>
+      </metal:content-core>
+   </body>
+</html>

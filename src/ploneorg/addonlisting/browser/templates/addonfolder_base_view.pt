@@ -1,0 +1,44 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      i18n:domain="ploneorg.addonlisting"
+      metal:use-macro="context/main_template/macros/master">
+
+  <metal:block fill-slot="content-core">
+          XXX - this text comes below title and description
+  </metal:block>
+
+  <metal:block fill-slot="main">
+
+    <h1 tal:content="context/title">Add-on Folder Title</h1>
+    <h2 tal:content="context/framework_name">Framework Name</h2>
+    <p class="description" tal:content="context/description">Description</p>
+    <ul tal:condition="context/query_classifieres">
+      <li tal:repeat="classifier context/query_classifieres"
+          tal:content="classifier">Classifier</li>
+    </ul>
+    <div tal:condition="context/addon_categories">
+      <h3>Categories</h3>
+      <ul>
+        <li tal:repeat="category context/addon_categories">
+          <span tal:replace="category/title">Category Title</span></li>
+      </ul>
+    </div>
+    <div tal:condition="context/framework_version_mapping">
+      <h3>Version Mappings</h3>
+      <ul>
+        <li tal:repeat="mapping context/framework_version_mapping">
+          <span tal:replace="mapping/value">Version</span> - <span tal:replace="mapping/key">Version Title</span></li>
+      </ul>
+    </div>
+    <div tal:condition="context/python_version_mapping">
+      <h3>Python Version Mappings</h3>
+      <ul>
+        <li tal:repeat="mapping context/python_version_mapping">
+          <span tal:replace="mapping/value">Version</span> - <span tal:replace="mapping/key">Version Title</span></li>
+      </ul>
+    </div>
+  </metal:block>
+
+</html>

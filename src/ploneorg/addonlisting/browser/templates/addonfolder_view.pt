@@ -1,40 +1,153 @@
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:metal="http://xml.zope.org/namespaces/metal"
-      xmlns:tal="http://xml.zope.org/namespaces/tal"
-      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
-      i18n:domain="ploneorg.addonlisting"
-      metal:use-macro="context/main_template/macros/master">
-<body>
-  <metal:content-core fill-slot="content-core">
 
-  <metal:addonlist define-macro="addonlist">
-  <table class="listing"
-         id="AddOns">
-    <thead>
-      <tr>
-        <th>Title</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr tal:repeat="addon view/all_addons" tal:condition="view/all_addons">
-        <td tal:content="addon/title">
-            Title
-        </td>
-        <td tal:content="addon/description">
-            Description
-        </td>
-      </tr>
-      <tr tal:condition="not:view/all_addons">
-        <td colspan="2">
+<html
+   xmlns="http://www.w3.org/1999/xhtml"
+   xmlns:metal="http://xml.zope.org/namespaces/metal"
+   xmlns:tal="http://xml.zope.org/namespaces/tal"
+   xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+   i18n:domain="ploneorg.addonlisting"
+   metal:use-macro="context/main_template/macros/master">
+   <head>
+      <metal:block fill-slot="style_slot">
+         <link rel="stylesheet" type="text/css"
+            tal:define="navroot context/@@plone_portal_state/navigation_root_url"
+            tal:attributes="href string:${navroot}/++resource++ploneorg.addonlisting/addonlist.css"
+            />
+      </metal:block>
+   </head>
+   <body>
+      <metal:content-core fill-slot="content-core">
+        <div id="filter">
+        <tal:form define="form view/filter_form">
+            <!-- plone.app.z3cform package provides view ploneform-macros
+                 which come with a helpers to render forms. This one
+                 will render the form body only. It also makes an assumption
+                 that form is presented in "view" TAL variable.
+              -->
+            
+            <h2 tal:content="form/label">Form Title</h2>
+
+            <tal:with-form-as-view define="view nocall:form">
+                <metal:block use-macro="form/@@ploneform-macros/titlelessform" />
+            </tal:with-form-as-view>
+
+        </tal:form>
+      </div>
+         <div class="wrapper">
+            <h1>Curated Add-Ons</h1>
+            <div class="scroll-container">
+               <ul class="list-container" id="listing">
+                  <div tal:repeat="addon_brain view/curated_addons" tal:condition="view/curated_addons">
+                     <div tal:define="addon python:addon_brain.getObject()">
+                        <li>
+                           <h3>${addon/title}</h3>
+                           <p>${addon/description}</p>
+                           
+                           <button id="details">Details</button>
+                           
+                           <div id="myModal" class="modal">
+                              
+                              <div class="modal-content">
+                                 <div class="modal-header">
+                                    <span class="close">&times;</span>
+                                    <h2>${addon/title}</h2>
+                                 </div>
+                                 <div class="modal-body">
+                                    <p tal:content="addon/description">description</p>
+                                    <p tal:content="addon/versions">Versions</p>
+                                    <p tal:content="addon/platform">Compatible Platforms</p>
+                                    <p tal:content="addon/license">license</p>
+                                    <p tal:content="addon/author_name">Author</p>
+                                    <p tal:content="addon/maintainer_name">Maintainer</p>
+                                 </div>
+                              </div>
+                           </div>
+                        </li>
+                     </div>
+                  </div>
+               </ul>
+            </div>
+         </div>
+         <div tal:condition="not:view/curated_addons">
             No addons so far :-(
-        </td>
-      </tr>
-    </tbody>
-  </table>
-  <div class="addoninfo"><span /></div>
-  </metal:addonlist>
-
-  </metal:content-core>
-</body>
+         </div>
+         <br>
+         <br>
+         <div class="wrapper">
+            <h1>New Add-Ons</h1>
+            <div class="scroll-container">
+               <ul class="list-container" id="listing">
+                  <div tal:repeat="addon_brain view/new_addons" tal:condition="view/new_addons">
+                     <div tal:define="addon python:addon_brain.getObject()">
+                        <li>
+                           <h3>${addon/title}</h3>
+                           <p>${addon/description}</p>
+                           <button id="details">Details</button>
+                           
+                           <div id="myModal" class="modal">
+                              
+                              <div class="modal-content">
+                                 <div class="modal-header">
+                                    <span class="close">&times;</span>
+                                    <h2>${addon/title}</h2>
+                                 </div>
+                                 <div class="modal-body">
+                                    <p tal:content="addon/description">description</p>
+                                    <p tal:content="addon/versions">Versions</p>
+                                    <p tal:content="addon/platform">Compatible Platforms</p>
+                                    <p tal:content="addon/license">license</p>
+                                    <p tal:content="addon/author_name">Author</p>
+                                    <p tal:content="addon/maintainer_name">Maintainer</p>
+                                 </div>
+                              </div>
+                           </div>
+                        </li>
+                     </div>
+                  </div>
+               </ul>
+            </div>
+         </div>
+         <div tal:condition="not:view/new_addons">
+            No addons so far :-(
+         </div>
+         <br>
+         <br>
+         <div class="wrapper">
+            <h1 id="heading">Most Downloaded Add-Ons</h1>
+            <div class="scroll-container">
+               <ul class="list-container" id="listing">
+                  <div tal:repeat="addon_brain view/downloaded_addons" tal:condition="view/downloaded_addons">
+                     <div tal:define="addon python:addon_brain.getObject()">
+                        <li>
+                           <h3>${addon/title}</h3>
+                           <p>${addon/description}</p>
+                           <button id="details">Details</button>
+                           
+                           <div id="myModal" class="modal">
+                              
+                              <div class="modal-content">
+                                 <div class="modal-header">
+                                    <span class="close">&times;</span>
+                                    <h2>${addon/title}</h2>
+                                 </div>
+                                 <div class="modal-body">
+                                    <p tal:content="addon/description">description</p>
+                                    <p tal:content="addon/versions">Versions</p>
+                                    <p tal:content="addon/platform">Compatible Platforms</p>
+                                    <p tal:content="addon/license">license</p>
+                                    <p tal:content="addon/author_name">Author</p>
+                                    <p tal:content="addon/maintainer_name">Maintainer</p>
+                                 </div>
+                              </div>
+                           </div>
+                        </li>
+                     </div>
+                  </div>
+               </ul>
+            </div>
+         </div>
+         <div tal:condition="not:view/downloaded_addons">
+            No addons so far :-(
+         </div>
+      </metal:content-core>
+   </body>
 </html>

@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<registry>
+
+ <records prefix="plone.bundles/ploneorg-addonlisting"
+         interface='Products.CMFPlone.interfaces.IBundleRegistry'>
+  <value key="enabled">True</value>
+  <value key="jscompilation">++resource++ploneorg.addonlisting/addonlist.js</value>
+  <value key="csscompilation">++resource++ploneorg.addonlisting/addonlist.css</value>
+  <value key="last_compilation">2016-01-01 00:00:00</value>
+  <value key="compile">False</value>
+  <value key="depends">plone</value>
+</records>
+
+</registry>

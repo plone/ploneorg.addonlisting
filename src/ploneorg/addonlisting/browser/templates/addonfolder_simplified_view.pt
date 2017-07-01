@@ -1,0 +1,63 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      i18n:domain="ploneorg.addonlisting"
+      metal:use-macro="context/main_template/macros/master">
+<head>
+<!--
+  <metal:block fill-slot="style_slot">
+    <link rel="stylesheet" type="text/css" tal:define="navroot context/@@plone_portal_state/navigation_root_url" tal:attributes="href string:${navroot}/++resource++ploneorg.addonlisting/addonlist.css"/>
+  </metal:block>
+-->
+
+            <metal:block fill-slot="column_one_slot" />
+            <metal:block fill-slot="column_two_slot" />
+
+</head>
+<body>
+    
+    
+
+   
+    <metal:content-core fill-slot="main">
+
+    <div id="filter">
+        <tal:form define="form view/filter_form">
+            <!-- plone.app.z3cform package provides view ploneform-macros
+                 which come with a helpers to render forms. This one
+                 will render the form body only. It also makes an assumption
+                 that form is presented in "view" TAL variable.
+              -->
+            
+            <h2 tal:content="form/label">Form Title</h2>
+
+            <tal:with-form-as-view define="view nocall:form">
+                <metal:block use-macro="form/@@ploneform-macros/titlelessform" />
+            </tal:with-form-as-view>
+
+        </tal:form>
+      </div>
+      
+      <h1>Add-Ons</h1>
+      <ul class="list-container" id="listing" tal:condition="view/addons">
+        <tal:addons tal:repeat="addon_brain view/addons">
+          <tal:block tal:define="addon python:addon_brain.getObject()">
+            <li>
+              <a href="${addon/absolute_url}"
+                 class="pat-plone-modal"
+                 data-pat-plone-modal="">
+                <span class="">${repeat/addon_brain/number}. </span>
+                <h3>${addon/title}</h3>
+                <p>${addon/description}</p>
+                </a>
+            </li>
+          </tal:block>
+        </tal:addons>
+      </ul>
+      <p tal:condition="not:view/addons">
+        No addons so far :-(
+      </p>
+    </metal:content-core>
+  </body>
+</html>

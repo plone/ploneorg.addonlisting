@@ -16,32 +16,7 @@
       <p class="description" tal:content="context/description">Description</p>
       <div tal:replace="structure context/text/output">Text</div>
     </div>
-    <table>
-      <tr>
-        <th>Current Version</th>
-        <td tal:content="context/current_version">1.0.0</td>
-      </tr>
-      <tr>
-        <th>All versions download count</th>
-        <td tal:content="context/download_sum_total">Number</td>
-      </tr>
-      <tr>
-        <th>Latest version download count</th>
-        <td tal:content="context/download_sum_latest">Number</td>
-      </tr>
-      <tr>
-        <th i18n:translate="" >Author</th>
-        <td><a tal:content="context/author_name" tal:attributes="href string:mailto:${context/author_email}">Author</a></td>
-      </tr>
-      <tr>
-        <th i18n:translate="" >Maintainer</th>
-        <td><a tal:content="context/maintainer_name" tal:attributes="href string:mailto:${context/maintainer_email}">Author</a></td>
-      </tr>
-    </table>
-    <p tal:content="context/versions">Versions</p>
-    <p tal:content="context/platform">Compatible Platforms</p>
-    <p tal:content="context/license">license</p>
-    <p tal:content="context/dict">Dict</p>
+    
   </metal:block>
 
 </html>

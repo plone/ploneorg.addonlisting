@@ -50,7 +50,7 @@ def update_addon_list(context, request=None):
                 )
                 transaction.get().commit()
 
-                info = u'For Add\'on-Folder: "%s" add Plone-Package "%s"' % (addon_folder.title, elem)  # NOQA: E501
+                info = u'For Add\'on-Folder: "%s" add PyPI-Package "%s"' % (addon_folder.title, elem)  # NOQA: E501
                 log.info(info)
                 log.info(addon)
 
@@ -84,13 +84,13 @@ def update_addon(context, request=None):
                                            'text/restructured',
                                            'text/restructured')
 
-            addon.current_version = data['info'].get('version')
-            addon.docs_link = data['info'].get('docs_link')
-            addon.bugtracker_link = data['info'].get('bugtrack_link')
-            addon.author_name = data['info'].get('author')
-            addon.author_email = data['info'].get('author_email')
-            addon.maintainer_name = data['info'].get('maintainer')
-            addon.maintainer_email = data['info'].get('maintainer_email')
+                addon.current_version = data['info'].get('version')
+                addon.docs_link = data['info'].get('docs_link')
+                addon.bugtracker_link = data['info'].get('bugtrack_link')
+                addon.author_name = data['info'].get('author')
+                addon.author_email = data['info'].get('author_email')
+                addon.maintainer_name = data['info'].get('maintainer')
+                addon.maintainer_email = data['info'].get('maintainer_email')
 
             versions = []
             tsum = 0
