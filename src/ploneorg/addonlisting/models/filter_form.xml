@@ -30,7 +30,7 @@
 
       <field name="addon_status"
              type="zope.schema.Choice"
-             form:widget="z3c.form.browser.radio.RadioFieldWidget" >
+             >
         <title i18n:translate="">Add-on Status</title>
         <description i18n:translate="">Is this add-on in a workable state?</description>
         <required>False</required>
@@ -61,7 +61,7 @@
 
       <field name="addon_type"
              type="zope.schema.Choice"
-             form:widget="z3c.form.browser.radio.RadioFieldWidget" >
+              >
         <title i18n:translate="">Add-on Category</title>
         <description i18n:translate="">Choose categories for the add-ons</description>
         <required>False</required>
