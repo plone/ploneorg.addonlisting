@@ -19,7 +19,8 @@ def cli_update_addon_listing():
     )
     parser.add_argument(
         "context",
-        help="Path to AddOnFolder relative to Zope root. Ex:/Plone/<AddOnFolder name>"
+        help="Path to AddOnFolder relative to Zope root.\
+              Ex:/Plone/<AddOnFolder name>"
     )
     parser.add_argument(
         "-v",
@@ -57,13 +58,15 @@ def cli_update_addon_listing():
     context = portal.restrictedTraverse(args.context)
     update_addon_list(context, verbose=args.verbose, limit=args.limit)
    
+
 def cli_update_addons():
     parser = argparse.ArgumentParser(
         description="updates all the addons in the listing"
     )
     parser.add_argument(
         "context",
-        help="Path to AddOnFolder relative to Zope root. Ex:/Plone/<AddOnFolder name>"
+        help="Path to AddOnFolder relative to Zope root. \
+              Ex:/Plone/<AddOnFolder name>"
     )
     parser.add_argument(
         "-v",
@@ -82,13 +85,15 @@ def cli_update_addons():
     context = portal.restrictedTraverse(args.context)
     update_addons(context, verbose=args.verbose, limit=args.limit)
 
+
 def cli_update_addon():
     parser = argparse.ArgumentParser(
         description="updates an individual addon"
     )
     parser.add_argument(
         "context",
-        help="Path to AddOn relative to Zope root.  Ex:/Plone/<AddOnFolder name>/<AddOn name>"
+        help="Path to AddOn relative to Zope root. \
+              Ex:/Plone/<AddOnFolder name>/<AddOn name>"
     )
     parser.add_argument(
         "-v",
