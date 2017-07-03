@@ -1,12 +1,15 @@
 # -*- coding: utf-8 -*-
 
 from ploneorg.addonlisting.utils import update_addon
-from ploneorg.addonlisting.utils import update_addons
 from ploneorg.addonlisting.utils import update_addon_list
-#from zope.site.hooks import setSite
+from ploneorg.addonlisting.utils import update_addons
 
 import argparse
 import logging
+
+
+#from zope.site.hooks import setSite
+
 
 
 logging.basicConfig()
