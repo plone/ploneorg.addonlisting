@@ -66,22 +66,22 @@ def cli_update_addons():
         help="Path to AddOnFolder relative to Zope root. Ex:/Plone/<AddOnFolder name>"
     )
     parser.add_argument(
-        "-v", 
-        "--verbose", 
+        "-v",
+        "--verbose",
         default=False,
-        help="print more verbose output", 
+        help="print more verbose output",
         action="store_true"
     )
     parser.add_argument(
-        "--limit", 
-        type=int, 
+        "--limit",
+        type=int,
         default=0,
         help="limit the number of addons checked for updates from PyPI"
     )
     args = parser.parse_args()
     context = portal.restrictedTraverse(args.context)
     update_addons(context, verbose=args.verbose, limit=args.limit)
-    
+
 def cli_update_addon():
     parser = argparse.ArgumentParser(
         description="updates an individual addon"
@@ -91,13 +91,12 @@ def cli_update_addon():
         help="Path to AddOn relative to Zope root.  Ex:/Plone/<AddOnFolder name>/<AddOn name>"
     )
     parser.add_argument(
-        "-v", 
+        "-v",
         "--verbose",
         default=False,
-        help="print more verbose output", 
+        help="print more verbose output",
         action="store_true"
     )
     args = parser.parse_args()
     context = portal.restrictedTraverse(args.context)
-    update_addon(context, verbose=args.verbose)
-    
+    update_addon(context, verbose=args.verbose)   

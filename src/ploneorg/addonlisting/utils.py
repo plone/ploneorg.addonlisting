@@ -146,13 +146,13 @@ def update_addons(context, request=None, verbose=False, limit=0):
 
     if limit:
         addons = api.content.find(
-                    context=addon_folder, 
+                    context=addon_folder,
                     portal_type="AddOn",
                     sort_limit=limit
         )[:limit]
     else:
         addons = api.content.find(
-                    context=addon_folder, 
+                    context=addon_folder,
                     portal_type="AddOn"
         )
 

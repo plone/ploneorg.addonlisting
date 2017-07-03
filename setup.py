@@ -67,4 +67,5 @@ setup(
     update_addon_listing = ploneorg.addonlisting.cli:cli_update_addon_listing
     update_addons = ploneorg.addonlisting.cli:cli_update_addons
     update_addon = ploneorg.addonlisting.cli:cli_update_addon
+    """,
 )
