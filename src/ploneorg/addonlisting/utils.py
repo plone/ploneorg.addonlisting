@@ -93,9 +93,9 @@ def update_addon(context, request=None, verbose=False):
 
             if not addon.curated:
                 addon.description = data['info'].get('summary')
-                addon.text = RichTextValue(data['info'].get('description'),
-                                           'text/restructured',
-                                           'text/restructured')
+                addon.text = RichTextValue(raw=data['info'].get('description'),
+                                           mimeType='text/restructured',
+                                           outputMimeType='text/x-html-safe')
 
                 addon.current_version = data['info'].get('version')
                 addon.docs_link = data['info'].get('docs_link')
