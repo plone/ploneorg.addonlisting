@@ -8,10 +8,6 @@ import argparse
 import logging
 
 
-#from zope.site.hooks import setSite
-
-
-
 logging.basicConfig()
 log = logging.getLogger('ploneorg.addonlisting-cli')
 
@@ -60,7 +56,7 @@ def cli_update_addon_listing():
 
     context = portal.restrictedTraverse(args.context)
     update_addon_list(context, verbose=args.verbose, limit=args.limit)
-   
+
 
 def cli_update_addons():
     parser = argparse.ArgumentParser(
@@ -107,4 +103,4 @@ def cli_update_addon():
     )
     args = parser.parse_args()
     context = portal.restrictedTraverse(args.context)
-    update_addon(context, verbose=args.verbose)   
+    update_addon(context, verbose=args.verbose)
