@@ -3,7 +3,7 @@
 from ploneorg.addonlisting.utils import update_addon
 from ploneorg.addonlisting.utils import update_addons
 from ploneorg.addonlisting.utils import update_addon_list
-from zope.site.hooks import setSite
+#from zope.site.hooks import setSite
 
 import argparse
 import logging
@@ -13,32 +13,32 @@ logging.basicConfig()
 log = logging.getLogger('ploneorg.addonlisting-cli')
 
 
-def update_addon_listing():
+def cli_update_addon_listing():
     parser = argparse.ArgumentParser(
         description="updates the listing with any new addons"
     )
     parser.add_argument(
-        "context", 
+        "context",
         help="Path to AddOnFolder relative to Zope root. Ex:/Plone/<AddOnFolder name>"
     )
     parser.add_argument(
-        "-v", 
-        "--verbose", 
+        "-v",
+        "--verbose",
         default=False,
-        help="print more verbose output", 
+        help="print more verbose output",
         action="store_true"
     )
     parser.add_argument(
-        "--limit", 
-        type=int, 
+        "--limit",
+        type=int,
         default=0,
         help="limit the number of new addons fetched from PyPI"
     )
     parser.add_argument(
-        "-s", 
-        "--site-id", 
-        dest='site_id', 
-        default='Plone', 
+        "-s",
+        "--site-id",
+        dest='site_id',
+        default='Plone',
         help="ID of the Plone site to fetch the content objects from"
     )
     args = parser.parse_args()
@@ -51,13 +51,13 @@ def update_addon_listing():
     print portal
 
     '''
-    # obtain the portal root object somehow and 
+    # obtain the portal root object somehow and
     # store in a local variable "portal"
 
     context = portal.restrictedTraverse(args.context)
     update_addon_list(context, verbose=args.verbose, limit=args.limit)
-    
-def update_addons():
+   
+def cli_update_addons():
     parser = argparse.ArgumentParser(
         description="updates all the addons in the listing"
     )
@@ -82,7 +82,7 @@ def update_addons():
     context = portal.restrictedTraverse(args.context)
     update_addons(context, verbose=args.verbose, limit=args.limit)
     
-def update_addon():
+def cli_update_addon():
     parser = argparse.ArgumentParser(
         description="updates an individual addon"
     )

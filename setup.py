@@ -64,8 +64,7 @@ setup(
     [z3c.autoinclude.plugin]
     target = plone
     [console_scripts]
-    update_addon_listing = ploneorg.addonlisting.cli:update_addon_listing
-    update_addons = ploneorg.addonlisting.cli:update_addons
-    update_addon = ploneorg.addonlisting.cli:update_addon
-    """,
+    update_addon_listing = ploneorg.addonlisting.cli:cli_update_addon_listing
+    update_addons = ploneorg.addonlisting.cli:cli_update_addons
+    update_addon = ploneorg.addonlisting.cli:cli_update_addon
 )
