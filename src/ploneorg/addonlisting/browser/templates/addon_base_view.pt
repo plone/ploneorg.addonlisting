@@ -14,9 +14,10 @@
     <h1 tal:content="context/title">Add-on Title</h1>
     <div>
       <p class="description" tal:content="context/description">Description</p>
-      <div tal:replace="structure context/text/output">Text</div>
+      <div tal:replace="structure context/text/output"
+           tal:condition="context/text">Text</div>
     </div>
-    
+
   </metal:block>
 
 </html>

@@ -76,7 +76,9 @@ def update_addon_list(context, request=None, verbose=False, limit=0):
 
 
 def update_addon(context, request=None, verbose=False):
-    addon = context
+    addon = context.getObject()
+    log.info('try to update %s', addon.title)
+    request.response.write("try to update " + str(addon.title) + '\n')
     with api.env.adopt_roles(['Manager']):
         if verbose:
             log.info(u'Start updating: %s', addon.title)
@@ -156,17 +158,13 @@ def update_addons(context, request=None, verbose=False, limit=0):
             portal_type="AddOn"
         )
 
-    if request is not None:
+    if request is not None or verbose:
         request.response.write("Start Update all Add-ons\n")
-
-    if verbose:
         log.info("Start Update all Add-ons\n")
 
     for addon in addons:
-        update_addon(addon, request=request)
+        update_addon(addon, request=request, verbose=verbose)
 
-    if request is not None:
+    if request is not None or verbose:
         request.response.write("Finished Update all Add-ons\n")
-
-    if verbose:
         log.info("Finished Update all Add-ons\n")
