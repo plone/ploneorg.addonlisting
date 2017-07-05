@@ -13,7 +13,7 @@ import transaction
 import xmlrpclib
 
 
-def update_addon_list(context, request=None, logger=None, limit=0):
+def update_addon_list(context, logger, limit=0):
     addon_folder = context
 
     # get Add'on List
@@ -54,7 +54,7 @@ def update_addon_list(context, request=None, logger=None, limit=0):
     logger.info("Finished Update Add'on Listing")
 
 
-def update_addon(context, logger=None):
+def update_addon(context, logger):
     addon = context
 
     with api.env.adopt_roles(['Manager']):
@@ -111,7 +111,7 @@ def update_addon(context, logger=None):
             logger.info('something went wrong on update %s', str(addon.title))
 
 
-def update_addons(context, limit=0, logger=None):
+def update_addons(context, logger, limit=0):
     addon_folder = context
 
     if limit:
