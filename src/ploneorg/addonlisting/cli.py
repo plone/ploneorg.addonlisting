@@ -4,13 +4,13 @@ from ploneorg.addonlisting.utils import update_addon
 from ploneorg.addonlisting.utils import update_addon_list
 from ploneorg.addonlisting.utils import update_addons
 
-import sys
 import argparse
 import logging
 
 
 logging.basicConfig()
 log = logging.getLogger('ploneorg.addonlisting-cli')
+
 
 def cli_update_addon_listing():
     parser = argparse.ArgumentParser(
@@ -42,6 +42,10 @@ def cli_update_addon_listing():
         help="ID of the Plone site to fetch the content objects from"
     )
     args = parser.parse_args()
+
+    if args.verbose:
+        log.setLevel(logging.INFO)
+
     '''
     current = app  # noqa
     for part in site_id.split('/'):
@@ -53,9 +57,11 @@ def cli_update_addon_listing():
     '''
     # obtain the portal root object somehow and
     # store in a local variable "portal"
-    print app
-    context = app.restrictedTraverse(args.context)
-    update_addon_list(context, verbose=args.verbose, limit=args.limit)
+    log.debug(app)
+    context = None
+    #context = app.restrictedTraverse(args.context)
+
+    update_addon_list(context, logger=log, limit=args.limit)
 
 
 def cli_update_addons():
@@ -81,8 +87,11 @@ def cli_update_addons():
         help="limit the number of addons checked for updates from PyPI"
     )
     args = parser.parse_args()
-    context = portal.restrictedTraverse(args.context)
-    update_addons(context, verbose=args.verbose, limit=args.limit)
+    if args.verbose:
+        log.setLevel(logging.INFO)
+    context = None
+    # context = portal.restrictedTraverse(args.context)
+    update_addons(context, logger=log, limit=args.limit)
 
 
 def cli_update_addon():
@@ -102,5 +111,8 @@ def cli_update_addon():
         action="store_true"
     )
     args = parser.parse_args()
-    context = portal.restrictedTraverse(args.context)
-    update_addon(context, verbose=args.verbose)
+    if args.verbose:
+        log.setLevel(logging.INFO)
+    context = None
+    # context = portal.restrictedTraverse(args.context)
+    update_addon(context, logger=log)

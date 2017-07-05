@@ -11,25 +11,38 @@ from Products.Five.browser import BrowserView
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from zope.interface import alsoProvides
 
+import logging
+
+
+log = logging.getLogger('ploneorg.addonlisting')
+
 
 class FolderUpdateView(BrowserView):
     def __call__(self):
         alsoProvides(self.request, IDisableCSRFProtection)
-        update_addon_list(self.context, self.request)
-        # return self.request.response.redirect(self.context.absolut_url)
+        logging.basicConfig(stream=self.request.response, level=logging.INFO)
+        update_addon_list(self.context, logger=log)
+        return self.request.response.redirect(self.context.absolut_url)
 
 
 class FolderUpdateAllView(BrowserView):
     def __call__(self):
         alsoProvides(self.request, IDisableCSRFProtection)
-        update_addon_list(self.context, self.request)
-        update_addons(self.context, self.request)
+        logging.basicConfig(stream=self.request.response, level=logging.INFO)
+        update_addon_list(self.context, logger=log)
+        update_addons(self.context, logger=log)
+        return self.request.response.redirect(self.context.absolut_url)
 
 
 class AddOnUpdateView(BrowserView):
     def __call__(self):
         alsoProvides(self.request, IDisableCSRFProtection)
-        update_addon(self.context, self.request)
+        logging.basicConfig(stream=self.request.response, level=logging.INFO)
+        update_addon(self.context, logger=log)
+        api.portal.show_message("Add'on %s has been updated" %
+                                (self.context.title),
+                                request=self.request, type='info')
+        return self.request.response.redirect(self.context.absolute_url())
 
 
 class AddOnView(BrowserView):

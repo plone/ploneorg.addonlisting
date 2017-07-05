@@ -14,14 +14,8 @@ import transaction
 import xmlrpclib
 
 
-log = logging.getLogger("ploneorg.addonlisting")
-
-
-def update_addon_list(context, request=None, verbose=False, limit=0):
+def update_addon_list(context, request=None, logger=None, limit=0):
     addon_folder = context
-
-    if verbose:
-        log.setLevel(logging.INFO)  # default level is WARNING
 
     # get Add'on List
     present_addon_list = api.content.find(context=addon_folder,
@@ -41,10 +35,7 @@ def update_addon_list(context, request=None, verbose=False, limit=0):
     if limit:
         new_addons = new_addons[:limit]
 
-    if request is not None:
-        request.response.write("Start Update Add'on Listing\n")
-
-    log.info("Start Update Add'on Listing\n")
+    logger.info("Start Update Add'on Listing\n")
 
     for elem in new_addons:
         with api.env.adopt_roles(['Manager']):
@@ -60,31 +51,24 @@ def update_addon_list(context, request=None, verbose=False, limit=0):
 
                 info = u'For Add\'on-Folder: "%s" add PyPI-Package "%s"' % (addon_folder.title, elem)  # NOQA: E501
 
-                log.info(info)
-                log.info(addon)
+                logger.info(info)
+                logger.info(addon)
 
                 if request is not None:
                     request.response.write(str(info) + "\n")
             except Exception as e:
-                log.error(u'Could not create %s', elem)
-                log.error(e)
+                logger.error(u'Could not create %s', elem)
+                logger.error(e)
 
-    if request is not None:
-        request.response.write("Finished Update Add'on Listing\n")
-
-    log.info("Finished Update Add'on Listing\n")
+    logger.info("Finished Update Add'on Listing\n")
 
 
-def update_addon(context, request=None, verbose=False):
-    addon = context.getObject()
-    log.info('try to update %s', addon.title)
-    request.response.write("try to update " + str(addon.title) + '\n')
-
-    if verbose:
-        log.setLevel(logging.INFO)  # default level is WARNING
+def update_addon(context, logger=None):
+    addon = context
+    logger.info('try to update %s\n', addon.title)
 
     with api.env.adopt_roles(['Manager']):
-        log.info(u'Start updating: %s', addon.title)
+        logger.info(u'Start updating: %s', addon.title)
 
         url = PYPI_URL + '/' + addon.title + '/json'
 
@@ -133,23 +117,13 @@ def update_addon(context, request=None, verbose=False):
             addon.downloads = tsum
             addon.versions = versions
 
-            api.portal.show_message("Add'on %s has been updated" %
-                                    (addon.title),
-                                    request=request, type='info')
-
-            log.info(u'Finished to update: %s', addon.title)
+            logger.info(u'Finished to update: %s', addon.title)
         else:
-            log.info(u'something went wrong on update %s', addon.title)
-
-        if request is not None:
-            request.response.redirect(context.absolute_url())
+            logger.info(u'something went wrong on update %s', addon.title)
 
 
-def update_addons(context, request=None, verbose=False, limit=0):
+def update_addons(context, limit=0, logger=None):
     addon_folder = context
-
-    if verbose:
-        log.setLevel(logging.INFO)  # default level is WARNING
 
     if limit:
         addons = api.content.find(
@@ -163,13 +137,9 @@ def update_addons(context, request=None, verbose=False, limit=0):
             portal_type="AddOn"
         )
 
-    if request is not None or verbose:
-        request.response.write("Start Update all Add-ons\n")
-        log.info("Start Update all Add-ons\n")
+    logger.info("Start Update all Add-ons\n")
 
     for addon in addons:
-        update_addon(addon, request=request, verbose=verbose)
+        update_addon(addon.getObject(), logger=logger)
 
-    if request is not None or verbose:
-        request.response.write("Finished Update all Add-ons\n")
-        log.info("Finished Update all Add-ons\n")
+    logger.info("Finished Update all Add-ons\n")
