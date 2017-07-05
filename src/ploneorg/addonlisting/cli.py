@@ -4,13 +4,13 @@ from ploneorg.addonlisting.utils import update_addon
 from ploneorg.addonlisting.utils import update_addon_list
 from ploneorg.addonlisting.utils import update_addons
 
+import sys
 import argparse
 import logging
 
 
 logging.basicConfig()
 log = logging.getLogger('ploneorg.addonlisting-cli')
-
 
 def cli_update_addon_listing():
     parser = argparse.ArgumentParser(
@@ -53,8 +53,8 @@ def cli_update_addon_listing():
     '''
     # obtain the portal root object somehow and
     # store in a local variable "portal"
-
-    context = portal.restrictedTraverse(args.context)
+    print app
+    context = app.restrictedTraverse(args.context)
     update_addon_list(context, verbose=args.verbose, limit=args.limit)
 
 
