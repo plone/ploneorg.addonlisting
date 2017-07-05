@@ -34,9 +34,9 @@ def html_header(title=""):
 def html_footer(url=""):
     return """
     </pre>
-    <script>
+    <script type="text/javascript" >
       window.location.href = "%s";
-    <script>
+    </script>
   </body>
 </html>
 """ % url
@@ -44,17 +44,19 @@ def html_footer(url=""):
 
 class FolderUpdateView(BrowserView):
     def __call__(self):
+        url = self.context.absolute_url()
         alsoProvides(self.request, IDisableCSRFProtection)
         self.request.response.setHeader("Content-type",
                                         "text/html; charset=utf-8")
         log.addHandler(logging.StreamHandler(self.request.response))
         log.info(html_header('Update Folder'))
         update_addon_list(self.context, logger=log)
-        log.info(html_footer(self.context.absolut_url))
+        log.info(html_footer(url))
 
 
 class FolderUpdateAllView(BrowserView):
     def __call__(self):
+        url = self.context.absolute_url()
         alsoProvides(self.request, IDisableCSRFProtection)
         self.request.response.setHeader("Content-type",
                                         "text/html; charset=utf-8")
@@ -62,10 +64,12 @@ class FolderUpdateAllView(BrowserView):
         log.info(html_header('Update Folder'))
         update_addon_list(self.context, logger=log)
         update_addons(self.context, logger=log)
+        log.info(html_footer(url))
 
 
 class AddOnUpdateView(BrowserView):
     def __call__(self):
+        url = self.context.absolute_url()
         alsoProvides(self.request, IDisableCSRFProtection)
         self.request.response.setHeader("Content-type",
                                         "text/html; charset=utf-8")
@@ -75,6 +79,7 @@ class AddOnUpdateView(BrowserView):
         api.portal.show_message("Add'on %s has been updated" %
                                 (self.context.title),
                                 request=self.request, type='info')
+        log.info(html_footer(url))
 
 
 class AddOnView(BrowserView):

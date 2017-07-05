@@ -48,10 +48,10 @@ def update_addon_list(context, request=None, logger=None, limit=0):
                 logger.info(addon)
 
             except Exception as e:
-                logger.error('Could not create %s', elem)
+                logger.error('Could not create %s', str(elem))
                 logger.error(e)
 
-    logger.info("Finished Update Add'on Listing\n")
+    logger.info("Finished Update Add'on Listing")
 
 
 def update_addon(context, logger=None):
