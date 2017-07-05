@@ -20,6 +20,9 @@ log = logging.getLogger("ploneorg.addonlisting")
 def update_addon_list(context, request=None, verbose=False, limit=0):
     addon_folder = context
 
+    if verbose:
+        log.setLevel(logging.INFO) #default level is WARNING
+
     # get Add'on List
     present_addon_list = api.content.find(context=addon_folder,
                                           portal_type="AddOn")
@@ -41,8 +44,7 @@ def update_addon_list(context, request=None, verbose=False, limit=0):
     if request is not None:
         request.response.write("Start Update Add'on Listing\n")
 
-    if verbose:
-        log.info("Start Update Add'on Listing\n")
+    log.info("Start Update Add'on Listing\n")
 
     for elem in new_addons:
         with api.env.adopt_roles(['Manager']):
@@ -58,9 +60,9 @@ def update_addon_list(context, request=None, verbose=False, limit=0):
 
                 info = u'For Add\'on-Folder: "%s" add PyPI-Package "%s"' % (addon_folder.title, elem)  # NOQA: E501
 
-                if verbose:
-                    log.info(info)
-                    log.info(addon)
+                
+                log.info(info)
+                log.info(addon)
 
                 if request is not None:
                     request.response.write(str(info) + "\n")
@@ -71,15 +73,19 @@ def update_addon_list(context, request=None, verbose=False, limit=0):
     if request is not None:
         request.response.write("Finished Update Add'on Listing\n")
 
-    if verbose:
-        log.info("Finished Update Add'on Listing\n")
+   
+    log.info("Finished Update Add'on Listing\n")
 
 
 def update_addon(context, request=None, verbose=False):
     addon = context
+
+    if verbose:
+        log.setLevel(logging.INFO) #default level is WARNING
+
     with api.env.adopt_roles(['Manager']):
-        if verbose:
-            log.info(u'Start updating: %s', addon.title)
+        
+        log.info(u'Start updating: %s', addon.title)
 
         url = PYPI_URL + '/' + addon.title + '/json'
 
@@ -131,11 +137,10 @@ def update_addon(context, request=None, verbose=False):
             api.portal.show_message("Add'on %s has been updated" %
                                     (addon.title),
                                     request=request, type='info')
-            if verbose:
-                log.info(u'Finished to update: %s', addon.title)
+            
+            log.info(u'Finished to update: %s', addon.title)
         else:
-            if verbose:
-                log.info(u'something went wrong on update %s', addon.title)
+            log.info(u'something went wrong on update %s', addon.title)
 
         if request is not None:
             request.response.redirect(context.absolute_url())
@@ -143,6 +148,9 @@ def update_addon(context, request=None, verbose=False):
 
 def update_addons(context, request=None, verbose=False, limit=0):
     addon_folder = context
+
+    if verbose:
+        log.setLevel(logging.INFO) #default level is WARNING
 
     if limit:
         addons = api.content.find(
@@ -159,8 +167,7 @@ def update_addons(context, request=None, verbose=False, limit=0):
     if request is not None:
         request.response.write("Start Update all Add-ons\n")
 
-    if verbose:
-        log.info("Start Update all Add-ons\n")
+    log.info("Start Update all Add-ons\n")
 
     for addon in addons:
         update_addon(addon, request=request)
@@ -168,5 +175,4 @@ def update_addons(context, request=None, verbose=False, limit=0):
     if request is not None:
         request.response.write("Finished Update all Add-ons\n")
 
-    if verbose:
-        log.info("Finished Update all Add-ons\n")
+    log.info("Finished Update all Add-ons\n")
