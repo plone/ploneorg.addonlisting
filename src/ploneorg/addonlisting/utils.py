@@ -8,7 +8,6 @@ from ploneorg.addonlisting import PYPI_URL
 from ploneorg.addonlisting.contents import VersionEggInfo
 from ploneorg.addonlisting.contents import VersionInfo
 
-import logging
 import requests
 import transaction
 import xmlrpclib
@@ -23,20 +22,15 @@ def update_addon_list(context, request=None, logger=None, limit=0):
     present_addon_list = [obj[0] for obj in context.items()]
 
     client = xmlrpclib.ServerProxy(PYPI_URL)
-
     classifiers = context.query_classifieres if context.query_classifieres else ['Framework :: Plone']  # NOQA: E501
-
     raw_queried_addon_list = client.browse(classifiers)
-
     queried_addon_list = [elem[0] for elem in raw_queried_addon_list]
-
     new_addons = set(queried_addon_list) - set(present_addon_list)
 
     if limit:
         new_addons = new_addons[:limit]
 
-    logger.info("Start Update Add'on Listing\n")
-
+    logger.info("Start Update Add'on Listing")
     for elem in new_addons:
         with api.env.adopt_roles(['Manager']):
             try:
@@ -49,15 +43,12 @@ def update_addon_list(context, request=None, logger=None, limit=0):
                 )
                 transaction.get().commit()
 
-                info = u'For Add\'on-Folder: "%s" add PyPI-Package "%s"' % (addon_folder.title, elem)  # NOQA: E501
-
+                info = 'For Add\'on-Folder: "%s" add PyPI-Package "%s"' % (str(addon_folder.title), str(elem))  # NOQA: E501
                 logger.info(info)
                 logger.info(addon)
 
-                if request is not None:
-                    request.response.write(str(info) + "\n")
             except Exception as e:
-                logger.error(u'Could not create %s', elem)
+                logger.error('Could not create %s', elem)
                 logger.error(e)
 
     logger.info("Finished Update Add'on Listing\n")
@@ -65,13 +56,11 @@ def update_addon_list(context, request=None, logger=None, limit=0):
 
 def update_addon(context, logger=None):
     addon = context
-    logger.info('try to update %s\n', addon.title)
 
     with api.env.adopt_roles(['Manager']):
-        logger.info(u'Start updating: %s', addon.title)
+        logger.info('Start trying updating: %s', str(addon.title))
 
         url = PYPI_URL + '/' + addon.title + '/json'
-
         pypi_response = requests.get(url)
 
         if pypi_response.ok and pypi_response.status_code == 200 and \
@@ -117,9 +106,9 @@ def update_addon(context, logger=None):
             addon.downloads = tsum
             addon.versions = versions
 
-            logger.info(u'Finished to update: %s', addon.title)
+            logger.info('Finished to update: %s', str(addon.title))
         else:
-            logger.info(u'something went wrong on update %s', addon.title)
+            logger.info('something went wrong on update %s', str(addon.title))
 
 
 def update_addons(context, limit=0, logger=None):

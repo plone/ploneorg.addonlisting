@@ -57,9 +57,9 @@ def cli_update_addon_listing():
     '''
     # obtain the portal root object somehow and
     # store in a local variable "portal"
-    log.debug(app)
+    # log.debug(app)
     context = None
-    #context = app.restrictedTraverse(args.context)
+    # context = app.restrictedTraverse(args.context)
 
     update_addon_list(context, logger=log, limit=args.limit)
 
