@@ -75,13 +75,13 @@ def update_addon(context, logger):
                                            mimeType='text/restructured',
                                            outputMimeType='text/x-html-safe')
 
-                addon.current_version = data['info'].get('version')
-                addon.docs_link = data['info'].get('docs_link')
-                addon.bugtracker_link = data['info'].get('bugtrack_link')
-                addon.author_name = data['info'].get('author')
-                addon.author_email = data['info'].get('author_email')
-                addon.maintainer_name = data['info'].get('maintainer')
-                addon.maintainer_email = data['info'].get('maintainer_email')
+            addon.current_version = data['info'].get('version')
+            addon.docs_link = data['info'].get('docs_link')
+            addon.bugtracker_link = data['info'].get('bugtrack_link')
+            addon.author_name = data['info'].get('author')
+            addon.author_email = data['info'].get('author_email')
+            addon.maintainer_name = data['info'].get('maintainer')
+            addon.maintainer_email = data['info'].get('maintainer_email')
 
             versions = []
             tsum = 0
@@ -95,7 +95,9 @@ def update_addon(context, logger):
                     egg_info = VersionEggInfo()
                     egg_info.filename = info['filename']
                     egg_info.downloads = int(info['downloads'])
+                    logger.info(info['downloads'])
                     psum += egg_info.downloads
+                    logger.info(info['upload_time'])
                     egg_info.upload_time = datetime.strptime(
                         info['upload_time'], '%Y-%m-%dT%H:%M:%S').date()
                     egg_infos.append(egg_info)

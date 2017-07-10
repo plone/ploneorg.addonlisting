@@ -1,25 +1,32 @@
 # -*- coding: utf-8 -*-
 
 from ploneorg.addonlisting.utils import update_addon
-from ploneorg.addonlisting.utils import update_addon_list
 from ploneorg.addonlisting.utils import update_addons
+from ploneorg.addonlisting.utils import update_addon_list
 
 import argparse
 import logging
 
-
 logging.basicConfig()
 log = logging.getLogger('ploneorg.addonlisting-cli')
 
+'''
+usage:
+bin/instance -O <portal_id> update_addon_listing
+                                  <Path to AddOnFolder relative to Zope root>
+bin/instance -O <portal_id> update_addons
+                                  <Path to AddOnFolder relative to Zope root>
+bin/instance -O <portal_id> update_addon <Path to AddOn relative to Zope root>
+'''
 
-def cli_update_addon_listing():
-    parser = argparse.ArgumentParser(
-        description="updates the listing with any new addons"
-    )
+
+def cli_update_addon_listing(app, args):
+    parser = argparse.ArgumentParser("updates the listing with new addons")
+    parser.add_argument('-c')
     parser.add_argument(
-        "context",
+        'context',
         help="Path to AddOnFolder relative to Zope root.\
-              Ex:/Plone/<AddOnFolder name>"
+              Ex:Plone/<AddOnFolder name>"
     )
     parser.add_argument(
         "-v",
@@ -34,44 +41,22 @@ def cli_update_addon_listing():
         default=0,
         help="limit the number of new addons fetched from PyPI"
     )
-    parser.add_argument(
-        "-s",
-        "--site-id",
-        dest='site_id',
-        default='Plone',
-        help="ID of the Plone site to fetch the content objects from"
-    )
     args = parser.parse_args()
-
     if args.verbose:
         log.setLevel(logging.INFO)
-
-    '''
-    current = app  # noqa
-    for part in site_id.split('/'):
-        current = current[part]
-    portal = current
-    setSite(portal)
-    print portal
-
-    '''
-    # obtain the portal root object somehow and
-    # store in a local variable "portal"
-    # log.debug(app)
-    context = None
-    # context = app.restrictedTraverse(args.context)
-
-    update_addon_list(context, logger=log, limit=args.limit)
+    folder = app.unrestrictedTraverse(args.context)
+    update_addon_list(folder, logger=log, limit=args.limit)
 
 
-def cli_update_addons():
+def cli_update_addons(app, args):
     parser = argparse.ArgumentParser(
         description="updates all the addons in the listing"
     )
+    parser.add_argument('-c')
     parser.add_argument(
         "context",
         help="Path to AddOnFolder relative to Zope root. \
-              Ex:/Plone/<AddOnFolder name>"
+              Ex:Plone/<AddOnFolder name>"
     )
     parser.add_argument(
         "-v",
@@ -89,15 +74,15 @@ def cli_update_addons():
     args = parser.parse_args()
     if args.verbose:
         log.setLevel(logging.INFO)
-    context = None
-    # context = portal.restrictedTraverse(args.context)
-    update_addons(context, logger=log, limit=args.limit)
+    folder = app.unrestrictedTraverse(args.context)
+    update_addons(folder, logger=log, limit=args.limit)
 
 
-def cli_update_addon():
+def cli_update_addon(app, args):
     parser = argparse.ArgumentParser(
         description="updates an individual addon"
     )
+    parser.add_argument('-c')
     parser.add_argument(
         "context",
         help="Path to AddOn relative to Zope root. \
@@ -113,6 +98,5 @@ def cli_update_addon():
     args = parser.parse_args()
     if args.verbose:
         log.setLevel(logging.INFO)
-    context = None
-    # context = portal.restrictedTraverse(args.context)
-    update_addon(context, logger=log)
+    addon = app.unrestrictedTraverse(args.context)
+    update_addon(addon, logger=log)
