@@ -11,25 +11,75 @@ from Products.Five.browser import BrowserView
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from zope.interface import alsoProvides
 
+import logging
+
+
+logging.basicConfig(level=logging.INFO)
+log = logging.getLogger('ploneorg.addonlisting')
+
+
+def html_header(title=""):
+    return """
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>%s</title>
+  </head>
+  <body>
+    <pre>
+""" % title
+
+
+def html_footer(url=""):
+    return """
+    </pre>
+    <script type="text/javascript" >
+      window.location.href = "%s";
+    </script>
+  </body>
+</html>
+""" % url
+
 
 class FolderUpdateView(BrowserView):
     def __call__(self):
+        url = self.context.absolute_url()
         alsoProvides(self.request, IDisableCSRFProtection)
-        update_addon_list(self.context, self.request)
-        # return self.request.response.redirect(self.context.absolut_url)
+        self.request.response.setHeader("Content-type",
+                                        "text/html; charset=utf-8")
+        log.addHandler(logging.StreamHandler(self.request.response))
+        log.info(html_header('Update Folder'))
+        update_addon_list(self.context, logger=log)
+        log.info(html_footer(url))
 
 
 class FolderUpdateAllView(BrowserView):
     def __call__(self):
+        url = self.context.absolute_url()
         alsoProvides(self.request, IDisableCSRFProtection)
-        update_addon_list(self.context, self.request)
-        update_addons(self.context, self.request)
+        self.request.response.setHeader("Content-type",
+                                        "text/html; charset=utf-8")
+        log.addHandler(logging.StreamHandler(self.request.response))
+        log.info(html_header('Update Folder'))
+        update_addon_list(self.context, logger=log)
+        update_addons(self.context, logger=log)
+        log.info(html_footer(url))
 
 
 class AddOnUpdateView(BrowserView):
     def __call__(self):
+        url = self.context.absolute_url()
         alsoProvides(self.request, IDisableCSRFProtection)
-        update_addon(self.context, self.request)
+        self.request.response.setHeader("Content-type",
+                                        "text/html; charset=utf-8")
+        log.addHandler(logging.StreamHandler(self.request.response))
+        log.info(html_header('Update Folder'))
+        update_addon(self.context, logger=log)
+        api.portal.show_message("Add'on %s has been updated" %
+                                (self.context.title),
+                                request=self.request, type='info')
+        log.info(html_footer(url))
 
 
 class AddOnView(BrowserView):

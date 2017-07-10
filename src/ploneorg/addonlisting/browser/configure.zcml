@@ -20,21 +20,21 @@
   <!-- Browser Views -->
 
   <!-- Update Views -->
-  <browser:page
+  <browser:view
       name="update_listing"
       for="ploneorg.addonlisting.interfaces.IAddOnFolder"
       permission="zope2.View"
       class="ploneorg.addonlisting.browser.views.FolderUpdateView"
       />
 
-  <browser:page
+  <browser:view
       name="update_all_listing"
       for="ploneorg.addonlisting.interfaces.IAddOnFolder"
       permission="zope2.View"
       class="ploneorg.addonlisting.browser.views.FolderUpdateAllView"
       />
 
-  <browser:page
+  <browser:view
       name="update"
       for="ploneorg.addonlisting.interfaces.IAddOn"
       permission="zope2.View"

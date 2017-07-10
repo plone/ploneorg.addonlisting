@@ -8,16 +8,11 @@ from ploneorg.addonlisting import PYPI_URL
 from ploneorg.addonlisting.contents import VersionEggInfo
 from ploneorg.addonlisting.contents import VersionInfo
 
-import logging
 import requests
-import transaction
 import xmlrpclib
 
 
-log = logging.getLogger("ploneorg.addonlisting")
-
-
-def update_addon_list(context, request=None):
+def update_addon_list(context, logger, limit=0):
     addon_folder = context
 
     # get Add'on List
@@ -26,50 +21,43 @@ def update_addon_list(context, request=None):
     present_addon_list = [obj[0] for obj in context.items()]
 
     client = xmlrpclib.ServerProxy(PYPI_URL)
-
     classifiers = context.query_classifieres if context.query_classifieres else ['Framework :: Plone']  # NOQA: E501
-
     raw_queried_addon_list = client.browse(classifiers)
-
     queried_addon_list = [elem[0] for elem in raw_queried_addon_list]
-
     new_addons = set(queried_addon_list) - set(present_addon_list)
 
-    if request is not None:
-        request.response.write("Start Update Add'on Listing\n")
+    if limit:
+        new_addons = list(new_addons)[:limit]
 
+    logger.info("Start Update Add'on Listing")
     for elem in new_addons:
         with api.env.adopt_roles(['Manager']):
             try:
-                transaction.begin()
                 addon = api.content.create(
                     container=addon_folder,
                     type="AddOn",
                     id=elem,
                     title=elem
                 )
-                transaction.get().commit()
 
-                info = u'For Add\'on-Folder: "%s" add PyPI-Package "%s"' % (addon_folder.title, elem)  # NOQA: E501
-                log.info(info)
-                log.info(addon)
+                info = 'For Add\'on-Folder: "%s" add PyPI-Package "%s"' % (str(addon_folder.title), str(elem))  # NOQA: E501
+                logger.info(info)
+                logger.info(addon)
 
-                if request is not None:
-                    request.response.write(str(info) + "\n")
             except Exception as e:
-                log.error(u'Could not create %s', elem)
-                log.error(e)
+                logger.error('Could not create %s', str(elem))
+                logger.error(e)
 
-    if request is not None:
-        request.response.write("Finished Update Add'on Listing\n")
+    logger.info("Finished Update Add'on Listing")
 
 
-def update_addon(context, request=None):
+def update_addon(context, logger):
     addon = context
-    with api.env.adopt_roles(['Manager']):
-        log.info(u'Start updating: %s', addon.title)
-        url = PYPI_URL + '/' + addon.title + '/json'
 
+    with api.env.adopt_roles(['Manager']):
+        logger.info('Start trying updating: %s', str(addon.title))
+
+        url = PYPI_URL + '/' + addon.title + '/json'
         pypi_response = requests.get(url)
 
         if pypi_response.ok and pypi_response.status_code == 200 and \
@@ -80,17 +68,17 @@ def update_addon(context, request=None):
 
             if not addon.curated:
                 addon.description = data['info'].get('summary')
-                addon.text = RichTextValue(data['info'].get('description'),
-                                           'text/restructured',
-                                           'text/restructured')
+                addon.text = RichTextValue(raw=data['info'].get('description'),
+                                           mimeType='text/restructured',
+                                           outputMimeType='text/x-html-safe')
 
-                addon.current_version = data['info'].get('version')
-                addon.docs_link = data['info'].get('docs_link')
-                addon.bugtracker_link = data['info'].get('bugtrack_link')
-                addon.author_name = data['info'].get('author')
-                addon.author_email = data['info'].get('author_email')
-                addon.maintainer_name = data['info'].get('maintainer')
-                addon.maintainer_email = data['info'].get('maintainer_email')
+            addon.current_version = data['info'].get('version')
+            addon.docs_link = data['info'].get('docs_link')
+            addon.bugtracker_link = data['info'].get('bugtrack_link')
+            addon.author_name = data['info'].get('author')
+            addon.author_email = data['info'].get('author_email')
+            addon.maintainer_name = data['info'].get('maintainer')
+            addon.maintainer_email = data['info'].get('maintainer_email')
 
             versions = []
             tsum = 0
@@ -104,7 +92,9 @@ def update_addon(context, request=None):
                     egg_info = VersionEggInfo()
                     egg_info.filename = info['filename']
                     egg_info.downloads = int(info['downloads'])
+                    logger.info(info['downloads'])
                     psum += egg_info.downloads
+                    logger.info(info['upload_time'])
                     egg_info.upload_time = datetime.strptime(
                         info['upload_time'], '%Y-%m-%dT%H:%M:%S').date()
                     egg_infos.append(egg_info)
@@ -115,28 +105,29 @@ def update_addon(context, request=None):
             addon.downloads = tsum
             addon.versions = versions
 
-            api.portal.show_message("Add'on %s has been updated" %
-                                    (addon.title),
-                                    request=request, type='info')
-            log.info(u'Finished to update: %s', addon.title)
+            logger.info('Finished to update: %s', str(addon.title))
         else:
-            log.info(u'something went wrong on update %s', addon.title)
-
-        if request is not None:
-            request.response.redirect(context.absolute_url())
+            logger.info('something went wrong on update %s', str(addon.title))
 
 
-def update_addons(context, request=None):
+def update_addons(context, logger, limit=0):
     addon_folder = context
 
-    # get Add'on List
-    addons = api.content.find(context=addon_folder, portal_type="AddOn")
+    if limit:
+        addons = api.content.find(
+            context=addon_folder,
+            portal_type="AddOn",
+            sort_limit=limit
+        )[:limit]
+    else:
+        addons = api.content.find(
+            context=addon_folder,
+            portal_type="AddOn"
+        )
 
-    if request is not None:
-        request.response.write("Start Update all Add-ons\n")
+    logger.info("Start Update all Add-ons\n")
 
     for addon in addons:
-        update_addon(addon, request=request)
+        update_addon(addon.getObject(), logger=logger)
 
-    if request is not None:
-        request.response.write("Finished Update all Add-ons\n")
+    logger.info("Finished Update all Add-ons\n")
