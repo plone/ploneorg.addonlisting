@@ -9,7 +9,6 @@ from ploneorg.addonlisting.contents import VersionEggInfo
 from ploneorg.addonlisting.contents import VersionInfo
 
 import requests
-import transaction
 import xmlrpclib
 
 
@@ -28,20 +27,18 @@ def update_addon_list(context, logger, limit=0):
     new_addons = set(queried_addon_list) - set(present_addon_list)
 
     if limit:
-        new_addons = new_addons[:limit]
+        new_addons = list(new_addons)[:limit]
 
     logger.info("Start Update Add'on Listing")
     for elem in new_addons:
         with api.env.adopt_roles(['Manager']):
             try:
-                transaction.begin()
                 addon = api.content.create(
                     container=addon_folder,
                     type="AddOn",
                     id=elem,
                     title=elem
                 )
-                transaction.get().commit()
 
                 info = 'For Add\'on-Folder: "%s" add PyPI-Package "%s"' % (str(addon_folder.title), str(elem))  # NOQA: E501
                 logger.info(info)
