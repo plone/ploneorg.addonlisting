@@ -16,7 +16,7 @@ import logging
 
 logging.basicConfig(level=logging.INFO)
 log = logging.getLogger('ploneorg.addonlisting')
-limit =  10
+limit = 10
 
 
 def html_header(title=''):
@@ -103,15 +103,6 @@ class AddOnFolderView(BrowserView):
         add_resource_on_request(self.request, 'myresources')
         return super(AddOnFolderView, self).__call__()
 
-    def all_addons(self):
-        return api.content.find(
-            context=self.context,
-            depth=1,
-            portal_type='AddOn',
-            sort_on='sortable_title',
-            sort_order='ascending'
-        )
-
     def curated_addons(self):
         return api.content.find(
             context=self.context,
@@ -119,8 +110,9 @@ class AddOnFolderView(BrowserView):
             portal_type='AddOn',
             curated=True,
             sort_on='sortable_title',
-            sort_order='ascending'
-        )
+            sort_order='ascending',
+            sort_limit=limit
+        )[:limit]
 
     def downloaded_addons(self):
         return api.content.find(
@@ -129,8 +121,9 @@ class AddOnFolderView(BrowserView):
             portal_type='AddOn',
             blacklisted=False,
             sort_on='download_sum_total',
-            sort_order='reverse'
-        )
+            sort_order='reverse',
+            sort_limit=limit
+        )[:limit]
 
     def new_addons(self):
         return api.content.find(
@@ -139,18 +132,9 @@ class AddOnFolderView(BrowserView):
             portal_type='AddOn',
             blacklisted=False,
             sort_on='upload_time',
-            sort_order='reverse'
-        )
-
-    def blacklisted_addons(self):
-        return api.content.find(
-            context=self.context,
-            depth=1,
-            portal_type='AddOn',
-            blacklisted=True,
-            sort_on='sortable_title',
-            sort_order='ascending'
-        )
+            sort_order='reverse',
+            sort_limit=limit
+        )[:limit]
 
 
 class FilteredAddOnFolderView(AddOnFolderView):
