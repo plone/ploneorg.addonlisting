@@ -16,6 +16,7 @@ import logging
 
 logging.basicConfig(level=logging.INFO)
 log = logging.getLogger('ploneorg.addonlisting')
+limit =  10
 
 
 def html_header(title=""):
