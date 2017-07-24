@@ -11,34 +11,101 @@
 
   <metal:block fill-slot="main">
 
-    <h1 tal:content="context/title">Add-on Folder Title</h1>
-    <h2 tal:content="context/framework_name">Framework Name</h2>
-    <p class="description" tal:content="context/description">Description</p>
-    <ul tal:condition="context/query_classifieres">
-      <li tal:repeat="classifier context/query_classifieres"
-          tal:content="classifier">Classifier</li>
-    </ul>
-    <div tal:condition="context/addon_categories">
-      <h3>Categories</h3>
-      <ul>
-        <li tal:repeat="category context/addon_categories">
-          <span tal:replace="category/title">Category Title</span></li>
+
+<ul tal:define="
+    Batch python:modules['Products.CMFPlone'].Batch;
+    b_size python:int(request.get('b_size', 10));
+    b_start python:int(request.get('b_start', 0));
+    results python:context.restrictedTraverse('@@contentlisting')(batch=True, b_size=b_size, b_start=b_start);
+    batch python:Batch(results, b_size, b_start);">
+  <li tal:repeat="item results"
+      tal:content="item/Title" />
+  <div metal:use-macro="context/batch_macros/macros/navigation" />
+</ul>
+
+      <div class="wrapper">
+            <h1>Curated Add-Ons</h1>
+            <button type="button">View all</button>
+            <div class="scroll-container">
+               <ul class="list-container" id="listing" tal:condition="view/curated_addons">
+            <tal:addons tal:repeat="addon_brain view/curated_addons">
+            <tal:block tal:define="addon python:addon_brain.getObject()">
+            <li>
+              <a href="${addon/absolute_url}"
+                 class="pat-plone-modal"
+                 data-pat-plone-modal="">
+                 <!--
+                <span class="">${repeat/addon_brain/number}. </span>
+                -->
+
+                <h3>${addon/title}</h3>
+                <p>${addon/description}</p>
+                </a>
+            </li>
+          </tal:block>
+        </tal:addons>
+         </ul>
+            </div>
+         </div>
+         <div tal:condition="not:view/curated_addons">
+            No addons so far :-(
+         </div>
+         <br>
+         <br>
+         <div class="wrapper">
+            <h1>New Add-Ons</h1>
+            <div class="scroll-container">
+        <ul class="list-container" id="listing" tal:condition="view/new_addons">
+        <tal:addons tal:repeat="addon_brain view/new_addons">
+          <tal:block tal:define="addon python:addon_brain.getObject()">
+            <li>
+              <a href="${addon/absolute_url}"
+                 class="pat-plone-modal"
+                 data-pat-plone-modal="">
+                 <!--
+                <span class="">${repeat/addon_brain/number}. </span>
+                -->
+                <h3>${addon/title}</h3>
+                <p>${addon/description}</p>
+                </a>
+            </li>
+          </tal:block>
+        </tal:addons>
       </ul>
-    </div>
-    <div tal:condition="context/framework_version_mapping">
-      <h3>Version Mappings</h3>
-      <ul>
-        <li tal:repeat="mapping context/framework_version_mapping">
-          <span tal:replace="mapping/value">Version</span> - <span tal:replace="mapping/key">Version Title</span></li>
+            </div>
+         </div>
+         <div tal:condition="not:view/new_addons">
+            No addons so far :-(
+         </div>
+         <br>
+         <br>
+         <div class="wrapper">
+            <h1 id="heading">Most Downloaded Add-Ons</h1>
+            <div class="scroll-container">
+               <ul class="list-container" id="listing" tal:condition="view/downloaded_addons">
+        <tal:addons tal:repeat="addon_brain view/downloaded_addons">
+          <tal:block tal:define="addon python:addon_brain.getObject()">
+            <li>
+              <a href="${addon/absolute_url}"
+                 class="pat-plone-modal"
+                 data-pat-plone-modal="">
+                 <!--
+                <span class="">${repeat/addon_brain/number}. </span>
+                -->
+                <h3>${addon/title}</h3>
+                <p>${addon/description}</p>
+                </a>
+            </li>
+          </tal:block>
+        </tal:addons>
       </ul>
-    </div>
-    <div tal:condition="context/python_version_mapping">
-      <h3>Python Version Mappings</h3>
-      <ul>
-        <li tal:repeat="mapping context/python_version_mapping">
-          <span tal:replace="mapping/value">Version</span> - <span tal:replace="mapping/key">Version Title</span></li>
-      </ul>
-    </div>
+            </div>
+         </div>
+         <div tal:condition="not:view/downloaded_addons">
+            No addons so far :-(
+         </div>
+
+
   </metal:block>
 
 </html>

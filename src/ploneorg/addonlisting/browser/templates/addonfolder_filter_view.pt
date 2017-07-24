@@ -1,0 +1,47 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      i18n:domain="ploneorg.addonlisting"
+      metal:use-macro="context/main_template/macros/master">
+
+  <metal:block fill-slot="content-core">
+          XXX - this text comes below title and description
+  </metal:block>
+
+  <metal:block fill-slot="main">
+
+  
+            <h1>Plone Add-Ons</h1>
+            
+         
+               <ul tal:define="results view/all_addons;
+                   Batch python:modules['Products.CMFPlone'].Batch;
+                   b_size python:int(request.get('b_size', 20));
+                   b_start python:int(request.get('b_start', 0));
+                   batch python:Batch(results, b_size, b_start);"
+                   tal:condition="view/all_addons"
+                   >
+             <div metal:use-macro="context/batch_macros/macros/navigation" />
+            <tal:addons tal:repeat="addon_brain batch">
+            <tal:block tal:define="addon python:addon_brain.getObject()">
+            <li>
+            
+                <h2 style="color:#007bb1">${addon/title}</h2>
+                <p>${addon/description}</p>
+                <a href="${addon/absolute_url}"
+                 class="pat-plone-modal"
+                 data-pat-plone-modal="">details
+                </a>
+            </li>
+          </tal:block>
+        </tal:addons>
+        <div metal:use-macro="context/batch_macros/macros/navigation" />
+         </ul>
+            
+     
+        
+
+  </metal:block>
+
+</html>
