@@ -22,9 +22,7 @@
    
     <metal:content-core fill-slot="main">
 
-    <form>
-  <input type="text" name="search" placeholder="Search addons..">
-   </form>
+    
 
     <div class="dropdown">
     <button class="button">Filter By</button>
@@ -124,5 +122,9 @@
 
 
     </metal:content-core>
+
+    <script type="text/javascript" >
+      document.getElementById("defaultOpen").click();
+    </script>
   </body>
 </html>
