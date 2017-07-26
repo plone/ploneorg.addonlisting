@@ -13,7 +13,7 @@
 
        <h1>Plone Add-Ons</h1>
 
-
+<div id="header">
 
 <div class="dropdown">
     <button class="button">Filter By</button>
@@ -21,6 +21,8 @@
 
     <div id="filter">
         <tal:form define="form view/filter_form">
+
+        <h2 tal:content="form/label">Form Title</h2>
             <!-- plone.app.z3cform package provides view ploneform-macros
                  which come with a helpers to render forms. This one
                  will render the form body only. It also makes an assumption
@@ -35,17 +37,22 @@
      </div>
      </div>
 
-<form>
+<form class="search">
   <input type="text" name="search" placeholder="Search addons..">
 </form>
+</div>
+
+<div class="tab">
+  <button class="tablinks" onclick="openTab('Curated')" id="defaultOpen">Curated Add-ons </button>
+  <button class="tablinks" onclick="openTab('New')">Newly added </button>
+  <button class="tablinks" onclick="openTab('Downloaded')">Most downloaded </button>
+</div>
 
 
 
-
-
-  
+  <div id="Curated" class="tabcontent">
        
-              <div metal:use-macro="context/batch_macros/macros/navigation" />
+            
          
                <ul tal:define="results view/all_addons;
                    Batch python:modules['Products.CMFPlone'].Batch;
@@ -71,7 +78,67 @@
         <div metal:use-macro="context/batch_macros/macros/navigation" />
          </ul>
             
-     
+  </div>   
+
+   <div id="New" class="tabcontent">
+       
+            
+         
+               <ul tal:define="results view/new_addons;
+                   Batch python:modules['Products.CMFPlone'].Batch;
+                   b_size python:int(request.get('b_size', 10));
+                   b_start python:int(request.get('b_start', 0));
+                   batch python:Batch(results, b_size, b_start);"
+                   tal:condition="view/new_addons"
+                   >
+             <div metal:use-macro="context/batch_macros/macros/navigation" />
+            <tal:addons tal:repeat="addon_brain batch">
+            <tal:block tal:define="addon python:addon_brain.getObject()">
+            <li>
+            
+                <h2 style="color:#007bb1">${addon/title}</h2>
+                <p>${addon/description}</p>
+                <a href="${addon/absolute_url}"
+                 class="pat-plone-modal"
+                 data-pat-plone-modal="">details
+                </a>
+            </li>
+          </tal:block>
+        </tal:addons>
+        <div metal:use-macro="context/batch_macros/macros/navigation" />
+         </ul>
+            
+  </div>   
+        
+   <div id="Downloaded" class="tabcontent">
+       
+            
+         
+               <ul tal:define="results view/downloaded_addons;
+                   Batch python:modules['Products.CMFPlone'].Batch;
+                   b_size python:int(request.get('b_size', 10));
+                   b_start python:int(request.get('b_start', 0));
+                   batch python:Batch(results, b_size, b_start);"
+                   tal:condition="view/downloaded_addons"
+                   >
+             <div metal:use-macro="context/batch_macros/macros/navigation" />
+            <tal:addons tal:repeat="addon_brain batch">
+            <tal:block tal:define="addon python:addon_brain.getObject()">
+            <li>
+            
+                <h2 style="color:#007bb1">${addon/title}</h2>
+                <p>${addon/description}</p>
+                <a href="${addon/absolute_url}"
+                 class="pat-plone-modal"
+                 data-pat-plone-modal="">details
+                </a>
+            </li>
+          </tal:block>
+        </tal:addons>
+        <div metal:use-macro="context/batch_macros/macros/navigation" />
+         </ul>
+            
+  </div>
         
 
   </metal:block>

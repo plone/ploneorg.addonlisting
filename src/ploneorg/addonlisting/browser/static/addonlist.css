@@ -52,7 +52,8 @@ body{
   color: #006c9d;
   font-size: 2.6rem;
   line-height: 3.2rem;
-  padding: 0 0 1rem;  
+  padding: 0 0 1rem; 
+  
 }
 
 
@@ -228,8 +229,8 @@ a {
   text-align: center;
   color: #006c9d;;
   font-weight: bold;
-  width: 60%; 
-  width: 60vw;
+  width: 30%; 
+  width: 30vw;
   overflow-y: scroll;
   max-height: 400px;
 }
@@ -244,9 +245,12 @@ a {
     font-size: 16px;
     margin: 4px 2px;
     cursor: pointer;
-    padding: 14px 40px;
-    
+    padding: 5px 20px;
     float: left;
+}
+
+#view-all {
+  float: right;
 }
 
 .dropdown {
@@ -266,12 +270,68 @@ a {
 }
 
 input[type=text] {
-    width: 60%;
+    width: 80%;
     box-sizing: border-box;
     border: 2px solid #ccc;
     border-radius: 4px;
     font-size: 16px;
     background-color: white;
-    padding: 16px 40px;
+    padding: 46px 40px;
     float: right;
+}
+
+
+div.tab {
+    overflow: hidden;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+}
+
+
+div.tab button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 24px 26px;
+    transition: 0.3s;
+}
+
+
+div.tab button:hover {
+    background-color: #ddd;
+}
+
+
+div.tab button.active {
+    background-color: #ccc;
+}
+
+
+.tabcontent {
+    display: none;
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    border-top: none;
+}
+
+@-webkit-keyframes fadeEffect {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+@keyframes fadeEffect {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+#filter {
+  float: left;
+  text-align: left;
+  display: inline-block;
+}
+
+.search {
+   float:left;
 }
