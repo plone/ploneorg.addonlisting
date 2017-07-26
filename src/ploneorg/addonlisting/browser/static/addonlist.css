@@ -245,6 +245,8 @@ a {
     margin: 4px 2px;
     cursor: pointer;
     padding: 14px 40px;
+    
+    float: left;
 }
 
 .dropdown {
@@ -264,15 +266,12 @@ a {
 }
 
 input[type=text] {
-    width: 50%;
+    width: 60%;
     box-sizing: border-box;
     border: 2px solid #ccc;
     border-radius: 4px;
     font-size: 16px;
     background-color: white;
-    background-image: url('searchicon.png');
-    background-position: 10px 10px; 
-    background-repeat: no-repeat;
-    padding: 12px 20px 12px 40px;
-    
+    padding: 16px 40px;
+    float: right;
 }
