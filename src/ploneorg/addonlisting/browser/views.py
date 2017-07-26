@@ -100,7 +100,7 @@ class AddOnView(BrowserView):
 
 class AddOnFolderView(BrowserView):
     def __call__(self):
-        add_resource_on_request(self.request, 'myresources')
+        add_resource_on_request(self.request, 'ploneorg-addonlisting')
         return super(AddOnFolderView, self).__call__()
 
     def curated_addons(self):
@@ -138,6 +138,10 @@ class AddOnFolderView(BrowserView):
 
 
 class FilteredAddOnFolderView(AddOnFolderView):
+
+    def __call__(self):
+        add_resource_on_request(self.request, 'ploneorg-addonlisting')
+        return super(FilteredAddOnFolderView, self).__call__()
 
     def filter_form(self):
         form = FilterForm(self.context, self.request)
