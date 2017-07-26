@@ -13,9 +13,7 @@
 
        <h1>Plone Add-Ons</h1>
 
-<form>
-  <input type="text" name="search" placeholder="Search addons..">
-   </form>
+
 
 <div class="dropdown">
     <button class="button">Filter By</button>
@@ -36,6 +34,12 @@
       </div>
      </div>
      </div>
+
+<form>
+  <input type="text" name="search" placeholder="Search addons..">
+</form>
+
+
 
 
 
