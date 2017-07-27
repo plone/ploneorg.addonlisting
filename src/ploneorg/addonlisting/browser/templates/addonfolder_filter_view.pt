@@ -66,7 +66,7 @@
             <tal:block tal:define="addon python:addon_brain.getObject()">
             <li>
             
-                <h2 style="color:#007bb1">${addon/title}</h2>
+                <h2>${addon/title}</h2>
                 <p>${addon/description}</p>
                 <a href="${addon/absolute_url}"
                  class="pat-plone-modal"
@@ -96,7 +96,7 @@
             <tal:block tal:define="addon python:addon_brain.getObject()">
             <li>
             
-                <h2 style="color:#007bb1">${addon/title}</h2>
+                <h2>${addon/title}</h2>
                 <p>${addon/description}</p>
                 <a href="${addon/absolute_url}"
                  class="pat-plone-modal"
@@ -126,7 +126,7 @@
             <tal:block tal:define="addon python:addon_brain.getObject()">
             <li>
             
-                <h2 style="color:#007bb1">${addon/title}</h2>
+                <h2>${addon/title}</h2>
                 <p>${addon/description}</p>
                 <a href="${addon/absolute_url}"
                  class="pat-plone-modal"
