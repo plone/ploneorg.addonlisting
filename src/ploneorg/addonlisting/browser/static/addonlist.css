@@ -56,6 +56,10 @@ body{
   
 }
 
+h2{
+  color:#007bb1;
+}
+
 
 .modal {
     display: none;

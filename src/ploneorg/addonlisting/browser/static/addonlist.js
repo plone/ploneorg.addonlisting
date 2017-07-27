@@ -11,5 +11,4 @@ function openTab(header) {
     document.getElementById(header).style.display = "block";
 }
 
-document.getElementById("defaultOpen").click();
-
+//document.getElementById("defaultOpen").click();
