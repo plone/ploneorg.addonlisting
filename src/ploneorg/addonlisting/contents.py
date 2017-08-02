@@ -16,17 +16,15 @@ from ploneorg.addonlisting.interfaces import IVersionInfo
 from z3c.form import button
 from z3c.form.object import registerFactoryAdapter
 from zope.interface import implementer
-from zope.interface import implements
 
 
 @implementer(IAddOnFolder)
 class AddOnFolder(Container):
-    implements(IAddOnFolder)
+    pass
 
 
 @implementer(IAddOn)
 class AddOn(Item):
-    implements(IAddOn)
 
     @property
     def package_link(self):
@@ -48,7 +46,7 @@ class Base(object):
 
 @implementer(IMapping)
 class Mapping(Base):
-    implements(IMapping)
+    pass
 
 
 registerFactoryAdapter(IMapping, Mapping)
@@ -56,7 +54,6 @@ registerFactoryAdapter(IMapping, Mapping)
 
 @implementer(IPyPIClassifierMapping)
 class PyPIClassifierMapping(Base):
-    implements(IPyPIClassifierMapping)
 
     @property
     def version(self):
@@ -68,7 +65,7 @@ registerFactoryAdapter(IPyPIClassifierMapping, PyPIClassifierMapping)
 
 @implementer(ICategory)
 class Category(Base):
-    implements(ICategory)
+    pass
 
 
 registerFactoryAdapter(ICategory, Category)
@@ -76,7 +73,7 @@ registerFactoryAdapter(ICategory, Category)
 
 @implementer(IVersionInfo)
 class VersionInfo(Base):
-    implements(IVersionInfo)
+    pass
 
 
 registerFactoryAdapter(IVersionInfo, VersionInfo)
@@ -84,7 +81,7 @@ registerFactoryAdapter(IVersionInfo, VersionInfo)
 
 @implementer(IVersionEggInfo)
 class VersionEggInfo(Base):
-    implements(IVersionEggInfo)
+    pass
 
 
 registerFactoryAdapter(IVersionEggInfo, VersionEggInfo)
@@ -94,8 +91,8 @@ class FilterForm(form.SchemaForm):
 
     schema = IFilterForm
     ignoreContext = True
-    label = u"Filter"
-    description = u"Filter after certain criteria."
+    label = u'Filter'
+    description = u'Filter after certain criteria.'
 
     @button.buttonAndHandler(u'Ok')
     def handleApply(self, action):
@@ -109,10 +106,10 @@ class FilterForm(form.SchemaForm):
         # Set status on this form page
         # (this status message is not bind to the session
         #  and does not go thru redirects)
-        self.status = "Thank you very much!"
+        self.status = 'Thank you very much!'
 
-    @button.buttonAndHandler(u"Cancel")
+    @button.buttonAndHandler(u'Cancel')
     def handleCancel(self, action):
         """User cancelled. Redirect back to the front page.
         """
-        self.status = "Canceled!"
+        self.status = 'Canceled!'

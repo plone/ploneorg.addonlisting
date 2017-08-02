@@ -14,49 +14,49 @@ class IAddOnFolder(Interface):
     """
     Content type for add-ons folder.
     """
-    # model.load("models/addonfolder.xml")
+    # model.load('models/addonfolder.xml')
 
 
 class IAddOn(Interface):
     """
     Content type for an add-on.
     """
-    # model.load("models/addon.xml")
+    # model.load('models/addon.xml')
 
 
 class IMapping(model.Schema):
     """
     Schema for mappings.
     """
-    model.load("models/mapping.xml")
+    model.load('models/mapping.xml')
 
 
 class IPyPIClassifierMapping(model.Schema):
     """
     Schema for mappings.
     """
-    model.load("models/pypi_classifier_mapping.xml")
+    model.load('models/pypi_classifier_mapping.xml')
 
 
 class ICategory(model.Schema):
     """
     Schema for version information.
     """
-    model.load("models/category.xml")
+    model.load('models/category.xml')
 
 
 class IVersionInfo(model.Schema):
     """
     Schema for version information.
     """
-    model.load("models/versioninfo.xml")
+    model.load('models/versioninfo.xml')
 
 
 class IVersionEggInfo(model.Schema):
     """
     Schema for version information.
     """
-    model.load("models/versioninfo.xml", schema=u"egg_info")
+    model.load('models/versioninfo.xml', schema=u'egg_info')
 
 
 class IFilterForm(model.Schema):

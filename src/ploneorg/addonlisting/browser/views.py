@@ -18,36 +18,38 @@ logging.basicConfig(level=logging.INFO)
 log = logging.getLogger('ploneorg.addonlisting')
 
 
-def html_header(title=""):
+def html_header(title=''):
     return """
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>%s</title>
+    <title>{title}</title>
   </head>
   <body>
     <pre>
-""" % title
+""".format(title=title)
 
 
-def html_footer(url=""):
+def html_footer(url=''):
     return """
     </pre>
     <script type="text/javascript" >
-      window.location.href = "%s";
+      window.location.href = "{url}";
     </script>
   </body>
 </html>
-""" % url
+""".format(url=url)
 
 
 class FolderUpdateView(BrowserView):
     def __call__(self):
         url = self.context.absolute_url()
         alsoProvides(self.request, IDisableCSRFProtection)
-        self.request.response.setHeader("Content-type",
-                                        "text/html; charset=utf-8")
+        self.request.response.setHeader(
+            'Content-type',
+            'text/html; charset=utf-8',
+        )
         log.addHandler(logging.StreamHandler(self.request.response))
         log.info(html_header('Update Folder'))
         update_addon_list(self.context, logger=log)
@@ -58,8 +60,10 @@ class FolderUpdateAllView(BrowserView):
     def __call__(self):
         url = self.context.absolute_url()
         alsoProvides(self.request, IDisableCSRFProtection)
-        self.request.response.setHeader("Content-type",
-                                        "text/html; charset=utf-8")
+        self.request.response.setHeader(
+            'Content-type',
+            'text/html; charset=utf-8',
+        )
         log.addHandler(logging.StreamHandler(self.request.response))
         log.info(html_header('Update Folder'))
         update_addon_list(self.context, logger=log)
@@ -71,14 +75,18 @@ class AddOnUpdateView(BrowserView):
     def __call__(self):
         url = self.context.absolute_url()
         alsoProvides(self.request, IDisableCSRFProtection)
-        self.request.response.setHeader("Content-type",
-                                        "text/html; charset=utf-8")
+        self.request.response.setHeader(
+            'Content-type',
+            'text/html; charset=utf-8',
+        )
         log.addHandler(logging.StreamHandler(self.request.response))
         log.info(html_header('Update Folder'))
         update_addon(self.context, logger=log)
-        api.portal.show_message("Add'on %s has been updated" %
-                                (self.context.title),
-                                request=self.request, type='info')
+        api.portal.show_message(
+            "Add'on {title} has been updated".format(title=self.context.title),
+            request=self.request,
+            type='info',
+        )
         log.info(html_footer(url))
 
 
@@ -152,7 +160,7 @@ class FilteredAddOnFolderView(AddOnFolderView):
         return form
 
     def __call__(self):
-        if self.request.method == "POST":
+        if self.request.method == 'POST':
             self.filter = {
                 'curated': bool(self.request.form.get('form.widgets.curated')),
                 'blacklisted': bool(self.request.form.get(
@@ -182,14 +190,14 @@ class FilteredAddOnFolderView(AddOnFolderView):
                     addon_status=self.filter.get('curated_status'),
                     addon_type=self.filter.get('addon_type'),
                     supported_python_versions={
-                        "query": self.filter.get('supported_python_versions'),
-                        "operator": "and"
+                        'query': self.filter.get('supported_python_versions'),
+                        'operator': 'and'
                     },
                     supported_framework_versions={
-                        "query": self.filter.get(
+                        'query': self.filter.get(
                             'supported_framework_versions'
                         ),
-                        "operator": "and"
+                        'operator': 'and'
                     },
                     sort_on='sortable_title',
                     sort_order='ascending'
@@ -204,14 +212,14 @@ class FilteredAddOnFolderView(AddOnFolderView):
                     addon_status=self.filter.get('pypi_status'),
                     addon_type=self.filter.get('addon_type'),
                     supported_python_versions={
-                        "query": self.filter.get('supported_python_versions'),
-                        "operator": "and"
+                        'query': self.filter.get('supported_python_versions'),
+                        'operator': 'and'
                     },
                     supported_framework_versions={
-                        "query": self.filter.get(
+                        'query': self.filter.get(
                             'supported_framework_versions'
                         ),
-                        "operator": "and"
+                        'operator': 'and'
                     },
                     sort_on='sortable_title',
                     sort_order='ascending'
@@ -236,14 +244,14 @@ class FilteredAddOnFolderView(AddOnFolderView):
                     addon_status=self.filter.get('curated_status'),
                     addon_type=self.filter.get('addon_type'),
                     supported_python_versions={
-                        "query": self.filter.get('supported_python_versions'),
-                        "operator": "and"
+                        'query': self.filter.get('supported_python_versions'),
+                        'operator': 'and'
                     },
                     supported_framework_versions={
-                        "query": self.filter.get(
+                        'query': self.filter.get(
                             'supported_framework_versions'
                         ),
-                        "operator": "and"
+                        'operator': 'and'
                     },
                     sort_on='download_sum_total',
                     sort_order='reverse'
@@ -258,14 +266,14 @@ class FilteredAddOnFolderView(AddOnFolderView):
                     addon_status=self.filter.get('pypi_status'),
                     addon_type=self.filter.get('addon_type'),
                     supported_python_versions={
-                        "query": self.filter.get('supported_python_versions'),
-                        "operator": "and"
+                        'query': self.filter.get('supported_python_versions'),
+                        'operator': 'and'
                     },
                     supported_framework_versions={
-                        "query": self.filter.get(
+                        'query': self.filter.get(
                             'supported_framework_versions'
                         ),
-                        "operator": "and"
+                        'operator': 'and'
                     },
                     sort_on='download_sum_total',
                     sort_order='reverse'
@@ -289,14 +297,14 @@ class FilteredAddOnFolderView(AddOnFolderView):
                     blacklisted=self.filter.get('blacklisted'),
                     curated_status=self.filter.get('curated_status'),
                     supported_python_versions={
-                        "query": self.filter.get('supported_python_versions'),
-                        "operator": "and"
+                        'query': self.filter.get('supported_python_versions'),
+                        'operator': 'and'
                     },
                     supported_framework_versions={
-                        "query": self.filter.get(
+                        'query': self.filter.get(
                             'supported_framework_versions'
                         ),
-                        "operator": "and"
+                        'operator': 'and'
                     },
                     addon_type=self.filter.get('addon_type'),
                     sort_on='upload_time',
@@ -311,14 +319,14 @@ class FilteredAddOnFolderView(AddOnFolderView):
                     blacklisted=self.filter.get('blacklisted'),
                     curated_status=self.filter.get('pypi_status'),
                     supported_python_versions={
-                        "query": self.filter.get('supported_python_versions'),
-                        "operator": "and"
+                        'query': self.filter.get('supported_python_versions'),
+                        'operator': 'and'
                     },
                     supported_framework_versions={
-                        "query": self.filter.get(
+                        'query': self.filter.get(
                             'supported_framework_versions'
                         ),
-                        "operator": "and"
+                        'operator': 'and'
                     },
                     addon_type=self.filter.get('addon_type'),
                     sort_on='upload_time',

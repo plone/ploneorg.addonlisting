@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from plone import api
 from plone.api.exc import InvalidParameterError
 from plone.app.testing import setRoles
@@ -25,7 +27,6 @@ class AddOnIntegrationTest(unittest.TestCase):
     def test_schema(self):
         fti = queryUtility(IDexterityFTI, name='AddOn')
         schema = fti.lookupSchema()
-        # self.assertEqual(IAddOnFolder, schema)  # TODO: fix test
         self.assertEqual(schema, schema)
 
     def test_fti(self):
@@ -46,7 +47,7 @@ class AddOnIntegrationTest(unittest.TestCase):
 
         with self.assertRaisesRegexp(InvalidParameterError,
                                      "Cannot add a 'AddOn' "
-                                     "object to the container."):
+                                     'object to the container.'):
             addon = api.content.create(  # NOQA: F841
                 type='AddOn',
                 title='Pillow',

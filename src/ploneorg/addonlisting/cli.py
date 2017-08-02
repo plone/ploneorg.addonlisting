@@ -11,14 +11,14 @@ import logging
 logging.basicConfig(level=logging.INFO)
 log = logging.getLogger('ploneorg.addonlisting-cli')
 
-'''
+"""
 usage:
 bin/instance -O <portal_id> update_addon_listing
                                   <Path to AddOnFolder relative to Zope root>
 bin/instance -O <portal_id> update_addons
                                   <Path to AddOnFolder relative to Zope root>
 bin/instance -O <portal_id> update_addon <Path to AddOn relative to Zope root>
-'''
+"""
 
 
 def cli_update_addon_listing(app, args):
