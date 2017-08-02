@@ -11,4 +11,16 @@ function openTab(header) {
     document.getElementById(header).style.display = "block";
 }
 
+function searchTitle() {
+    title = document.getElementById("title").value
+    
+    //search for title amongst addonss
+}
+
+
 //document.getElementById("defaultOpen").click();
+
+window.addEventListener('load', 
+  function() { 
+    document.getElementById("defaultOpen").click();
+  }, false);

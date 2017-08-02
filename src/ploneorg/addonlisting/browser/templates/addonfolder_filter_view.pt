@@ -37,9 +37,11 @@
      </div>
      </div>
 
-<form class="search">
-  <input type="text" name="search" placeholder="Search addons..">
+
+<form class="search" onsubmit="searchTitle()">
+  <input type="text" name="search" id="title" placeholder="Search addons..">
 </form>
+
 </div>
 
 <div class="tab">
