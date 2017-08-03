@@ -17,7 +17,7 @@ def update_addon_list(context, logger, limit=0):
 
     # get Add'on List
     present_addon_list = api.content.find(context=addon_folder,
-                                          portal_type="AddOn")
+                                          portal_type='AddOn')
     present_addon_list = [obj[0] for obj in context.items()]
 
     client = xmlrpclib.ServerProxy(PYPI_URL)
@@ -29,18 +29,21 @@ def update_addon_list(context, logger, limit=0):
     if limit:
         new_addons = list(new_addons)[:limit]
 
-    logger.info("Start Update Add'on Listing")
+    logger.info('Start Update Add\'on Listing')
     for elem in new_addons:
         with api.env.adopt_roles(['Manager']):
             try:
                 addon = api.content.create(
                     container=addon_folder,
-                    type="AddOn",
+                    type='AddOn',
                     id=elem,
-                    title=elem
+                    title=elem,
                 )
 
-                info = 'For Add\'on-Folder: "%s" add PyPI-Package "%s"' % (str(addon_folder.title), str(elem))  # NOQA: E501
+                info = 'For Add\'on-Folder: "{title}" add PyPI-Package "{package}"'.format(  # NOQA: E501
+                    title=str(addon_folder.title),
+                    package=str(elem)
+                )
                 logger.info(info)
                 logger.info(addon)
 
@@ -116,18 +119,18 @@ def update_addons(context, logger, limit=0):
     if limit:
         addons = api.content.find(
             context=addon_folder,
-            portal_type="AddOn",
+            portal_type='AddOn',
             sort_limit=limit
         )[:limit]
     else:
         addons = api.content.find(
             context=addon_folder,
-            portal_type="AddOn"
+            portal_type='AddOn'
         )
 
-    logger.info("Start Update all Add-ons\n")
+    logger.info('Start Update all Add-ons\n')
 
     for addon in addons:
         update_addon(addon.getObject(), logger=logger)
 
-    logger.info("Finished Update all Add-ons\n")
+    logger.info('Finished Update all Add-ons\n')
