@@ -53,7 +53,7 @@ body{
   font-size: 2.6rem;
   line-height: 3.2rem;
   padding: 0 0 1rem; 
-  
+  float: left;
 }
 
 h2{
@@ -149,8 +149,6 @@ h2{
     from {opacity: 0} 
     to {opacity: 1}
 }
-
-
 
 
 a {
@@ -253,7 +251,7 @@ a {
     float: left;
 }
 
-#view-all {
+.button .view-all {
   float: right;
 }
 
@@ -337,5 +335,5 @@ div.tab button.active {
 }
 
 .search {
-   float:left;
+   float: left;
 }

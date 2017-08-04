@@ -13,8 +13,9 @@
 
 
       <div class="wrapper">
-            <h1>Curated Add-Ons  <button class="view-all" type="button" onclick="filter_view">View all</button></h1>
-            
+      
+            <h1 id="heading">Curated Add-Ons  <a class="button view-all" tal:attributes="href string:${context/absolute_url}/filter_view">View all</a>  </h1>
+      
             <div class="scroll-container">
                <ul class="list-container" id="listing" tal:condition="view/curated_addons">
             <tal:addons tal:repeat="addon_brain view/curated_addons">
@@ -42,8 +43,7 @@
          <br>
          <br>
          <div class="wrapper">
-            <h1>New Add-Ons  <button class="view-all" type="button" onclick="filter_view">View all</button></h1>
-            
+            <h1 id="heading">New Add-Ons  <a class="button view-all" tal:attributes="href string:${context/absolute_url}/filter_view">View all</a> </h1>
             <div class="scroll-container">
         <ul class="list-container" id="listing" tal:condition="view/new_addons">
         <tal:addons tal:repeat="addon_brain view/new_addons">
@@ -70,8 +70,8 @@
          <br>
          <br>
          <div class="wrapper">
-            <h1 id="heading">Most Downloaded Add-Ons <button class="view-all" type="button" onclick="filter_view">View all</button> </h1>
-            
+
+            <h1 id="heading">Most Downloaded Add-Ons <a class="button view-all" tal:attributes="href string:${context/absolute_url}/filter_view">View all</a> </h1>
             <div class="scroll-container">
                <ul class="list-container" id="listing" tal:condition="view/downloaded_addons">
         <tal:addons tal:repeat="addon_brain view/downloaded_addons">
