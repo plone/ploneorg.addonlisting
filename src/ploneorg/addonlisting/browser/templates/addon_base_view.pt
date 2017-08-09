@@ -12,11 +12,15 @@
   <metal:block fill-slot="main">
 
     <h1 tal:content="context/title">Add-on Title</h1>
-    <div>
-      <p class="description" tal:content="context/description">Description</p>
-      <div tal:replace="structure context/text/output"
+    <p class="description" tal:content="context/description">Description</p>
+    <div tal:replace="structure context/text/output"
            tal:condition="context/text">Text</div>
-    </div>
+    <h3>Author name:<span tal:content="context/author_name">Add-on Author name</span></h3>
+    <h3>Author email:<span tal:content="context/author_email">Add-on Author email</span></h3>
+    <h3>Maintainer name:<span tal:content="context/maintainer_name">Add-on Maintainer name</span></h3>
+    <h3>Maintainer email:<span tal:content="context/maintainer_email">Add-on Maintainer email</span></h3>
+    <h3>Link to the package URL:<span tal:content="context/package_url">package-url</span></h3>
+    
 
   </metal:block>
 
