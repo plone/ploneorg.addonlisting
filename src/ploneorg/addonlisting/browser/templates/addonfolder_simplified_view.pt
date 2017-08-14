@@ -22,6 +22,12 @@
    
     <metal:content-core fill-slot="main">
 
+    
+
+    <div class="dropdown">
+    <button class="button">Filter By</button>
+    <div class="dropdown-content">
+
     <div id="filter">
         <tal:form define="form view/filter_form">
             <!-- plone.app.z3cform package provides view ploneform-macros
@@ -38,10 +44,14 @@
 
         </tal:form>
       </div>
-      
+     </div>
+     </div>
+
       <h1>Add-Ons</h1>
-      <ul class="list-container" id="listing" tal:condition="view/addons">
-        <tal:addons tal:repeat="addon_brain view/addons">
+      <div class="wrapper">
+      <div class="scroll-container">
+      <ul class="list-container" id="listing" tal:condition="view/all_addons">
+        <tal:addons tal:repeat="addon_brain view/all_addons">
           <tal:block tal:define="addon python:addon_brain.getObject()">
             <li>
               <a href="${addon/absolute_url}"
@@ -55,9 +65,66 @@
           </tal:block>
         </tal:addons>
       </ul>
-      <p tal:condition="not:view/addons">
+      </div>
+      </div>
+      <p tal:condition="not:view/all_addons">
         No addons so far :-(
       </p>
+
+
+      <h1>Add-Ons</h1>
+      <div class="wrapper">
+      <div class="scroll-container">
+      <ul class="list-container" id="listing" tal:condition="view/all_addons">
+        <tal:addons tal:repeat="addon_brain view/all_addons">
+          <tal:block tal:define="addon python:addon_brain.getObject()">
+            <li>
+              <a href="${addon/absolute_url}"
+                 class="pat-plone-modal"
+                 data-pat-plone-modal="">
+                <span class="">${repeat/addon_brain/number}. </span>
+                <h3>${addon/title}</h3>
+                <p>${addon/description}</p>
+                </a>
+            </li>
+          </tal:block>
+        </tal:addons>
+      </ul>
+      </div>
+      </div>
+      <p tal:condition="not:view/all_addons">
+        No addons so far :-(
+      </p>
+
+      <h1>Add-Ons</h1>
+      <div class="wrapper">
+      <div class="scroll-container">
+      <ul class="list-container" id="listing" tal:condition="view/all_addons">
+        <tal:addons tal:repeat="addon_brain view/all_addons">
+          <tal:block tal:define="addon python:addon_brain.getObject()">
+            <li>
+              <a href="${addon/absolute_url}"
+                 class="pat-plone-modal"
+                 data-pat-plone-modal="">
+                <span class="">${repeat/addon_brain/number}. </span>
+                <h3>${addon/title}</h3>
+                <p>${addon/description}</p>
+                </a>
+            </li>
+          </tal:block>
+        </tal:addons>
+      </ul>
+      </div>
+      </div>
+      <p tal:condition="not:view/all_addons">
+        No addons so far :-(
+      </p>
+
+
     </metal:content-core>
+
+    <script type="text/javascript" >
+      document.getElementById("defaultOpen").click();
+    </script>
   </body>
 </html>

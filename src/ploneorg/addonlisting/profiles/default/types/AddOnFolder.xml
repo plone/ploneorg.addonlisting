@@ -42,8 +42,8 @@
 
   <!-- View information -->
   <property name="add_view_expr">string:${folder_url}/++add++AddOnFolder</property>
-  <property name="immediate_view">folder_view</property>
-  <property name="default_view">folder_view</property>
+  <property name="immediate_view">base_view</property>
+  <property name="default_view">base_view</property>
   <property name="default_view_fallback">False</property>
   <property name="view_methods">
     <element value="view" />
