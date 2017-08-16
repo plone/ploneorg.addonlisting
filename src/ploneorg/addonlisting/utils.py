@@ -7,6 +7,7 @@ from plone.app.textfield.value import RichTextValue
 from ploneorg.addonlisting import PYPI_URL
 from ploneorg.addonlisting.contents import VersionEggInfo
 from ploneorg.addonlisting.contents import VersionInfo
+from zExceptions import BadRequest
 
 import requests
 import xmlrpclib
@@ -47,7 +48,7 @@ def update_addon_list(context, logger, limit=0):
                 logger.info(info)
                 logger.info(addon)
 
-            except Exception as e:
+            except BadRequest as e:
                 logger.error('Could not create %s', str(elem))
                 logger.error(e)
 
@@ -95,9 +96,9 @@ def update_addon(context, logger):
                     egg_info = VersionEggInfo()
                     egg_info.filename = info['filename']
                     egg_info.downloads = int(info['downloads'])
-                    logger.info(info['downloads'])
+                    logger.info(str(info['downloads']))
                     psum += egg_info.downloads
-                    logger.info(info['upload_time'])
+                    logger.info(str(info['upload_time']))
                     egg_info.upload_time = datetime.strptime(
                         info['upload_time'], '%Y-%m-%dT%H:%M:%S').date()
                     egg_infos.append(egg_info)
