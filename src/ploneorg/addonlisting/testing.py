@@ -29,13 +29,13 @@ PLONEORG_ADDONLISTING_FIXTURE = PloneorgAddonlistingLayer()
 
 PLONEORG_ADDONLISTING_INTEGRATION_TESTING = IntegrationTesting(
     bases=(PLONEORG_ADDONLISTING_FIXTURE,),
-    name='PloneorgAddonlistingLayer:IntegrationTesting'
+    name='PloneorgAddonlistingLayer:IntegrationTesting',
 )
 
 
 PLONEORG_ADDONLISTING_FUNCTIONAL_TESTING = FunctionalTesting(
     bases=(PLONEORG_ADDONLISTING_FIXTURE,),
-    name='PloneorgAddonlistingLayer:FunctionalTesting'
+    name='PloneorgAddonlistingLayer:FunctionalTesting',
 )
 
 
@@ -43,7 +43,7 @@ PLONEORG_ADDONLISTING_ACCEPTANCE_TESTING = FunctionalTesting(
     bases=(
         PLONEORG_ADDONLISTING_FIXTURE,
         REMOTE_LIBRARY_BUNDLE_FIXTURE,
-        z2.ZSERVER_FIXTURE
+        z2.ZSERVER_FIXTURE,
     ),
-    name='PloneorgAddonlistingLayer:AcceptanceTesting'
+    name='PloneorgAddonlistingLayer:AcceptanceTesting',
 )

@@ -43,7 +43,7 @@ class AddOnIntegrationTest(unittest.TestCase):
         portal = api.portal.get()
         with self.assertRaises(ValueError,
                                message='Disallowed subobject type: AddOn'):
-            self.portal.invokeFactory('AddOn', 'AddOn')
+            self.portal.invokeFactory('AddOn', 'AddOn')  # NOQA: P001
 
         with self.assertRaisesRegexp(InvalidParameterError,
                                      "Cannot add a 'AddOn' "
@@ -51,7 +51,7 @@ class AddOnIntegrationTest(unittest.TestCase):
             addon = api.content.create(  # NOQA: F841
                 type='AddOn',
                 title='Pillow',
-                container=portal
+                container=portal,
             )
 
     def test_adding_in_addonfolder(self):
@@ -59,17 +59,17 @@ class AddOnIntegrationTest(unittest.TestCase):
         addon_folder = api.content.create(
             type='AddOnFolder',
             title='Plone',
-            container=portal
+            container=portal,
         )
 
         addon = api.content.create(
             type='AddOn',
             title='Pillow',
-            container=addon_folder
+            container=addon_folder,
         )
         self.assertTrue(
-            IAddOnFolder.providedBy(addon_folder)
+            IAddOnFolder.providedBy(addon_folder),
         )
         self.assertTrue(
-            IAddOn.providedBy(addon)
+            IAddOn.providedBy(addon),
         )

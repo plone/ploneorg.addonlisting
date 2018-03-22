@@ -111,7 +111,7 @@ class AddOnFolderView(BrowserView):
             curated=True,
             sort_on='sortable_title',
             sort_order='ascending',
-            sort_limit=limit
+            sort_limit=limit,
         )[:limit]
 
     def downloaded_addons(self):
@@ -122,7 +122,7 @@ class AddOnFolderView(BrowserView):
             blacklisted=False,
             sort_on='download_sum_total',
             sort_order='reverse',
-            sort_limit=limit
+            sort_limit=limit,
         )[:limit]
 
     def new_addons(self):
@@ -133,7 +133,7 @@ class AddOnFolderView(BrowserView):
             blacklisted=False,
             sort_on='upload_time',
             sort_order='reverse',
-            sort_limit=limit
+            sort_limit=limit,
         )[:limit]
 
 
@@ -149,15 +149,20 @@ class FilteredAddOnFolderView(AddOnFolderView):
             self.filter = {
                 'curated': bool(self.request.form.get('form.widgets.curated')),
                 'blacklisted': bool(self.request.form.get(
-                    'form.widgets.blacklisted')),
+                    'form.widgets.blacklisted',
+                )),
                 'addon_type': self.request.form.get(
-                    'form.widgets.addon_type'),
+                    'form.widgets.addon_type',
+                ),
                 'addon_status': self.request.form.get(
-                    'form.widgets.addon_status'),
+                    'form.widgets.addon_status',
+                ),
                 'supported_python_versions': self.request.form.get(
-                    'form.widgets.supported_python_versions'),
+                    'form.widgets.supported_python_versions',
+                ),
                 'supported_framework_versions': self.request.form.get(
-                    'form.widgets.supported_framework_versions')
+                    'form.widgets.supported_framework_versions',
+                ),
             }
         else:
             self.filter = dict()
@@ -176,16 +181,16 @@ class FilteredAddOnFolderView(AddOnFolderView):
                     addon_type=self.filter.get('addon_type'),
                     supported_python_versions={
                         'query': self.filter.get('supported_python_versions'),
-                        'operator': 'and'
+                        'operator': 'and',
                     },
                     supported_framework_versions={
                         'query': self.filter.get(
-                            'supported_framework_versions'
+                            'supported_framework_versions',
                         ),
-                        'operator': 'and'
+                        'operator': 'and',
                     },
                     sort_on='sortable_title',
-                    sort_order='ascending'
+                    sort_order='ascending',
                 )
             else:
                 return api.content.find(
@@ -198,23 +203,23 @@ class FilteredAddOnFolderView(AddOnFolderView):
                     addon_type=self.filter.get('addon_type'),
                     supported_python_versions={
                         'query': self.filter.get('supported_python_versions'),
-                        'operator': 'and'
+                        'operator': 'and',
                     },
                     supported_framework_versions={
                         'query': self.filter.get(
-                            'supported_framework_versions'
+                            'supported_framework_versions',
                         ),
-                        'operator': 'and'
+                        'operator': 'and',
                     },
                     sort_on='sortable_title',
-                    sort_order='ascending'
+                    sort_order='ascending',
                 )
         return api.content.find(
             context=self.context,
             depth=1,
             portal_type='AddOn',
             sort_on='sortable_title',
-            sort_order='ascending'
+            sort_order='ascending',
         )
 
     def downloaded_addons(self):
@@ -230,16 +235,16 @@ class FilteredAddOnFolderView(AddOnFolderView):
                     addon_type=self.filter.get('addon_type'),
                     supported_python_versions={
                         'query': self.filter.get('supported_python_versions'),
-                        'operator': 'and'
+                        'operator': 'and',
                     },
                     supported_framework_versions={
                         'query': self.filter.get(
-                            'supported_framework_versions'
+                            'supported_framework_versions',
                         ),
-                        'operator': 'and'
+                        'operator': 'and',
                     },
                     sort_on='download_sum_total',
-                    sort_order='reverse'
+                    sort_order='reverse',
                 )
             else:
                 return api.content.find(
@@ -252,23 +257,23 @@ class FilteredAddOnFolderView(AddOnFolderView):
                     addon_type=self.filter.get('addon_type'),
                     supported_python_versions={
                         'query': self.filter.get('supported_python_versions'),
-                        'operator': 'and'
+                        'operator': 'and',
                     },
                     supported_framework_versions={
                         'query': self.filter.get(
-                            'supported_framework_versions'
+                            'supported_framework_versions',
                         ),
-                        'operator': 'and'
+                        'operator': 'and',
                     },
                     sort_on='download_sum_total',
-                    sort_order='reverse'
+                    sort_order='reverse',
                 )
         return api.content.find(
             context=self.context,
             depth=1,
             portal_type='AddOn',
             sort_on='download_sum_total',
-            sort_order='reverse'
+            sort_order='reverse',
         )
 
     def new_addons(self):
@@ -283,17 +288,17 @@ class FilteredAddOnFolderView(AddOnFolderView):
                     curated_status=self.filter.get('curated_status'),
                     supported_python_versions={
                         'query': self.filter.get('supported_python_versions'),
-                        'operator': 'and'
+                        'operator': 'and',
                     },
                     supported_framework_versions={
                         'query': self.filter.get(
-                            'supported_framework_versions'
+                            'supported_framework_versions',
                         ),
-                        'operator': 'and'
+                        'operator': 'and',
                     },
                     addon_type=self.filter.get('addon_type'),
                     sort_on='upload_time',
-                    sort_order='reverse'
+                    sort_order='reverse',
                 )
             else:
                 return api.content.find(
@@ -305,22 +310,22 @@ class FilteredAddOnFolderView(AddOnFolderView):
                     curated_status=self.filter.get('pypi_status'),
                     supported_python_versions={
                         'query': self.filter.get('supported_python_versions'),
-                        'operator': 'and'
+                        'operator': 'and',
                     },
                     supported_framework_versions={
                         'query': self.filter.get(
-                            'supported_framework_versions'
+                            'supported_framework_versions',
                         ),
-                        'operator': 'and'
+                        'operator': 'and',
                     },
                     addon_type=self.filter.get('addon_type'),
                     sort_on='upload_time',
-                    sort_order='reverse'
+                    sort_order='reverse',
                 )
         return api.content.find(
             context=self.context,
             depth=1,
             portal_type='AddOn',
             sort_on='upload_time',
-            sort_order='reverse'
+            sort_order='reverse',
         )
