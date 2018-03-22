@@ -42,3 +42,4 @@ share/
 coverage.xml
 !.coveragerc
 reports/
+.ropeproject/
