@@ -62,7 +62,11 @@ def update_addon(context, logger):
         logger.info('Start trying updating: %s', str(addon.title))
 
         url = PYPI_URL + '/' + addon.title + '/json'
-        pypi_response = requests.get(url)
+        headers = {
+            'Accept': 'application/json',
+            'user-agent': 'Plone-AddonListing-Bot',
+        }
+        pypi_response = requests.get(url, headers=headers)
 
         if pypi_response.ok and pypi_response.status_code == 200 and \
                 pypi_response.headers['Content-Type'] and \

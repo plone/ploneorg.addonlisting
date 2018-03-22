@@ -6,4 +6,4 @@ from zope.i18nmessageid import MessageFactory
 
 _ = MessageFactory('ploneorg.addonlisting')
 
-PYPI_URL = 'https://pypi.python.org/pypi'
+PYPI_URL = 'https://pypi.org/pypi'
