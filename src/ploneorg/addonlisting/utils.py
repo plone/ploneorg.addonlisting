@@ -43,7 +43,7 @@ def update_addon_list(context, logger, limit=0):
 
                 info = 'For Add\'on-Folder: "{title}" add PyPI-Package "{package}"'.format(  # NOQA: E501
                     title=str(addon_folder.title),
-                    package=str(elem)
+                    package=str(elem),
                 )
                 logger.info(info)
                 logger.info(addon)
@@ -67,14 +67,17 @@ def update_addon(context, logger):
         if pypi_response.ok and pypi_response.status_code == 200 and \
                 pypi_response.headers['Content-Type'] and \
                 pypi_response.headers['Content-Type'].startswith(
-                'application/json'):
+                    'application/json',
+                ):
             data = pypi_response.json()
 
             if not addon.curated:
                 addon.description = data['info'].get('summary')
-                addon.text = RichTextValue(raw=data['info'].get('description'),
-                                           mimeType='text/restructured',
-                                           outputMimeType='text/x-html-safe')
+                addon.text = RichTextValue(
+                    raw=data['info'].get('description'),
+                    mimeType='text/restructured',
+                    outputMimeType='text/x-html-safe',
+                )
 
             addon.current_version = data['info'].get('version')
             addon.docs_link = data['info'].get('docs_link')
@@ -121,12 +124,12 @@ def update_addons(context, logger, limit=0):
         addons = api.content.find(
             context=addon_folder,
             portal_type='AddOn',
-            sort_limit=limit
+            sort_limit=limit,
         )[:limit]
     else:
         addons = api.content.find(
             context=addon_folder,
-            portal_type='AddOn'
+            portal_type='AddOn',
         )
 
     logger.info('Start Update all Add-ons\n')

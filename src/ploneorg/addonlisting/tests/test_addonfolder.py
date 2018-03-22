@@ -38,7 +38,7 @@ class AddOnFolderIntegrationTest(unittest.TestCase):
         self.assertTrue(IAddOnFolder.providedBy(obj))
 
     def test_adding(self):
-        self.portal.invokeFactory('AddOnFolder', 'AddOnFolder')
+        self.portal.invokeFactory('AddOnFolder', 'AddOnFolder')  # NOQA: P001
         self.assertTrue(
-            IAddOnFolder.providedBy(self.portal['AddOnFolder'])
+            IAddOnFolder.providedBy(self.portal['AddOnFolder']),
         )

@@ -17,6 +17,12 @@ from z3c.form import button
 from z3c.form.object import registerFactoryAdapter
 from zope.interface import implementer
 
+import logging
+
+
+logging.basicConfig(level=logging.WARNING)
+log = logging.getLogger('ploneorg.addonlisting-contents')
+
 
 @implementer(IAddOnFolder)
 class AddOnFolder(Container):
@@ -100,7 +106,7 @@ class FilterForm(form.SchemaForm):
         if errors:
             self.status = self.formErrorsMessage
             return
-        print data
+        log.info(data)
         # Do something with valid data here
 
         # Set status on this form page

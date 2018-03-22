@@ -27,20 +27,20 @@ def cli_update_addon_listing(app, args):
     parser.add_argument(
         'context',
         help='Path to AddOnFolder relative to Zope root.\
-              Ex:Plone/<AddOnFolder name>'
+              Ex:Plone/<AddOnFolder name>',
     )
     parser.add_argument(
         '-v',
         '--verbose',
         default=False,
         help='print more verbose output',
-        action='store_true'
+        action='store_true',
     )
     parser.add_argument(
         '--limit',
         type=int,
         default=0,
-        help='limit the number of new addons fetched from PyPI'
+        help='limit the number of new addons fetched from PyPI',
     )
     args = parser.parse_args()
     if args.verbose:
@@ -51,26 +51,26 @@ def cli_update_addon_listing(app, args):
 
 def cli_update_addons(app, args):
     parser = argparse.ArgumentParser(
-        description='updates all the addons in the listing'
+        description='updates all the addons in the listing',
     )
     parser.add_argument('-c')
     parser.add_argument(
         'context',
         help='Path to AddOnFolder relative to Zope root. \
-              Ex:Plone/<AddOnFolder name>'
+              Ex:Plone/<AddOnFolder name>',
     )
     parser.add_argument(
         '-v',
         '--verbose',
         default=False,
         help='print more verbose output',
-        action='store_true'
+        action='store_true',
     )
     parser.add_argument(
         '--limit',
         type=int,
         default=0,
-        help='limit the number of addons checked for updates from PyPI'
+        help='limit the number of addons checked for updates from PyPI',
     )
     args = parser.parse_args()
     if args.verbose:
@@ -81,20 +81,20 @@ def cli_update_addons(app, args):
 
 def cli_update_addon(app, args):
     parser = argparse.ArgumentParser(
-        description='updates an individual addon'
+        description='updates an individual addon',
     )
     parser.add_argument('-c')
     parser.add_argument(
         'context',
         help='Path to AddOn relative to Zope root. \
-              Ex:/Plone/<AddOnFolder name>/<AddOn name>'
+              Ex:/Plone/<AddOnFolder name>/<AddOn name>',
     )
     parser.add_argument(
         '-v',
         '--verbose',
         default=False,
         help='print more verbose output',
-        action='store_true'
+        action='store_true',
     )
     args = parser.parse_args()
     if args.verbose:
