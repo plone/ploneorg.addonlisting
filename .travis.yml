@@ -7,7 +7,7 @@ python:
 
 env:
     - ENVIRON=py
-      TOXENV=py27
+      TOXENV=py27-Plone51
     - ENVIRON=code-conventions
       TOXENV=isort,flake8,code-analysis
 
