@@ -13,15 +13,16 @@
 
     <h1 tal:content="context/title">Add-on Title</h1>
     <p class="description" tal:content="context/description">Description</p>
-    
+
     <div tal:replace="structure context/text/output"
-           tal:condition="context/text">Text</div>
-    <p tal:condition="context/author_name">Author name: <span tal:content="context/author_name" >Add-on Author name</span></p>
+         tal:condition="context/text">Text
+    </div>
+    <p tal:condition="context/author_name" i18n:translate="">Author name: <span tal:content="context/author_name" >Add-on Author name</span></p>
     <p tal:condition="context/author_email">Author email: <span tal:content="context/author_email" >Add-on Author email</span></p>
     <p tal:condition="context/maintainer_name">Maintainer name: <span tal:content="context/maintainer_name" >Add-on Maintainer name</span></p>
     <p tal:condition="context/maintainer_email">Maintainer email: <span tal:content="context/maintainer_email" >Add-on Maintainer email</span></p>
     <p tal:condition="context/package_url">Link to the package URL: <span tal:content="context/package_url">package-url</span></p>
-    
+
 
   </metal:block>
 
